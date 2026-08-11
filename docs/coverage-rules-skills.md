@@ -1,7 +1,7 @@
 # Rules & skills coverage map (CakePHP 5)
 
 Audit date: 2026-08-10 · Package **0.9.0**  
-**Phase ownership:** Phase 11 Wave A **done** — see [HANDOFF-phase-11.md](HANDOFF-phase-11.md); leftovers in [HANDOFF-phase-12.md](HANDOFF-phase-12.md)
+**Phase ownership:** Phase 12 — Wave B + Wave C — see [HANDOFF-phase-12.md](HANDOFF-phase-12.md). Packagist/1.0 is [Phase 13](HANDOFF-phase-13.md).
 
 Goal: honest answer to “is CakePHP entirely covered?” — **No (Wave B+ still open).** Core everyday ownership boundaries for Wave A are filled so agents don’t invent wrong abstractions for routing, behaviors, components, commands, transactions, or thin security/testing.
 
@@ -109,7 +109,7 @@ Skills remain stronger procedurally than rules are encyclopedically — which ma
 6. ~~Expand **`security`** (FormProtection/CSRF, uploads, serialization)~~  
 7. ~~Expand **`testing`** + `write-table-test` skill~~  
 
-### Wave B — web/app completeness — Phase 12 optional
+### Wave B — web/app completeness — **Phase 12 required**
 
 8. Pagination (controller/ORM)  
 9. Forms + FormProtection (dedicated skill; security rule already covers CSRF bar)  
@@ -118,11 +118,13 @@ Skills remain stronger procedurally than rules are encyclopedically — which ma
 12. Configuration + DI (`Application::services`)  
 13. Performance rule (N+1 already elsewhere; add caching/query budget)
 
-### Wave C — ecosystem (extensions, not core always-on) — post–Wave B
+### Wave C — ecosystem (extensions) — **Phase 12 after Wave B**
 
 14. `cakephp/migrations` pack  
 15. Bake intelligence  
 16. Mailer / Queue packs as demand appears  
+
+Packagist / public **1.0** cut is **Phase 13**, not Phase 12.
 
 ---
 

@@ -1,6 +1,6 @@
 # Agent Handoff — Start Phase 12
 
-> **For a new agent:** read this file first, then [coverage-rules-skills.md](coverage-rules-skills.md) and [pre-1.0-review.md](pre-1.0-review.md). Do not re-bootstrap Phases 0–11.
+> **For a new agent:** read this file first, then [coverage-rules-skills.md](coverage-rules-skills.md). Do not re-bootstrap Phases 0–11.
 
 **Repo:** https://github.com/chrisShick/cakephp-agent  
 **Local path (if present):** `/Users/chrishickingbottom/Development/cakephp-agent`  
@@ -36,58 +36,76 @@ Everyday ownership holes closed:
 
 Also: decisions `route-config-vs-controller-url-logic`, `command-vs-controller-action`; `choose-cakephp-abstraction` updated; coverage map marked Wave A done.
 
+**Not your primary job:** Packagist publish / declaring 1.0 — that is **Phase 13** ([HANDOFF-phase-13.md](HANDOFF-phase-13.md) stub after this phase, or create it when finishing).
+
 ---
 
-## 2. Phase 12 — your assignment
+## 2. Phase 12 — your assignment (Wave B + Wave C)
 
 ### Goal
 
-Move from **0.9.0 adopter preview** toward a credible **1.0** cut: Packagist (human) + remaining trust items, and optionally Wave B coverage if time.
+Continue CakePHP coverage from the audit: finish **Wave B** (web/app completeness), then **Wave C** (ecosystem extension packs) so agents cover the remaining everyday Book surfaces without inventing foreign frameworks.
 
-### Track A — release / Packagist (primary)
+**Source of truth:** [coverage-rules-skills.md](coverage-rules-skills.md)
 
-- Confirm Packagist publish of `chrisshick/cakephp-agent` (human account; agent can prepare docs/checklist only)
-- Walk [pre-1.0-review.md](pre-1.0-review.md) remaining items
-- Version bump strategy to **1.0.0** when accept bar is met
-- CHANGELOG / README status line for 1.0
+### Wave B — required this phase (P1 web/app)
 
-### Track B — Wave B coverage (optional stretch)
+| Topic | Deliver |
+|---|---|
+| Pagination | Rule + skill(s) for controller/ORM pagination ownership |
+| Forms + FormProtection | Dedicated rule/skill (security rule already has CSRF bar — deepen with FormHelper workflow) |
+| Views / cells / helpers | Rules/skills **or** an explicit “views out of scope for v1 agents” decision documented in coverage + architecture |
+| Error handling | Exception renderer / error trapping ownership rule + skill as needed |
+| Configuration / DI | `Application::services` / config ownership rule + skill as needed |
+| Performance | Core performance rule (query budget / caching guidance; N+1 already elsewhere) |
 
-From [coverage-rules-skills.md](coverage-rules-skills.md):
+For each new/expanded unit:
 
-1. Pagination  
-2. Forms + FormProtection skill (security rule already has CSRF bar)  
-3. Views/cells/helpers **or** explicit “views out of scope” note  
-4. Error handling / exception renderer  
-5. Configuration + DI  
-6. Performance rule  
+- Match existing rule/skill contracts (frontmatter, sections, `inspect-before-coding` on skills)
+- Prefer CakePHP Book 5.x provenance in `sources` / `knowledge/sources/` when framework-sensitive
+- Add **positive + negative** evaluations for critical ownership boundaries
+- Update `choose-cakephp-abstraction` / related decisions if ownership defaults change
+- Keep rules **thin**; put procedures in skills
 
-Keep rules thin; skills procedural; pos+neg evals for new ownership boundaries.
+### Wave C — include after Wave B is green (ecosystem packs)
+
+| Topic | Deliver |
+|---|---|
+| Migrations | `cakephp/migrations` capability pack (detect Composer; rules/skills; no inventing when absent) |
+| Bake | Bake intelligence skill/rule pack or scoped guidance (do not assume Bake in every app) |
+| Mailer / Queues | Packs **as demand appears** — at least stub manifests + honest “absent → do not invent” evals if you start them |
+
+Follow existing extension patterns (`extensions/friendsofcake-crud/`, AuthN/AuthZ/Search): Composer detection, disable path, incompatible version path, fixtures, evals.
 
 ### Accept
 
-- [ ] Packagist (or documented blocked-on-human) path clear
-- [ ] pre-1.0 review items triaged (done / deferred with reason)
-- [ ] If Wave B started: validate + phpunit + phpstan + eval green; coverage doc updated
-- [ ] README / architecture reflect 1.0 or explicit “still 0.9.x + Wave B”
-- [ ] Handoff for Phase 13 only if needed (Wave C / migrations pack)
+- [ ] Wave B rules/skills (or explicit out-of-scope notes) present; `php bin/cakephp-agent validate` green
+- [ ] Wave C: at least Migrations pack started **or** Wave B complete with Wave C deferred + Phase 13 handoff explaining why
+- [ ] New skills reference `inspect-before-coding`
+- [ ] Critical new boundaries have pos+neg evals; `php bin/cakephp-agent eval` self-check green
+- [ ] `vendor/bin/phpunit` + `vendor/bin/phpstan analyse --memory-limit=512M` green
+- [ ] [coverage-rules-skills.md](coverage-rules-skills.md) updated (Wave B/C status)
+- [ ] README / architecture note Phase 12 status
+- [ ] Handoff for **Phase 13** (Packagist / 1.0 cut) written
 
 ### Out of scope
 
 - Live LLM eval adapters
 - MCP / remote registry
-- Wave C ecosystem packs unless Wave B done and user asks
-- Re-litigating Phases 0–11
+- 200+ eval corpus expansion for its own sake
+- Packagist account setup (human) — Phase 13
+- Re-litigating Phases 0–11 / Wave A
 
 ---
 
 ## 3. Kickoff prompt
 
 ```text
-Read docs/HANDOFF-phase-12.md, docs/coverage-rules-skills.md, and docs/pre-1.0-review.md.
-Phase 11 Wave A coverage is done. Prepare Packagist/1.0 cut (Track A);
-optionally implement Wave B coverage if release blockers are clear.
-Leave the repo green (validate, phpunit, phpstan, eval).
+Read docs/HANDOFF-phase-12.md and docs/coverage-rules-skills.md.
+Phase 11 Wave A is done. Implement Phase 12 Wave B (pagination, forms,
+views-or-out-of-scope, errors, config/DI, performance), then Wave C
+(migrations pack first; Bake/mailer/queues as time allows).
+Leave validate/phpunit/phpstan/eval green and a Phase 13 Packagist/1.0 handoff.
 ```
 
 ---
@@ -102,3 +120,11 @@ php bin/cakephp-agent validate
 php bin/cakephp-agent eval
 php bin/cakephp-agent install --editor=cursor --dry-run --project=tests/fixtures/projects/cakephp-only
 ```
+
+## 5. Contracts to mirror
+
+- Rules: see existing `rules/cakephp/*.mdc` (Purpose via description + Framework semantics / Required behavior / Anti-patterns / Review checklist)
+- Skills: Objective / Use when / Do not use when / Inputs / Workflow / Framework decisions / Anti-patterns / Validation / Completion criteria
+- Extensions: `extensions/*/extension.json` + Composer detection fixtures (see CRUD/Search packs)
+- Evals: `evaluations/**/*.json` — `id`, `category`, `prompt`, `expected`, `must_not`, `related_knowledge`
+- ContentValidator enforces skill section list + `inspect-before-coding` reference

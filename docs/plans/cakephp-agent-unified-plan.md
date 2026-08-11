@@ -509,7 +509,13 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 **Deliver (coverage Wave A — done):** routing, behaviors, components, commands, transactions, deeper security/testing — see [coverage-rules-skills.md](../coverage-rules-skills.md).
 
-**Phase 12:** Packagist / 1.0 + optional Wave B — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
+### Phase 12 — CakePHP coverage Wave B + Wave C
+
+**Deliver:** Wave B (pagination, forms, views-or-out-of-scope, errors, config/DI, performance) then Wave C (migrations pack; Bake/mailer/queues as time allows) — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
+
+### Phase 13 — Packagist / public 1.0
+
+**Deliver:** Packagist publish path, pre-1.0 triage, version bump — [HANDOFF-phase-13.md](../HANDOFF-phase-13.md).
 
 ---
 

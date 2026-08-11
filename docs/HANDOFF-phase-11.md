@@ -75,7 +75,7 @@ Migrations pack, Bake intelligence, mailer/queues, I18n, HTTP client — do **no
 - [x] README / architecture note Phase 11 coverage status
 - [x] Handoff for **Phase 12** (Packagist / 1.0 cut, or Wave B leftovers) written
 
-> **Phase 11 Wave A complete.** Continue at [HANDOFF-phase-12.md](HANDOFF-phase-12.md).
+> **Phase 11 Wave A complete.** Continue at [HANDOFF-phase-12.md](HANDOFF-phase-12.md) (Wave B + Wave C). Packagist/1.0 is [HANDOFF-phase-13.md](HANDOFF-phase-13.md).
 
 ### Out of scope
 
