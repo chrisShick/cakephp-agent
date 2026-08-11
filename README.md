@@ -90,6 +90,8 @@ Cursor / Claude / Codex + .ai project overlays
 
 See [docs/plans/cakephp-agent-unified-plan.md](docs/plans/cakephp-agent-unified-plan.md).
 
+**New agent / Phase 4 pickup:** [docs/HANDOFF-phase-4.md](docs/HANDOFF-phase-4.md)
+
 ## Development
 
 ```bash
