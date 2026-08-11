@@ -1,7 +1,7 @@
 # Rules & skills coverage map (CakePHP 5)
 
-Audit date: 2026-08-10 · Package **0.9.0** · **Apache-2.0**  
-**Phase ownership:** Phase 13 **done** (full CakePHP coverage + security/PHP base) — [HANDOFF-phase-13.md](HANDOFF-phase-13.md). Next: [Phase 14 Packagist/1.0](HANDOFF-phase-14.md).
+Audit date: 2026-08-11 · Package **1.0.0-beta.1** · **Apache-2.0**  
+**Phase ownership:** Phase 13 **done** — [HANDOFF-phase-13.md](HANDOFF-phase-13.md). Phase 14: Packagist live + beta cut — [HANDOFF-phase-14.md](HANDOFF-phase-14.md) (soak → stable 1.0).
 
 Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so agents don’t invent foreign frameworks. **Book-complete enough for 1.0 trust** after Phase 13; not an encyclopedia of every plugin.
 
@@ -62,7 +62,7 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 - **Phase 13 Track A:** remaining core Book surfaces + queue/DebugKit packs  
 - **Phase 13 Track B:** security review skill, deeper security rule, PHP safety, engineering P2  
 - **Phase 14 prep:** CRUD harden (evals, decisions, security, smells, AuthZ integration) + `muffin/trash` pack + core polish  
-- **Phase 14:** Packagist / public path — cut `1.0.0-beta.1`, then stable `1.0.0`
+- **Phase 14:** Packagist published; **`1.0.0-beta.1`** cut — remaining: soak → stable `1.0.0`
 
 ---
 

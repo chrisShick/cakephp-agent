@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve CakePHP Agent. This package is an **adopter preview (0.9.x)** — not 1.0 yet.
+Thanks for helping improve CakePHP Agent. This package is a **public beta (`1.0.0-beta.x`)** — stable 1.0 after soak.
 
 ## Setup
 

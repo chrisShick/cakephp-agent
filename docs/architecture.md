@@ -41,15 +41,16 @@ Details: [editors.md](editors.md).
 | 11 CakePHP coverage (Wave A) | Done |
 | 12 CakePHP coverage (Wave B + C) | Done |
 | 13 Full coverage + security/PHP base | Done |
-| **14 Packagist / 1.0** | **Next** — beta `1.0.0-beta.1` then stable; [HANDOFF-phase-14.md](HANDOFF-phase-14.md) |
+| **14 Packagist / 1.0** | **In progress** — Packagist live; beta `1.0.0-beta.1`; soak → stable; [HANDOFF-phase-14.md](HANDOFF-phase-14.md) |
 
 Coverage audit: [coverage-rules-skills.md](coverage-rules-skills.md).
 
 ## Versioning
 
-- Package CLI version: `Application::VERSION` (currently **0.9.0** adopter preview).
+- Package CLI version: `Application::VERSION` (currently **1.0.0-beta.1**).
+- Packagist: https://packagist.org/packages/chrisshick/cakephp-agent
 - License: **Apache-2.0**.
-- 1.0 requires Packagist (or equivalent) + coverage/security base (done) + soak — see [pre-1.0-review.md](pre-1.0-review.md).
+- Stable 1.0 after soak — see [pre-1.0-review.md](pre-1.0-review.md).
 
 ## Related docs
 

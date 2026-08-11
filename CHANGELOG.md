@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-beta.1] - 2026-08-11
+
+Public beta on Packagist. Not yet stable 1.0 — soak in a real app before `1.0.0`.
+
+Composer: **`composer require --dev chrisshick/cakephp-agent:^1.0@beta`**  
+Package: https://packagist.org/packages/chrisshick/cakephp-agent
+
 ### Added
 
 - Phase 11 Wave A CakePHP coverage: routing, behaviors, components, commands, transactions; deeper security/testing
@@ -16,12 +23,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRUD harden: config/listener/controller decisions; security rule/skill; smells; expanded CRUD evals; CRUD+Authorization integration; deeper CRUD+Search
 - `muffin/trash` (UseMuffin/Trash) soft-delete capability pack
 - Core polish: combined security evals, Flash note, Bake→CRUD/ownership review, soft-delete pointer on behaviors
-- Pos+neg evaluations across phases; [HANDOFF-phase-14.md](docs/HANDOFF-phase-14.md) for Packagist / 1.0
+- Pos+neg evaluations across phases; Packagist publish path
 
 ### Changed
 
 - Coverage map and `choose-cakephp-abstraction` defaults through Phase 13
 - Relicensed from MIT to **Apache-2.0** (`LICENSE`, `NOTICE`, `composer.json`, README)
+- Install docs prefer Packagist; VCS/path remain as alternatives
+- Package version **1.0.0-beta.1**
+
+### Notes
+
+- Offline `eval` is a corpus/self-check harness, not live model grading
+- Stable **1.0.0** after soak — see [docs/pre-1.0-review.md](docs/pre-1.0-review.md)
 
 ## [0.9.0] - 2026-08-10
 
@@ -47,8 +61,9 @@ Composer package name: **`chrisshick/cakephp-agent`** (Composer requires a lower
 
 ### Notes
 
-- Not on Packagist yet — install via VCS (`https://github.com/chrisShick/cakephp-agent.git`) or path repository as `chrisshick/cakephp-agent`
+- Originally VCS/path install only; Packagist added in **1.0.0-beta.1**
 - Offline `eval` is a corpus/self-check harness, not live model grading
-- See [docs/pre-1.0-review.md](docs/pre-1.0-review.md) for the path to 1.0
+- See [docs/pre-1.0-review.md](docs/pre-1.0-review.md) for the path to stable 1.0
 
+[1.0.0-beta.1]: https://github.com/chrisShick/cakephp-agent/releases/tag/v1.0.0-beta.1
 [0.9.0]: https://github.com/chrisShick/cakephp-agent/releases/tag/v0.9.0
