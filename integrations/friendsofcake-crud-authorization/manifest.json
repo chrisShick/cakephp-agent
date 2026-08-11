@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "friendsofcake-crud-authorization",
+  "name": "FriendsOfCake CRUD + Authorization integration",
+  "description": "Joint guidance when friendsofcake-crud and cakephp-authorization packs are both enabled \u2014 IDOR/scoping on CRUD actions.",
+  "version": "1.0.0",
+  "type": "integration",
+  "detect": {},
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "activateWhenAllExtensionsPresent": [
+    "friendsofcake-crud",
+    "cakephp-authorization"
+  ],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

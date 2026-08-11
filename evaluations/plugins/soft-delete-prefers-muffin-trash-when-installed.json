@@ -1,0 +1,29 @@
+{
+    "id": "soft-delete-prefers-muffin-trash-when-installed",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "requires": {
+        "extensions": [
+            "muffin-trash"
+        ]
+    },
+    "prompt": "muffin/trash is installed on ArticlesTable. User deletes an article in the UI. What should happen by default?",
+    "expected": {
+        "concepts": [
+            "trash",
+            "soft-delete"
+        ],
+        "preferred": [
+            "Trash",
+            "soft delete",
+            "deleted/trashed field"
+        ]
+    },
+    "must_not": [
+        "SoftDeletes trait",
+        "hard delete by default"
+    ],
+    "related_knowledge": [
+        "trash-vs-hard-delete"
+    ]
+}

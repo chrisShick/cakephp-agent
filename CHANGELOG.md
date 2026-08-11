@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 12 Wave B/C: pagination, forms, views scope, errors, config/DI, performance; Migrations + Bake packs
 - Phase 13 Track A: sessions, cache, logging, I18n, HTTP client, request/response, mailer, advanced ORM, `work-with-views`; `cakephp-queue` + `cakephp-debug-kit` packs
 - Phase 13 Track B: `review-cakephp-security`; deepened security rule; PHP safety rules/skills; engineering testing + dependency honesty
+- CRUD harden: config/listener/controller decisions; security rule/skill; smells; expanded CRUD evals; CRUD+Authorization integration; deeper CRUD+Search
+- `muffin/trash` (UseMuffin/Trash) soft-delete capability pack
+- Core polish: combined security evals, Flash note, Bake→CRUD/ownership review, soft-delete pointer on behaviors
 - Pos+neg evaluations across phases; [HANDOFF-phase-14.md](docs/HANDOFF-phase-14.md) for Packagist / 1.0
 
 ### Changed

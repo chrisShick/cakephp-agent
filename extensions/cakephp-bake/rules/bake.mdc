@@ -24,6 +24,12 @@ last_verified: 2026-08-10
 - After baking, review for fat controllers, missing validation/rules, and mass-assignment exposure.
 - Do not assume Bake exists in production-only installs.
 
+## After Bake
+
+- Run ownership review (`cakephp-code-review`, `review-abstraction-choice`).
+- If FriendsOfCake CRUD is installed and Bake emitted CRUD-ish controllers, run `review-crud-controller` / `review-crud-security` before shipping.
+- Tighten `_accessible`, validation, and application rules — Bake stubs are not security review.
+
 ## Anti-patterns
 
 - Shipping Bake output unchanged when it violates project architecture

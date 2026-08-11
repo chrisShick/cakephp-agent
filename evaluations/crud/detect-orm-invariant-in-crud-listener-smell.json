@@ -1,0 +1,27 @@
+{
+    "id": "detect-orm-invariant-in-crud-listener-smell",
+    "category": "crud",
+    "type": "rejection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "A Crud.beforeSave listener is the only place enforcing unique email. Is that an acceptable long-term design?",
+    "expected": {
+        "concepts": [
+            "orm-invariant-in-crud-listener"
+        ],
+        "preferred": [
+            "buildRules",
+            "application rule"
+        ]
+    },
+    "must_not": [
+        "endorse uniqueness only in the CRUD listener"
+    ],
+    "related_knowledge": [
+        "orm-invariant-in-crud-listener",
+        "crud-listener-vs-orm-callback"
+    ]
+}

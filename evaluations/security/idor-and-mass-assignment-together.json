@@ -1,0 +1,25 @@
+{
+    "id": "idor-and-mass-assignment-together",
+    "category": "security",
+    "type": "selection",
+    "prompt": "An edit endpoint loads a user by id and patchEntity with request data that includes role. What two issues should a CakePHP security review catch first?",
+    "expected": {
+        "concepts": [
+            "IDOR",
+            "mass assignment"
+        ],
+        "preferred": [
+            "authorization",
+            "tighten _accessible",
+            "exclude role"
+        ]
+    },
+    "must_not": [
+        "ignore role mass assignment",
+        "treat find-by-id as authorization"
+    ],
+    "related_knowledge": [
+        "mass-assignment-overexposure",
+        "authorization-only-in-ui"
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "trash-absent-no-softdeletes-api",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "composer.json has no muffin/trash. How should I add recoverable deletes?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "inspect composer",
+            "consider muffin/trash",
+            "project strategy"
+        ]
+    },
+    "must_not": [
+        "SoftDeletes",
+        "assume Trash APIs",
+        "restoreTrash"
+    ],
+    "related_knowledge": [
+        "trash-vs-hard-delete",
+        "plugin-vs-application-code"
+    ]
+}

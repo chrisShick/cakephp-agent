@@ -21,10 +21,11 @@ CRUD owns common controller action boilerplate via actions, configuration, and `
 
 ## Decision order
 
-1. Can standard CRUD **configuration** express it?
-2. If not, and it is tied to CRUD action lifecycle → CRUD **listener/event**.
-3. If it is a persistence/domain invariant → Table / Validator / RulesChecker (not only CRUD).
-4. Do not recreate CRUD action flow manually when CRUD already provides it.
+1. Can standard CRUD **configuration** express it? (`crud-config-vs-listener`)
+2. If not, and it is tied to CRUD action lifecycle → CRUD **listener/event** (prefer staying on CRUD vs forking — `crud-listener-vs-controller-action`).
+3. If it is a persistence/domain invariant → Table / Validator / RulesChecker (not only CRUD) — `crud-listener-vs-orm-callback`.
+4. Do not recreate CRUD action flow manually when CRUD already provides it (`reimplemented-crud-action`).
+5. Security: mass assignment, serialization, RelatedModels, and IDOR still apply — see `rules/security.mdc` / `review-crud-security`.
 
 ## Required behavior
 

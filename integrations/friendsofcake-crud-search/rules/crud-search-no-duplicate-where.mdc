@@ -1,0 +1,25 @@
+---
+description: Do not duplicate Search filter where-clauses inside CRUD listeners.
+globs:
+  - "**/Listener/**/*.php"
+  - "**/Controller/**/*.php"
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+packages: [friendsofcake/crud, friendsofcake/search]
+last_verified: 2026-08-11
+---
+
+# CRUD + Search — no duplicate where
+
+## Required behavior
+
+- Filters live once on the Table Search manager.
+- CRUD index applies Search; listeners must not re-state the same `where` trees.
+- Pagination must preserve filter query params per project PRG/Search patterns.
+
+## Anti-patterns
+
+- Twin `where` in Search filter and `Crud.beforePaginate`
+- Controller `where` piles beside enabled Search

@@ -1,0 +1,29 @@
+{
+    "id": "crud-with-authz-scopes-index",
+    "category": "auth",
+    "type": "selection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud",
+            "cakephp-authorization"
+        ]
+    },
+    "prompt": "App has FriendsOfCake CRUD and cakephp/authorization. CRUD index lists all articles. What should we add?",
+    "expected": {
+        "concepts": [
+            "scope",
+            "authorization"
+        ],
+        "preferred": [
+            "scope",
+            "Authorization",
+            "beforePaginate"
+        ]
+    },
+    "must_not": [
+        "list all rows without scoping when AuthZ is installed"
+    ],
+    "related_knowledge": [
+        "authorize-resource-vs-authenticated-only"
+    ]
+}

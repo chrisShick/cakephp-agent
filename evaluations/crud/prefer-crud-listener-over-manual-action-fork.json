@@ -1,0 +1,28 @@
+{
+    "id": "prefer-crud-listener-over-manual-action-fork",
+    "category": "crud",
+    "type": "selection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "CRUD index is enabled. We need to add a where condition for the current tenant on that index only. What should we prefer?",
+    "expected": {
+        "concepts": [
+            "crud listener",
+            "beforePaginate"
+        ],
+        "preferred": [
+            "Crud.beforePaginate",
+            "CRUD listener",
+            "config finder"
+        ]
+    },
+    "must_not": [
+        "reimplement the whole index action manually by default"
+    ],
+    "related_knowledge": [
+        "crud-listener-vs-controller-action"
+    ]
+}

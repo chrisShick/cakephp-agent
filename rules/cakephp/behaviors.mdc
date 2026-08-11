@@ -26,6 +26,10 @@ Behaviors attach reusable find/save/delete lifecycle capabilities to Tables (Tim
 - Keep Behaviors focused on one coherent theme; split unrelated concerns.
 - Check for an installed plugin Behavior before inventing a parallel one.
 
+## Soft-delete note
+
+When `muffin/trash` is installed, prefer the Trash behavior pack over hand-rolled `deleted_at` filters. When absent, do not invent Laravel SoftDeletes — see plugin honesty.
+
 ## Anti-patterns
 
 - god-behavior

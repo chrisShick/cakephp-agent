@@ -46,10 +46,13 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 
 | Pack | Coverage |
 |---|---|
-| CRUD / AuthN / AuthZ / Search + integrations | Strong / Good |
-| Migrations / Bake | Good / Light |
-| **cakephp/queue** | Good (Phase 13) |
-| **cakephp/debug_kit** | Light dev-only (Phase 13) |
+| CRUD / AuthN / AuthZ / Search + integrations | **Strong** — CRUD hardened (evals, security, AuthZ integration, smells) |
+| CRUD + Authorization integration | **Good** (IDOR/scoping on CRUD actions) |
+| CRUD + Search integration | **Good** (non-duplication deepened) |
+| Migrations / Bake | Good / Light (Bake → ownership/CRUD review notes) |
+| **muffin/trash** (UseMuffin/Trash) | **Good** — soft-delete behavior pack |
+| **cakephp/queue** | Good |
+| **cakephp/debug_kit** | Light dev-only |
 
 ---
 
@@ -58,6 +61,7 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 - **A–C (Phases 11–12):** everyday ownership + migrations/bake  
 - **Phase 13 Track A:** remaining core Book surfaces + queue/DebugKit packs  
 - **Phase 13 Track B:** security review skill, deeper security rule, PHP safety, engineering P2  
+- **Phase 14 prep:** CRUD harden (evals, decisions, security, smells, AuthZ integration) + `muffin/trash` pack + core polish  
 - **Phase 14:** Packagist / public 1.0
 
 ---

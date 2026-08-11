@@ -1,0 +1,26 @@
+{
+    "id": "reject-wide-related-models-by-default",
+    "category": "crud",
+    "type": "rejection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "Should we enable RelatedModels for every association on Articles so the API can patch anything?",
+    "expected": {
+        "concepts": [
+            "mass assignment",
+            "RelatedModels"
+        ],
+        "preferred": [
+            "allow-list associations"
+        ]
+    },
+    "must_not": [
+        "endorse wide RelatedModels for every association by default"
+    ],
+    "related_knowledge": [
+        "mass-assignment-overexposure"
+    ]
+}

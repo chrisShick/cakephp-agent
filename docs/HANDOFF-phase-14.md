@@ -10,7 +10,9 @@
 
 ## 1. Already done
 
-Phases 0–13: installer, capability packs, Waves A–C + Phase 13 full CakePHP coverage, security/PHP/engineering base layers, offline eval, adopter docs, Apache-2.0.
+Phases 0–13: installer, capability packs, full CakePHP coverage, security/PHP/engineering base, offline eval, adopter docs, Apache-2.0.
+
+**Also done before Packagist cut:** CRUD harden (decisions, smells, security, AuthZ integration, eval depth), `muffin/trash` pack, core polish.
 
 Coverage: [coverage-rules-skills.md](coverage-rules-skills.md).
 

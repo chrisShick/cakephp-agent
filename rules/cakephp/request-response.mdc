@@ -26,6 +26,10 @@ Controllers receive `ServerRequest` and return `Response` (or use `render`/`redi
 - Avoid open redirects — only redirect to known-safe local paths/routes.
 - Do not invent Laravel Request facades / FormRequest.
 
+## Flash
+
+Use Flash component/helper for user feedback after redirects. Keep messages presentation-only — do not put persistence decisions in Flash. Prefer project message keys/styles.
+
 ## Anti-patterns
 
 - Reading `$_POST`/`$_GET` directly in new CakePHP code

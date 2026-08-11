@@ -1,0 +1,21 @@
+{
+    "id": "flash-is-not-persistence",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Should we enforce unique email by checking Flash success messages after save?",
+    "expected": {
+        "concepts": [
+            "application rule"
+        ],
+        "preferred": [
+            "buildRules",
+            "isUnique"
+        ]
+    },
+    "must_not": [
+        "endorse Flash as the uniqueness mechanism"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

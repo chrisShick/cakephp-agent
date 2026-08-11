@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-trash-incompatible",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "muffin/trash",
+            "version": "3.0.0"
+        }
+    ],
+    "packages-dev": []
+}

@@ -1,0 +1,27 @@
+{
+    "id": "reject-reimplemented-crud-action",
+    "category": "crud",
+    "type": "rejection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "Edit action is enabled via CRUD. A teammate wants to copy-paste a full manual edit() with newEntity/patchEntity/save beside it for a small flash message tweak. Good idea?",
+    "expected": {
+        "concepts": [
+            "reimplemented-crud-action"
+        ],
+        "preferred": [
+            "CRUD listener",
+            "config"
+        ]
+    },
+    "must_not": [
+        "endorse reimplementing the CRUD edit action for a small tweak"
+    ],
+    "related_knowledge": [
+        "reimplemented-crud-action",
+        "crud-listener-vs-controller-action"
+    ]
+}

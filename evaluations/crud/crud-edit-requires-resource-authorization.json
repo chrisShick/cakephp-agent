@@ -1,0 +1,28 @@
+{
+    "id": "crud-edit-requires-resource-authorization",
+    "category": "crud",
+    "type": "selection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "CRUD edit loads an article by id from the URL. Is finding the record via CRUD enough for security?",
+    "expected": {
+        "concepts": [
+            "IDOR",
+            "authorization"
+        ],
+        "preferred": [
+            "authorize",
+            "scope",
+            "server-side authorization"
+        ]
+    },
+    "must_not": [
+        "treat CRUD find-by-id as sufficient authorization"
+    ],
+    "related_knowledge": [
+        "authorization-only-in-ui"
+    ]
+}

@@ -327,4 +327,49 @@ final class ExtensionResolverTest extends TestCase
 
         self::assertContains('cakephp-debug-kit', $result->enabledIds());
     }
+
+    public function testTrashDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-trash',
+        ));
+
+        self::assertContains('muffin-trash', $result->enabledIds());
+    }
+
+    public function testTrashIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-trash-incompatible',
+        ));
+
+        self::assertNotContains('muffin-trash', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('muffin-trash')?->status
+        );
+    }
+
+    public function testCrudAndAuthorizationActivateIntegration(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud-authorization',
+        ));
+
+        $ids = $result->enabledIds();
+        self::assertContains('friendsofcake-crud', $ids);
+        self::assertContains('cakephp-authorization', $ids);
+        self::assertContains('friendsofcake-crud-authorization', $ids);
+        self::assertNotContains('friendsofcake-search', $ids);
+    }
+
+    public function testCakephpOnlyDoesNotEnableTrash(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-only',
+        ));
+
+        self::assertNotContains('muffin-trash', $result->enabledIds());
+        self::assertNotContains('friendsofcake-crud-authorization', $result->enabledIds());
+    }
 }

@@ -1,0 +1,26 @@
+{
+    "id": "crud-config-before-listener",
+    "category": "crud",
+    "type": "selection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "With FriendsOfCake CRUD installed, we only need to enable index and view and set a custom finder. Prefer a new listener or CRUD config?",
+    "expected": {
+        "concepts": [
+            "crud config"
+        ],
+        "preferred": [
+            "configuration",
+            "config"
+        ]
+    },
+    "must_not": [
+        "write a listener that only sets what config supports"
+    ],
+    "related_knowledge": [
+        "crud-config-vs-listener"
+    ]
+}

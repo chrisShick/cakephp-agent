@@ -1,0 +1,8 @@
+{
+    "name": "fixture/cakephp-trash",
+    "require": {
+        "php": "^8.2",
+        "cakephp/cakephp": "^5.4",
+        "muffin/trash": "^4.0"
+    }
+}

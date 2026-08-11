@@ -1,0 +1,22 @@
+{
+    "id": "reject-laravel-softdeletes-trait",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Add SoftDeletes trait to the CakePHP Article entity for soft delete.",
+    "expected": {
+        "concepts": [
+            "behavior"
+        ],
+        "preferred": [
+            "Muffin/Trash.Trash",
+            "Trash behavior"
+        ]
+    },
+    "must_not": [
+        "SoftDeletes",
+        "Illuminate"
+    ],
+    "related_knowledge": [
+        "trash-vs-hard-delete"
+    ]
+}

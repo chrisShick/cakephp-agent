@@ -12,7 +12,7 @@ sources:
   - https://crud.readthedocs.io/en/latest/events.html
   - https://book.cakephp.org/5.x/orm/table-objects.html
 last_verified: 2026-08-10
-related: [validation-vs-application-rule, table-callback-vs-application-rule]
+related: [validation-vs-application-rule, table-callback-vs-application-rule, crud-config-vs-listener, crud-listener-vs-controller-action]
 evaluations: [crud-event-not-orm-callback, crud-response-uses-crud-listener]
 ---
 

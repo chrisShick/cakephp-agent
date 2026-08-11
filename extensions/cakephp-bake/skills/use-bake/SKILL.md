@@ -32,6 +32,7 @@ Generate CakePHP stubs with Bake when installed, then edit them to match project
 3. Tighten `_accessible`, validation, and application rules.
 4. Add tests; do not trust Bake coverage.
 5. Run `cakephp-code-review` / smell detection on the diff.
+6. If CRUD is installed and controllers look CRUD-shaped, run `review-crud-controller` / `review-crud-security`.
 
 ## Framework decisions
 

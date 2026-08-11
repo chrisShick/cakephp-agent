@@ -1,0 +1,25 @@
+{
+    "id": "reject-listener-when-crud-config-suffices",
+    "category": "crud",
+    "type": "rejection",
+    "requires": {
+        "extensions": [
+            "friendsofcake-crud"
+        ]
+    },
+    "prompt": "Should we add a CRUD listener whose only job is to set relatedModels and a redirect that CRUD action config already supports?",
+    "expected": {
+        "concepts": [
+            "crud config"
+        ],
+        "preferred": [
+            "CRUD configuration"
+        ]
+    },
+    "must_not": [
+        "endorse a listener solely for config-expressible settings"
+    ],
+    "related_knowledge": [
+        "crud-config-vs-listener"
+    ]
+}

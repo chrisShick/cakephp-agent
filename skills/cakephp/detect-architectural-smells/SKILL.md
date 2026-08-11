@@ -35,9 +35,10 @@ Identify architectural smells in a CakePHP codebase or diff using `knowledge/ant
    - ORM style: `active-record-entity`, `anemic-entity`, `hidden-n-plus-one`, `over-eager-contain`
    - Abstraction misuse: `premature-service-layer`, `repository-over-table`, `framework-replacement-abstraction`, `unnecessary-trait`
    - Duplication: `duplicate-finders`, `duplicate-query-semantics`, `duplicate-validation`, `duplicate-application-rules`
-   - God objects: `god-behavior`, `god-component`, `god-listener`
+   - God objects: `god-behavior`, `god-component`, `god-listener`, `god-crud-listener` (when CRUD installed)
+   - CRUD misuse (when installed): `orm-invariant-in-crud-listener`, `reimplemented-crud-action`
    - Lifecycle opacity: `callback-side-effect-explosion`, `event-chain-obscurity`
-   - Security exposure: `mass-assignment-overexposure`, `serialization-overexposure`, `authorization-only-in-ui`
+   - Security exposure: `mass-assignment-overexposure`, `serialization-overexposure`, `authorization-only-in-ui`, `open-redirect`, `debug-in-production`
    - Plugin honesty: `plugin-api-reimplementation`
 3. For each candidate, apply the smell’s **Detection guidance** and **False positives**.
 4. Rank by risk (security/correctness first, then maintainability/performance).

@@ -1,0 +1,37 @@
+---
+description: Security boundaries when using FriendsOfCake CRUD (mass assignment, serialization, IDOR, related models).
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Listener/**/*.php"
+  - "**/Model/Entity/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/
+  - https://book.cakephp.org/5.x/orm/entities.html
+last_verified: 2026-08-11
+---
+
+# CRUD security
+
+## Plugin semantics
+
+CRUD accelerates HTTP actions; it does **not** relax mass assignment, serialization, or authorization. RelatedModels / patchable associations are common overexposure vectors.
+
+## Required behavior
+
+- Keep Entity `_accessible` tight — especially `role`, auth flags, and association patches.
+- Hide secrets via `$_hidden` / API shaping even when Api listeners serialize entities.
+- Authorize/scoped-load resources on view/edit/delete (IDOR) — “CRUD found it” is not permission.
+- Treat RelatedModels config as a security surface; only expose associations intentionally.
+- When Authorization is installed, prefer policy/scope patterns (see CRUD+AuthZ integration).
+
+## Anti-patterns
+
+- mass-assignment-overexposure via CRUD patch
+- serialization-overexposure on Api listeners
+- IDOR on CRUD view/edit by primary key alone
+- Wide RelatedModels “for convenience”

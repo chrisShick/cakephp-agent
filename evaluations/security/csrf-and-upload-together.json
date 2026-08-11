@@ -1,0 +1,26 @@
+{
+    "id": "csrf-and-upload-together",
+    "category": "security",
+    "type": "selection",
+    "prompt": "HTML form posts a profile photo. What CakePHP protections should participate by default?",
+    "expected": {
+        "concepts": [
+            "FormProtection",
+            "upload"
+        ],
+        "preferred": [
+            "FormProtection",
+            "CSRF",
+            "validate upload",
+            "server-generated filename"
+        ]
+    },
+    "must_not": [
+        "trust client filename under webroot",
+        "JavaScript-only CSRF"
+    ],
+    "related_knowledge": [
+        "csrf-formprotection-required",
+        "unsafe-upload-handling"
+    ]
+}

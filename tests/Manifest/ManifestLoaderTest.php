@@ -27,6 +27,8 @@ final class ManifestLoaderTest extends TestCase
         self::assertContains('cakephp-bake', $ids);
         self::assertContains('cakephp-queue', $ids);
         self::assertContains('cakephp-debug-kit', $ids);
+        self::assertContains('muffin-trash', $ids);
+        self::assertContains('friendsofcake-crud-authorization', $ids);
     }
 
     public function testTestFixturesLoadWhenRequested(): void

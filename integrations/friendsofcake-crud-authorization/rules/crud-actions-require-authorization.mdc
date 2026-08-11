@@ -1,0 +1,30 @@
+---
+description: Authorize and scope FriendsOfCake CRUD view/edit/delete when Authorization is installed.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Listener/**/*.php"
+  - "**/Policy/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+packages: [friendsofcake/crud, cakephp/authorization]
+last_verified: 2026-08-11
+---
+
+# CRUD actions require authorization
+
+## Package recommendation
+
+When both CRUD and Authorization are installed: loading a record in a CRUD action is not permission. Apply `authorize` / policy checks and query scoping consistent with the app’s Authorization setup.
+
+## Required behavior
+
+- Scope index queries (CRUD beforePaginate / finder) to what the identity may see.
+- Authorize view/edit/delete subjects before mutating or exposing them.
+- Keep policies on Authorization’s side; CRUD listeners may call authorize/scope but must not invent a parallel ACL.
+- Do not assume Authentication APIs from this integration alone.
+
+## Anti-patterns
+
+- IDOR via CRUD get-by-id without policy/scope
+- Duplicating AuthZ rules inside CRUD listeners as the only check
