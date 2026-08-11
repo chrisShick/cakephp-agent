@@ -1,0 +1,25 @@
+{
+    "id": "abstraction-unique-constraint-not-controller",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "Users must not reuse an email address. Where should this uniqueness check live in CakePHP?",
+    "expected": {
+        "concepts": [
+            "application-rule",
+            "choose-cakephp-abstraction"
+        ],
+        "preferred": [
+            "buildRules",
+            "RulesChecker",
+            "isUnique"
+        ]
+    },
+    "must_not": [
+        "only check in the controller",
+        "FormRequest",
+        "rely solely on validationDefault"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "id": "lifecycle-uniqueness-prefers-application-rule",
+    "category": "architecture",
+    "type": "lifecycle",
+    "prompt": "I need to reject duplicate slugs when saving Articles. Should I use beforeSave, validationDefault alone, middleware, or an application rule?",
+    "expected": {
+        "concepts": [
+            "application-rule",
+            "select-lifecycle-hook"
+        ],
+        "preferred": [
+            "buildRules",
+            "RulesChecker",
+            "isUnique"
+        ]
+    },
+    "must_not": [
+        "middleware for uniqueness",
+        "only beforeSave exception",
+        "validationDefault alone"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule",
+        "table-callback-vs-application-rule"
+    ]
+}

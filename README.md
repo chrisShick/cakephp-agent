@@ -2,7 +2,7 @@
 
 AI engineering knowledge platform for **CakePHP 5.x** — rules, skills, extensions, and a safe installer for Cursor, Claude Code, and Codex.
 
-> Status: early development (Phases 0–3). Extension auto-detection works; CakePHP core knowledge/rules and evaluation seeds are in place. P0 skills and FriendsOfCake CRUD come next.
+> Status: early development (Phases 0–4). P0 CakePHP skills and evaluation corpus (≥20) are in place. FriendsOfCake CRUD extension is next.
 
 ## What this is
 
@@ -90,7 +90,7 @@ Cursor / Claude / Codex + .ai project overlays
 
 See [docs/plans/cakephp-agent-unified-plan.md](docs/plans/cakephp-agent-unified-plan.md).
 
-**New agent / Phase 4 pickup:** [docs/HANDOFF-phase-4.md](docs/HANDOFF-phase-4.md)
+**New agent / Phase 5 pickup:** [docs/HANDOFF-phase-5.md](docs/HANDOFF-phase-5.md)
 
 ## Development
 

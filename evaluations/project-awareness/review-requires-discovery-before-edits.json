@@ -1,0 +1,22 @@
+{
+    "id": "review-requires-discovery-before-edits",
+    "category": "project-awareness",
+    "type": "project-awareness",
+    "prompt": "Review this CakePHP PR that adds a new service class wrapping one Table. What should you do first?",
+    "expected": {
+        "concepts": [
+            "inspect-before-coding",
+            "cakephp-code-review"
+        ],
+        "preferred": [
+            "inspect existing patterns",
+            "check .ai",
+            "composer packages"
+        ]
+    },
+    "must_not": [
+        "immediately rewrite without inspecting",
+        "require a repository for every Table"
+    ],
+    "related_knowledge": []
+}

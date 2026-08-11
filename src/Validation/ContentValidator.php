@@ -8,10 +8,12 @@ use CakePhpAgent\Filesystem\Filesystem;
 use CakePhpAgent\PackagePaths;
 
 /**
- * Validate canonical knowledge units, evaluations, and CakePHP rule hygiene.
+ * Validate canonical knowledge units, evaluations, skills, and CakePHP rule hygiene.
  */
 final class ContentValidator
 {
+    private const MIN_EVALUATIONS = 20;
+
     /** @var list<string> */
     private const LARAVEL_TERMS = [
         'Eloquent',
@@ -32,6 +34,19 @@ final class ContentValidator
         '## Exceptions',
         '## Examples',
         '## Evaluations',
+    ];
+
+    /** @var list<string> */
+    private const REQUIRED_SKILL_SECTIONS = [
+        '## Objective',
+        '## Use when',
+        '## Do not use when',
+        '## Inputs to discover',
+        '## Workflow',
+        '## Framework decisions',
+        '## Anti-patterns',
+        '## Validation',
+        '## Completion criteria',
     ];
 
     /** @var list<string> */
@@ -61,6 +76,7 @@ final class ContentValidator
         $errors = array_merge($errors, $this->validateDecisions($root));
         $errors = array_merge($errors, $this->validateAntiPatterns($root));
         $errors = array_merge($errors, $this->validateEvaluations($root));
+        $errors = array_merge($errors, $this->validateCakephpSkills($root));
         $errors = array_merge($errors, $this->validateCakephpRules($root));
 
         return $errors;
@@ -208,8 +224,85 @@ final class ContentValidator
             $count++;
         }
 
-        if ($count < 10) {
-            $errors[] = sprintf('Expected at least 10 evaluation fixtures, found %d.', $count);
+        if ($count < self::MIN_EVALUATIONS) {
+            $errors[] = sprintf(
+                'Expected at least %d evaluation fixtures, found %d.',
+                self::MIN_EVALUATIONS,
+                $count
+            );
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function validateCakephpSkills(string $root): array
+    {
+        $dir = $root . '/skills/cakephp';
+        if (!$this->filesystem->isDir($dir)) {
+            return ['Missing skills/cakephp directory.'];
+        }
+
+        $errors = [];
+        $names = [];
+        $skillCount = 0;
+
+        foreach ($this->filesystem->listFilesRelative($dir) as $relative) {
+            if (!str_ends_with($relative, 'SKILL.md')) {
+                continue;
+            }
+
+            $skillCount++;
+            $path = $dir . '/' . $relative;
+            $contents = $this->filesystem->read($path);
+            $frontmatter = $this->parseFrontmatter($contents);
+            if ($frontmatter === null) {
+                $errors[] = sprintf('skills/cakephp/%s: missing frontmatter.', $relative);
+                continue;
+            }
+
+            foreach (['name', 'description'] as $required) {
+                if (!isset($frontmatter[$required]) || !is_string($frontmatter[$required]) || $frontmatter[$required] === '') {
+                    $errors[] = sprintf('skills/cakephp/%s: missing frontmatter field "%s".', $relative, $required);
+                }
+            }
+
+            $name = $frontmatter['name'] ?? null;
+            if (is_string($name) && $name !== '') {
+                if (isset($names[$name])) {
+                    $errors[] = sprintf('Duplicate skill name "%s".', $name);
+                }
+                $names[$name] = true;
+
+                $folder = dirname($relative);
+                if ($folder !== '.' && $folder !== $name) {
+                    $errors[] = sprintf(
+                        'skills/cakephp/%s: folder "%s" must match skill name "%s".',
+                        $relative,
+                        $folder,
+                        $name
+                    );
+                }
+            }
+
+            foreach (self::REQUIRED_SKILL_SECTIONS as $section) {
+                if (!str_contains($contents, $section)) {
+                    $errors[] = sprintf('skills/cakephp/%s: missing section "%s".', $relative, $section);
+                }
+            }
+
+            if ($name !== 'inspect-before-coding' && !str_contains($contents, 'inspect-before-coding')) {
+                $errors[] = sprintf(
+                    'skills/cakephp/%s: must reference inspect-before-coding.',
+                    $relative
+                );
+            }
+        }
+
+        if ($skillCount < 12) {
+            $errors[] = sprintf('Expected at least 12 CakePHP skills, found %d.', $skillCount);
         }
 
         return $errors;

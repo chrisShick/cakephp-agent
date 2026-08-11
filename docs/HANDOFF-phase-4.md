@@ -189,15 +189,17 @@ If useful, extend `ContentValidator` to require skill contract headings / unique
 
 ## 7. Acceptance checklist (Phase 4 done when)
 
-- [ ] All listed P0 skills exist with full contract
-- [ ] Skills reference `inspect-before-coding` instead of duplicating discovery
-- [ ] Core skills assume no optional plugins
-- [ ] `cakephp-agent install --dry-run` shows skill files for a fixture project
-- [ ] Integration/unit coverage for skill install path if anything broke
-- [ ] ≥20 evaluations; `cakephp-agent validate` passes
-- [ ] PHPUnit + PHPStan green
-- [ ] `docs/architecture.md` updated to “Phase 4 complete → Phase 5 CRUD”
-- [ ] This handoff file updated or a new `HANDOFF-phase-5.md` created for the next agent
+- [x] All listed P0 skills exist with full contract
+- [x] Skills reference `inspect-before-coding` instead of duplicating discovery
+- [x] Core skills assume no optional plugins
+- [x] `cakephp-agent install --dry-run` shows skill files for a fixture project
+- [x] Integration/unit coverage for skill install path if anything broke
+- [x] ≥20 evaluations; `cakephp-agent validate` passes
+- [x] PHPUnit + PHPStan green
+- [x] `docs/architecture.md` updated to “Phase 4 complete → Phase 5 CRUD”
+- [x] This handoff file updated or a new `HANDOFF-phase-5.md` created for the next agent
+
+> **Phase 4 complete.** Continue at [HANDOFF-phase-5.md](HANDOFF-phase-5.md).
 
 ---
 

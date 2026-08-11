@@ -1,0 +1,96 @@
+---
+name: choose-cakephp-abstraction
+description: Ownership router — decide which CakePHP abstraction should own a concern before implementing it.
+---
+
+# Choose CakePHP abstraction
+
+## Objective
+
+Select the correct CakePHP ownership boundary for a concern (Controller, Middleware, Component, Table, Entity, Finder, Behavior, Validator, RulesChecker, Event/Listener, Command, etc.) with explicit rationale and rejected alternatives.
+
+## Use when
+
+- Unsure where new behavior should live.
+- A request sounds like “add a service / helper / util” without a clear CakePHP home.
+- Reviewing whether an existing placement is wrong.
+
+## Do not use when
+
+- The abstraction is already decided and you only need the implementation workflow (use the matching task skill).
+- The only question is syntax, not ownership.
+
+## Inputs to discover
+
+1. Run **`inspect-before-coding`** first (Composer, `.ai/`, neighboring classes, existing patterns).
+2. Name the concern in one sentence (what must be true / what must happen).
+3. Note lifecycle: request pipeline, controller action, entity marshaling, save/delete, query, CLI, async event.
+4. Note whether the concern is HTTP-specific, query semantics, persistence invariant, or side effect.
+5. Check whether an installed plugin already owns the concern.
+
+## Workflow
+
+1. Complete discovery via `inspect-before-coding`.
+2. Answer the ownership questions:
+   1. What concern is being implemented?
+   2. Which lifecycle owns it?
+   3. Must it apply across multiple entry points?
+   4. Does it require persisted state?
+   5. Is it HTTP-specific?
+   6. Is it query semantics?
+   7. Is it persistence behavior / invariant?
+   8. Is it reusable across Tables/controllers/apps?
+   9. Does CakePHP already expose a native extension point?
+   10. Does an installed plugin own it?
+   11. Does the project already establish an architecture for it?
+3. Map answers to a recommended abstraction using linked decision units.
+4. State rejected alternatives and why.
+5. Name a testing strategy appropriate to the layer (controller/integration/table/unit).
+6. Hand off to the matching task skill when implementation starts.
+
+## Framework decisions
+
+Link and apply as relevant:
+
+- `knowledge/decisions/validation-vs-application-rule`
+- `knowledge/decisions/finder-vs-behavior`
+- `knowledge/decisions/component-vs-middleware`
+- `knowledge/decisions/entity-accessor-vs-query-calculation`
+- `knowledge/decisions/table-callback-vs-application-rule`
+- `knowledge/decisions/contain-vs-matching`
+- `knowledge/decisions/bulk-update-vs-entity-save`
+- `knowledge/decisions/plugin-vs-application-code`
+
+Rough defaults (override with project conventions and decisions above):
+
+| Concern | Prefer |
+|---|---|
+| Request/response pipeline | Middleware |
+| Reusable controller collaboration | Component |
+| HTTP orchestration only | Controller action |
+| Query reuse on one Table | Custom finder |
+| Cross-table persistence feature | Behavior |
+| Field shape/format | Validator |
+| Stateful save/delete invariant | Application rule (`buildRules`) |
+| Persistence side effect | Table callback / event listener |
+| Derived field on loaded entity | Entity accessor (careful) |
+| Aggregate query calculation | Query / finder |
+
+## Anti-patterns
+
+- Fat controllers holding persistence and query logic.
+- Active Record Entities that query the database by default.
+- Premature service/repository layers that wrap a single Table with no orchestration value.
+- Putting uniqueness only in validation.
+- Assuming optional plugin APIs in core guidance.
+
+## Validation
+
+- Output includes: recommended abstraction, rationale, rejected alternatives, lifecycle boundary, testing strategy.
+- Choice aligns with a decision unit or an explicit project convention from `.ai/`.
+- No undetected plugin APIs recommended.
+
+## Completion criteria
+
+- Ownership decision documented and ready for implementation.
+- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`).

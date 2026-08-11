@@ -155,6 +155,66 @@ final class KnowledgeInstallerTest extends TestCase
         self::assertNotEmpty($skips);
     }
 
+    public function testInstallsNestedCakephpSkillFolders(): void
+    {
+        $skillDir = $this->packageRoot . '/skills/cakephp/inspect-before-coding';
+        mkdir($skillDir, 0775, true);
+        file_put_contents($skillDir . '/SKILL.md', "# inspect\n");
+
+        $config = new ProjectConfig(projectRoot: $this->projectRoot, editors: ['cursor']);
+        $this->installer->install($config);
+
+        self::assertFileExists(
+            $this->projectRoot . '/.editor/cursor/skills/cakephp-agent/cakephp/inspect-before-coding/SKILL.md'
+        );
+    }
+
+    public function testRealPackageDryRunPlansCoreSkills(): void
+    {
+        $project = TestTemp::dir('real-skills-project');
+        file_put_contents($project . '/composer.json', '{"name":"fixture/app","require":{"cakephp/cakephp":"^5.0"}}');
+
+        try {
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+                dryRun: true,
+            ));
+
+            $skillPaths = [];
+            foreach ($result['actions'] as $action) {
+                if (str_contains($action->relativePath, 'skills/cakephp-agent/cakephp/')
+                    && str_ends_with($action->relativePath, 'SKILL.md')
+                ) {
+                    $skillPaths[] = $action->relativePath;
+                }
+            }
+
+            self::assertNotEmpty($skillPaths);
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'inspect-before-coding/SKILL.md')
+                ),
+                'Expected inspect-before-coding skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'choose-cakephp-abstraction/SKILL.md')
+                ),
+                'Expected choose-cakephp-abstraction skill in dry-run plan'
+            );
+        } finally {
+            TestTemp::removeTree($project);
+        }
+    }
+
     public function testPackagePathsPointAtRealRepo(): void
     {
         self::assertDirectoryExists(PackagePaths::rules());

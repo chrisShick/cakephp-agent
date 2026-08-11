@@ -287,7 +287,7 @@ HELP;
 
         $contentErrors = (new ContentValidator())->validate();
         if ($contentErrors === []) {
-            echo 'Knowledge, evaluations, and CakePHP rules OK.' . PHP_EOL;
+            echo 'Knowledge, evaluations, skills, and CakePHP rules OK.' . PHP_EOL;
         } else {
             $errors = array_merge($errors, $contentErrors);
         }
