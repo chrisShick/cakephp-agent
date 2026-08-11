@@ -43,6 +43,7 @@
         "test": "phpunit",
         "phpstan": "phpstan analyse --memory-limit=512M",
         "validate-content": "php bin/cakephp-agent validate",
+        "eval": "php bin/cakephp-agent eval",
         "check": [
             "@composer validate --strict",
             "@test",

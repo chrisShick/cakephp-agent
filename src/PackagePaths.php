@@ -35,4 +35,14 @@ final class PackagePaths
     {
         return self::root() . '/schemas';
     }
+
+    public static function evaluations(): string
+    {
+        return self::root() . '/evaluations';
+    }
+
+    public static function knowledge(): string
+    {
+        return self::root() . '/knowledge';
+    }
 }

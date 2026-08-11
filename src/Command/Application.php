@@ -9,6 +9,9 @@ use CakePhpAgent\Configuration\ProjectConfigLoader;
 use CakePhpAgent\Discovery\ComposerMetadataReader;
 use CakePhpAgent\Discovery\ProjectRootLocator;
 use CakePhpAgent\Editor\EditorRegistry;
+use CakePhpAgent\Evaluation\EvaluationFilter;
+use CakePhpAgent\Evaluation\EvaluationRunner;
+use CakePhpAgent\Evaluation\ScoreResult;
 use CakePhpAgent\Extension\ExtensionDecision;
 use CakePhpAgent\Extension\ExtensionRegistry;
 use CakePhpAgent\Extension\ExtensionResolver;
@@ -21,6 +24,8 @@ use Throwable;
 
 final class Application
 {
+    public const VERSION = '0.1.0';
+
     public function __construct(
         private readonly ProjectRootLocator $rootLocator = new ProjectRootLocator(),
         private readonly ProjectConfigLoader $configLoader = new ProjectConfigLoader(),
@@ -30,6 +35,7 @@ final class Application
         private readonly ExtensionResolver $extensionResolver = new ExtensionResolver(),
         private readonly ExtensionRegistry $extensionRegistry = new ExtensionRegistry(),
         private readonly ManifestLoader $manifestLoader = new ManifestLoader(),
+        private readonly EvaluationRunner $evaluationRunner = new EvaluationRunner(),
     ) {
     }
 
@@ -49,6 +55,7 @@ final class Application
                 'extensions' => $this->extensions($options),
                 'explain' => $this->explain($options),
                 'validate' => $this->validate(),
+                'eval' => $this->runEval($options),
                 'doctor' => $this->doctor($options),
                 'version', '--version', '-V' => $this->version(),
                 default => $this->unknown($command),
@@ -74,6 +81,7 @@ Commands:
   extensions   List known extension packs and status for a project
   explain      Explain why each extension is enabled or not
   validate     Validate package content, manifests, knowledge, evaluations
+  eval         Run evaluation corpus self-check / baselines (offline)
   doctor       Sanity-check project + package
   version      Show package version
   help         Show this help
@@ -89,6 +97,17 @@ Install options:
   --verbose                          Verbose output
   --project=PATH                     Project root (default: discover from cwd)
 
+Eval options:
+  --category=NAME                    Filter by category (repeatable / comma-separated)
+  --type=NAME                        Filter by evaluation type (repeatable / comma-separated)
+  --id=ID                            Filter by evaluation id (repeatable / comma-separated)
+  --extension=ID                     Prefer fixtures requiring extension (core still included)
+  --model=NAME                       Baseline model label (default: self-check)
+  --model-version=VER                Baseline model version (default: 1)
+  --format=text|json                 Output format (default: text)
+  --write-baseline=PATH              Write baseline JSON after the run
+  --compare-baseline=PATH            Compare run to a previous baseline
+
 Project-owned overlays live under .ai/ and are never overwritten.
 
 HELP;
@@ -98,7 +117,131 @@ HELP;
 
     private function version(): int
     {
-        echo 'cakephp-agent 0.1.0' . PHP_EOL;
+        echo 'cakephp-agent ' . self::VERSION . PHP_EOL;
+
+        return 0;
+    }
+
+    /**
+     * Offline evaluation platform: load corpus, self-check heuristic scorer, baselines.
+     *
+     * @param array<string, mixed> $options
+     */
+    private function runEval(array $options): int
+    {
+        $filter = new EvaluationFilter(
+            categories: $this->optionIdList($options, 'category'),
+            types: $this->optionIdList($options, 'type'),
+            ids: $this->optionIdList($options, 'id'),
+            extensions: $this->optionIdList($options, 'extension'),
+        );
+
+        $run = $this->evaluationRunner->run($filter);
+        $model = isset($options['model']) && is_string($options['model']) && $options['model'] !== ''
+            ? $options['model']
+            : 'self-check';
+        $modelVersion = isset($options['model-version']) && is_string($options['model-version']) && $options['model-version'] !== ''
+            ? $options['model-version']
+            : '1';
+
+        $format = isset($options['format']) && is_string($options['format']) ? $options['format'] : 'text';
+
+        if (isset($options['write-baseline']) && is_string($options['write-baseline'])) {
+            $document = $this->evaluationRunner->buildBaseline(
+                $run['cases'],
+                $run['results'],
+                self::VERSION,
+                $model,
+                $modelVersion,
+            );
+            $this->evaluationRunner->baselineStore()->write($options['write-baseline'], $document);
+        }
+
+        $compare = null;
+        if (isset($options['compare-baseline']) && is_string($options['compare-baseline'])) {
+            $baseline = $this->evaluationRunner->baselineStore()->read($options['compare-baseline']);
+            $compare = $this->evaluationRunner->compareBaseline($baseline, $run['cases'], $run['results']);
+        }
+
+        if ($format === 'json') {
+            $payload = [
+                'knowledge_version' => self::VERSION,
+                'model' => $model,
+                'model_version' => $modelVersion,
+                'catalog' => [
+                    'count' => count($run['cases']),
+                    'fingerprint' => $run['fingerprint'],
+                    'by_category' => $run['by_category'],
+                    'by_type' => $run['by_type'],
+                ],
+                'self_check_ok' => $run['self_check_ok'],
+                'results' => array_map(
+                    static fn (ScoreResult $r): array => [
+                        'id' => $r->evaluationId,
+                        'status' => $r->status,
+                        'score' => $r->score,
+                        'notes' => $r->notes,
+                    ],
+                    $run['results'],
+                ),
+                'compare' => $compare,
+            ];
+            echo json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+        } else {
+            echo 'CakePHP Agent eval (offline self-check)' . PHP_EOL . PHP_EOL;
+            echo sprintf("Knowledge version: %s\n", self::VERSION);
+            echo sprintf("Model label: %s (%s)\n", $model, $modelVersion);
+            echo sprintf("Fixtures: %d\n", count($run['cases']));
+            echo sprintf("Fingerprint: %s\n", $run['fingerprint']);
+            echo PHP_EOL . 'By category:' . PHP_EOL;
+            foreach ($run['by_category'] as $category => $count) {
+                echo sprintf("  %-20s %d\n", $category, $count);
+            }
+            echo PHP_EOL . 'By type:' . PHP_EOL;
+            foreach ($run['by_type'] as $type => $count) {
+                echo sprintf("  %-20s %d\n", $type, $count);
+            }
+
+            $failed = array_values(array_filter(
+                $run['results'],
+                static fn (ScoreResult $r): bool => $r->status === ScoreResult::FAIL
+            ));
+            echo PHP_EOL . sprintf(
+                "Self-check: %s (%d fail)\n",
+                $run['self_check_ok'] ? 'OK' : 'FAILED',
+                count($failed)
+            );
+            if ($failed !== []) {
+                foreach ($failed as $result) {
+                    echo sprintf("  ✗ %s\n", $result->evaluationId);
+                    foreach ($result->notes as $note) {
+                        echo '      - ' . $note . PHP_EOL;
+                    }
+                }
+            }
+
+            if (isset($options['write-baseline']) && is_string($options['write-baseline'])) {
+                echo PHP_EOL . 'Wrote baseline: ' . $options['write-baseline'] . PHP_EOL;
+            }
+
+            if ($compare !== null) {
+                echo PHP_EOL . 'Baseline compare:' . PHP_EOL;
+                echo '  ' . ($compare['ok'] ? 'OK (no score regressions)' : 'REGRESSIONS DETECTED') . PHP_EOL;
+                foreach ($compare['regressions'] as $line) {
+                    echo '  ✗ ' . $line . PHP_EOL;
+                }
+                foreach ($compare['changes'] as $line) {
+                    echo '  · ' . $line . PHP_EOL;
+                }
+            }
+        }
+
+        if (!$run['self_check_ok']) {
+            return 1;
+        }
+        if ($compare !== null && !$compare['ok']) {
+            return 1;
+        }
 
         return 0;
     }
@@ -424,7 +567,7 @@ HELP;
             $arg = substr($arg, 2);
             if (str_contains($arg, '=')) {
                 [$key, $value] = explode('=', $arg, 2);
-                if (in_array($key, ['extension', 'without'], true)) {
+                if (in_array($key, ['extension', 'without', 'category', 'type', 'id'], true)) {
                     $existing = $options[$key] ?? [];
                     if (!is_array($existing)) {
                         $existing = [(string) $existing];

@@ -30,11 +30,13 @@ Installer, extensions, P0 skills, capability-aware reviewer agents, expanded dec
 
 ### Accept
 
-- Eval runner CLI with deterministic fixture loading
-- Baseline/report format documented
-- Tests for runner plumbing (not live model calls required for MVP)
-- `phpunit` + `phpstan` + `validate` green
-- Handoff for Phase 11 (docs & public 1.0) when appropriate
+- [x] Eval runner CLI with deterministic fixture loading
+- [x] Baseline/report format documented
+- [x] Tests for runner plumbing (not live model calls required for MVP)
+- [x] `phpunit` + `phpstan` + `validate` green
+- [x] Handoff for Phase 11 (docs & public 1.0)
+
+> **Phase 10 complete.** Continue at [HANDOFF-phase-11.md](HANDOFF-phase-11.md).
 
 ### Out of scope
 
@@ -60,5 +62,6 @@ composer install
 vendor/bin/phpunit
 vendor/bin/phpstan analyse --memory-limit=512M
 php bin/cakephp-agent validate
+php bin/cakephp-agent eval
 php bin/cakephp-agent help
 ```

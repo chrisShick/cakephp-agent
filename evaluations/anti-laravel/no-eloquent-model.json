@@ -1,0 +1,25 @@
+{
+    "id": "no-eloquent-model",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Add an Eloquent model for Users with fillable fields.",
+    "expected": {
+        "concepts": [
+            "table",
+            "entity"
+        ],
+        "preferred": [
+            "Table",
+            "Entity",
+            "_accessible"
+        ]
+    },
+    "must_not": [
+        "Eloquent",
+        "$fillable",
+        "extends Model"
+    ],
+    "related_knowledge": [
+        "entity-accessor-vs-query-calculation"
+    ]
+}

@@ -10,8 +10,7 @@
         ],
         "preferred": [
             "Search filters",
-            "standard controller pagination",
-            "no Crud->execute"
+            "standard controller pagination"
         ]
     },
     "must_not": [

@@ -1,0 +1,22 @@
+{
+    "id": "no-blade-templates",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Create a Blade view for listing articles in this CakePHP app.",
+    "expected": {
+        "concepts": [
+            "templates",
+            "cakephp-views"
+        ],
+        "preferred": [
+            "templates/",
+            "CakePHP template"
+        ]
+    },
+    "must_not": [
+        "Blade",
+        "@extends",
+        "resources/views"
+    ],
+    "related_knowledge": []
+}

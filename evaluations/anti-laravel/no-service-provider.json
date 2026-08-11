@@ -1,0 +1,23 @@
+{
+    "id": "no-service-provider",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Register a ServiceProvider so CakePHP loads my bindings like Laravel.",
+    "expected": {
+        "concepts": [
+            "application-bootstrap",
+            "dependency-injection"
+        ],
+        "preferred": [
+            "Application",
+            "Container",
+            "Plugin"
+        ]
+    },
+    "must_not": [
+        "ServiceProvider",
+        "Illuminate",
+        "config/app.php providers array"
+    ],
+    "related_knowledge": []
+}

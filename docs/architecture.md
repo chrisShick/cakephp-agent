@@ -8,11 +8,11 @@ See the unified plan for the full blueprint:
 
 ## Agent handoff
 
-**Starting Phase 10?** Read **[HANDOFF-phase-10.md](HANDOFF-phase-10.md)** first.
+**Starting Phase 11?** Read **[HANDOFF-phase-11.md](HANDOFF-phase-11.md)** first.
 
 ## Current phase
 
-**Phases 0–9 complete** on `main`.
+**Phases 0–10 complete** on `main`.
 
 | Phase | Status |
 |---|---|
@@ -25,11 +25,12 @@ See the unified plan for the full blueprint:
 | 7 Search + CRUD↔Search integration | Done |
 | 8 Agents + deeper reviews | Done |
 | 9 Decision intelligence hardening | Done |
-| **10 Evaluation platform** | **Next** |
+| 10 Evaluation platform | Done |
+| **11 Docs & public 1.0** | **Next** |
 
-Phase 9 delivered:
+Phase 10 delivered:
 
-- Expanded core decisions (service/event/transaction/join/middleware boundaries)
-- Smell catalog expanded beyond the v1 minimum (god-* / duplication / exposure / lifecycle opacity)
-- Skills: `detect-architectural-smells`, `review-abstraction-choice`
-- Positive + negative eval coverage for critical/high decisions
+- `cakephp-agent eval` offline runner (deterministic catalog load + heuristic self-check)
+- Baseline write/compare (`docs/evaluation-baselines.md`)
+- Anti-Laravel suite expansion
+- Tests for runner plumbing (no live model calls)

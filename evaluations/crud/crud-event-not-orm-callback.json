@@ -2,6 +2,9 @@
     "id": "crud-event-not-orm-callback",
     "category": "crud",
     "type": "selection",
+    "requires": {
+        "extensions": ["friendsofcake-crud"]
+    },
     "prompt": "In an app using FriendsOfCake CRUD, I need to ensure article slugs are unique on every save, including CLI imports that do not use CRUD controllers. Should I enforce this in Crud.beforeSave, Model.beforeSave only, or an application rule?",
     "expected": {
         "concepts": [
