@@ -1,0 +1,25 @@
+{
+    "id": "prefer-orm-over-connection-execute",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "I need to load published articles with their authors for a controller action. Should I use Connection::execute with a JOIN, or the ORM?",
+    "expected": {
+        "concepts": [
+            "orm",
+            "contain",
+            "finder"
+        ],
+        "preferred": [
+            "Table find",
+            "contain",
+            "custom finder"
+        ]
+    },
+    "must_not": [
+        "endorse Connection::execute as the default for ordinary association loads"
+    ],
+    "related_knowledge": [
+        "orm-vs-connection-sql",
+        "bypassing-orm-for-convenience"
+    ]
+}

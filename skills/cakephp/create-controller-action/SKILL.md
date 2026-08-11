@@ -30,7 +30,7 @@ Implement a controller action that handles HTTP concerns (authz hooks already in
 
 1. Confirm route → controller → action naming matches project conventions.
 2. Keep the action orchestration-only: read request, call Table/finder, branch on success/failure, set response.
-3. Use `newEntity`/`patchEntity` + `save` rather than raw SQL in the controller.
+3. Use `newEntity`/`patchEntity` + `save` rather than raw SQL or `Connection::execute` in the controller.
 4. Avoid embedding complex query building; extract a finder if needed (`create-finder`).
 5. Respect mass-assignment (`_accessible`) and CSRF/form patterns already in the app.
 6. Add controller/integration tests consistent with project style.

@@ -32,13 +32,13 @@ Identify architectural smells in a CakePHP codebase or diff using `knowledge/ant
 1. Complete discovery via `inspect-before-coding`.
 2. Scan for candidates using the anti-pattern catalog (not class length alone):
    - Ownership: `fat-controller`, `fat-table`, `persistence-concern-in-controller`, `http-concern-in-model`
-   - ORM style: `active-record-entity`, `anemic-entity`, `hidden-n-plus-one`, `over-eager-contain`
+   - ORM style: `active-record-entity`, `anemic-entity`, `hidden-n-plus-one`, `over-eager-contain`, `bypassing-orm-for-convenience`
    - Abstraction misuse: `premature-service-layer`, `repository-over-table`, `framework-replacement-abstraction`, `unnecessary-trait`
    - Duplication: `duplicate-finders`, `duplicate-query-semantics`, `duplicate-validation`, `duplicate-application-rules`
    - God objects: `god-behavior`, `god-component`, `god-listener`, `god-crud-listener` (when CRUD installed)
    - CRUD misuse (when installed): `orm-invariant-in-crud-listener`, `reimplemented-crud-action`
    - Lifecycle opacity: `callback-side-effect-explosion`, `event-chain-obscurity`
-   - Security exposure: `mass-assignment-overexposure`, `serialization-overexposure`, `authorization-only-in-ui`, `open-redirect`, `debug-in-production`
+   - Security exposure: `mass-assignment-overexposure`, `serialization-overexposure`, `authorization-only-in-ui`, `open-redirect`, `debug-in-production`, `unsafe-sql-concatenation`
    - Plugin honesty: `plugin-api-reimplementation`
 3. For each candidate, apply the smell’s **Detection guidance** and **False positives**.
 4. Rank by risk (security/correctness first, then maintainability/performance).

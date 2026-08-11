@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Phase 14b: ORM-first decision (`orm-vs-connection-sql`), anti-patterns (`bypassing-orm-for-convenience`, `unsafe-sql-concatenation`), and related evals
+- Knowledge catalog indexes for concepts/patterns/security/performance pointing at real units
+- [HANDOFF-phase-14b.md](docs/HANDOFF-phase-14b.md) for 1.0 quality polish → stable
+
+### Changed
+
+- Philosophy / ORM / Tables / advanced-orm / security rules prefer ORM and bound Query expressions
+- Ownership and smell skills link ORM-first + SQL concat guidance
+- Source freshness (`last_verified`) refreshed on critical ORM/security rules
+
 ## [1.0.0-beta.1] - 2026-08-11
 
 Public beta on Packagist. Not yet stable 1.0 — soak in a real app before `1.0.0`.

@@ -36,8 +36,9 @@ Publish on Packagist and cut a **beta**, then stable **1.0.0** after soak.
 2. [x] Packagist publish `chrisshick/cakephp-agent`
 3. [x] Triage [pre-1.0-review.md](pre-1.0-review.md)
 4. [x] Version bump to **`1.0.0-beta.1`**; CHANGELOG / README status
-5. [ ] Git tag **`v1.0.0-beta.1`** (human Admin after merge)
-6. [ ] Optional soak in a real CakePHP app → then stable **1.0.0**
+5. [x] Git tag **`v1.0.0-beta.1`** (human Admin after merge)
+6. [x] Phase **14b** ORM-first / 1.0 polish — [HANDOFF-phase-14b.md](HANDOFF-phase-14b.md)
+7. [ ] Soak in a real CakePHP app → then stable **1.0.0**
 
 ### Accept
 

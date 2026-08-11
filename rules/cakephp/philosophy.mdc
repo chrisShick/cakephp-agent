@@ -7,7 +7,7 @@ truth_level: PACKAGE_RECOMMENDATION
 framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5/en/intro.html
-last_verified: 2026-08-10
+    10|last_verified: 2026-08-11
 ---
 
 # CakePHP philosophy
@@ -16,6 +16,7 @@ last_verified: 2026-08-10
 
 - Prefer convention before configuration.
 - Prefer CakePHP extension points before inventing framework replacements.
+- Prefer the CakePHP ORM (Tables, finders, associations, Query expressions) for application domain data access; treat `Connection::execute` / raw SQL as exceptional.
 - Inspect existing project conventions (and `.ai/`) before creating new ones.
 - Use plugin capabilities only when the project has intentionally adopted them.
 - For important decisions, state rejected alternatives (“why not”).
@@ -28,6 +29,7 @@ last_verified: 2026-08-10
 - Do not put authorization only in the UI.
 - Do not enforce persisted uniqueness solely through input validation.
 - Do not use `contain()` merely because an association exists.
+- Do not default to raw Connection SQL for ordinary finds/saves.
 - Do not invent Laravel concepts (not Laravel: FormRequest, Eloquent, ServiceProvider, artisan, Blade, Gate).
 
 ## Review checklist
@@ -35,3 +37,4 @@ last_verified: 2026-08-10
 - [ ] Convention inspected before invention
 - [ ] Ownership boundary named
 - [ ] Rejected alternative stated when choosing an abstraction
+- [ ] Domain data access uses ORM unless an exception is justified

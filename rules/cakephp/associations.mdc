@@ -8,7 +8,7 @@ truth_level: FRAMEWORK_DEFAULT
 framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5.x/orm/associations.html
-last_verified: 2026-08-10
+last_verified: 2026-08-11
 related_knowledge: [contain-vs-matching]
 ---
 

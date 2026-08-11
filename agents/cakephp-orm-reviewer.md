@@ -16,6 +16,7 @@ You specialize in CakePHP 5 ORM correctness and performance reasoning.
 
 ## Review focus
 
+- Prefer ORM (Tables/finders/expressions) over `Connection::execute` for domain data
 - N+1 / hidden query loops vs selective `contain`
 - Over-eager `contain` graphs
 - `contain` vs `matching` / `innerJoinWith` for filtering
@@ -23,6 +24,7 @@ You specialize in CakePHP 5 ORM correctness and performance reasoning.
 - Hydration mode and field selection when relevant
 - Association correctness (FK, aliases, belongstomany)
 - Bulk `update`/`delete` vs entity `save` lifecycle (callbacks/rules)
+- Unbound SQL / string concatenation risks
 - Entity accessors vs query calculations
 - Index advice **only** when schema/migration evidence supports it
 

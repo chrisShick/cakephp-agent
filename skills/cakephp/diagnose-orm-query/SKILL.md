@@ -37,6 +37,7 @@ Systematically find why an ORM query returns wrong data, performs poorly, or ski
    - Load associations for use → `contain` selectively.
    - Repeated per-row queries → contain/select or batch strategy.
    - Need callbacks/rules → entity save path; bulk update skips them (`bulk-update-vs-entity-save`).
+   - Tempted by `Connection::execute` for ordinary domain data → prefer ORM / expressions (`orm-vs-connection-sql`).
 4. Prefer fixing in a finder when semantics are reusable.
 5. Add a regression test that fails on the old behavior.
 
@@ -45,13 +46,15 @@ Systematically find why an ORM query returns wrong data, performs poorly, or ski
 - `knowledge/decisions/contain-vs-matching`
 - `knowledge/decisions/bulk-update-vs-entity-save`
 - `knowledge/decisions/entity-accessor-vs-query-calculation`
-- Anti-patterns: hidden-n-plus-one, over-eager-contain
+- `knowledge/decisions/orm-vs-connection-sql`
+- Anti-patterns: hidden-n-plus-one, over-eager-contain, bypassing-orm-for-convenience, unsafe-sql-concatenation
 
 ## Anti-patterns
 
 - Adding more `contain` without measuring need.
 - Fixing filter bugs with PHP loops over large result sets.
 - Expecting `Query::update()` to fire `beforeSave` rules like `save()`.
+- Reaching for Connection/raw SQL when Table finders or Query expressions fit.
 - Eloquent-style global scopes as the mental model.
 
 ## Validation
