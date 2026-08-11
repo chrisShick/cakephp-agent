@@ -1,0 +1,34 @@
+---
+description: CakePHP Authorization plugin — permissions, not login.
+globs:
+  - "**/Application.php"
+  - "**/Policy/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/authorization
+package_versions: [">=3.0 <4.0"]
+sources:
+  - https://book.cakephp.org/authorization/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# Authorization
+
+## Plugin semantics
+
+`cakephp/authorization` answers **may this identity perform this action?** via policies, middleware/component hooks, and optional query scoping. It does not replace Authentication.
+
+## Required behavior
+
+- Apply only when `cakephp/authorization` ^3 is installed.
+- Prefer policy classes for resource/action decisions.
+- Do not assume Authentication plugin APIs unless that package/pack is present — inspect how identity is provided.
+- Fail closed: missing authorization checks on mutating endpoints are defects.
+
+## Anti-patterns
+
+- UI-only hiding of actions without server-side authorization
+- Laravel Gate/Policy cargo-cult with wrong namespaces
+- Skipping authorization because the user is “logged in”

@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-authentication-incompatible",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "cakephp/authentication",
+            "version": "3.3.7"
+        }
+    ],
+    "packages-dev": []
+}

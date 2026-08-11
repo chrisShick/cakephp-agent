@@ -157,4 +157,51 @@ final class ExtensionResolverTest extends TestCase
             $result->decisionFor('friendsofcake-crud')?->status
         );
     }
+
+    public function testAuthenticationOnlyDoesNotEnableAuthorization(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-authentication',
+        ));
+
+        self::assertContains('cakephp-authentication', $result->enabledIds());
+        self::assertNotContains('cakephp-authorization', $result->enabledIds());
+        self::assertNotContains('cakephp-authentication-authorization', $result->enabledIds());
+    }
+
+    public function testAuthorizationOnlyDoesNotEnableAuthentication(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-authorization',
+        ));
+
+        self::assertContains('cakephp-authorization', $result->enabledIds());
+        self::assertNotContains('cakephp-authentication', $result->enabledIds());
+        self::assertNotContains('cakephp-authentication-authorization', $result->enabledIds());
+    }
+
+    public function testBothAuthPackagesActivateIntegration(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-auth-both',
+        ));
+
+        $ids = $result->enabledIds();
+        self::assertContains('cakephp-authentication', $ids);
+        self::assertContains('cakephp-authorization', $ids);
+        self::assertContains('cakephp-authentication-authorization', $ids);
+    }
+
+    public function testAuthenticationIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-authentication-incompatible',
+        ));
+
+        self::assertNotContains('cakephp-authentication', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('cakephp-authentication')?->status
+        );
+    }
 }

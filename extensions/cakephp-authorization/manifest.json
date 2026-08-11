@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "cakephp-authorization",
+  "name": "CakePHP Authorization",
+  "description": "Policy-oriented authorization for cakephp/authorization ^3 (CakePHP 5).",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp/authorization",
+        "constraint": "^3.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

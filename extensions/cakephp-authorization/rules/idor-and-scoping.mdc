@@ -1,0 +1,34 @@
+---
+description: IDOR defense and authorization-aware query scoping.
+globs:
+  - "**/Policy/**/*.php"
+  - "**/Controller/**/*.php"
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+package: cakephp/authorization
+package_versions: [">=3.0 <4.0"]
+sources:
+  - https://book.cakephp.org/authorization/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# IDOR and query scoping
+
+## Package recommendation
+
+Prevent insecure direct object references: never trust request IDs alone. Authorize access to the loaded resource and prefer identity-aware query scoping where the plugin/project supports it.
+
+## Required behavior
+
+- After `get`/`get()` by primary key, authorize before mutating or exposing sensitive fields.
+- Prefer scoped finders/policy scope methods when the app already uses them — inspect first.
+- Do not leak existence of unauthorized records via differing error shapes unless project convention requires it.
+- Pair with tight `_accessible` / field lists on patch (mass-assignment).
+
+## Anti-patterns
+
+- `get($this->request->getParam('id'))` then edit with no authorization
+- Authorization-only-in-UI
+- Over-wide `_accessible` to “make authorize work”

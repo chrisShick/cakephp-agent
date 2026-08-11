@@ -18,6 +18,9 @@ final class ManifestLoaderTest extends TestCase
         self::assertContains('test-fake-plugin', $ids);
         self::assertContains('test-fake-addon', $ids);
         self::assertContains('friendsofcake-crud', $ids);
+        self::assertContains('cakephp-authentication', $ids);
+        self::assertContains('cakephp-authorization', $ids);
+        self::assertContains('cakephp-authentication-authorization', $ids);
     }
 
     public function testFakePluginManifestFields(): void

@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-authorization",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "cakephp/authorization",
+            "version": "3.5.3"
+        }
+    ],
+    "packages-dev": []
+}

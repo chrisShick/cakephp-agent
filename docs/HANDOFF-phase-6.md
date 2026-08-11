@@ -37,13 +37,15 @@ Ship **independent Authentication and Authorization extension packs** with clear
 
 ### Accept (unified plan)
 
-- AuthN-only install does **not** recommend AuthZ policy APIs
-- AuthZ-only does **not** assume Authentication plugin APIs incorrectly
-- IDOR / mass-assignment guidance present where relevant
-- Detection via Composer; no contamination when packages absent
-- Fixtures + tests for AuthN-only, AuthZ-only, both, disabled, incompatible as needed
-- `phpunit` + `phpstan` + `validate` green
-- Update architecture + handoff for Phase 7 (Search)
+- [x] AuthN-only install does **not** recommend AuthZ policy APIs
+- [x] AuthZ-only does **not** assume Authentication plugin APIs incorrectly
+- [x] IDOR / mass-assignment guidance present where relevant
+- [x] Detection via Composer; no contamination when packages absent
+- [x] Fixtures + tests for AuthN-only, AuthZ-only, both, disabled, incompatible as needed
+- [x] `phpunit` + `phpstan` + `validate` green
+- [x] Update architecture + handoff for Phase 7 (Search)
+
+> **Phase 6 complete.** Continue at [HANDOFF-phase-7.md](HANDOFF-phase-7.md).
 
 ### Out of scope
 

@@ -1,0 +1,24 @@
+{
+    "id": "auth-both-identity-not-permission",
+    "category": "auth",
+    "type": "selection",
+    "prompt": "Both cakephp/authentication and cakephp/authorization are installed. After successful login, may the user edit any article?",
+    "expected": {
+        "concepts": [
+            "authentication-vs-authorization",
+            "identity-feeds-authorization"
+        ],
+        "preferred": [
+            "still authorize",
+            "policy on resource",
+            "login is identity only"
+        ]
+    },
+    "must_not": [
+        "login grants all permissions",
+        "skip Authorization because authenticated"
+    ],
+    "related_knowledge": [
+        "authentication-vs-authorization"
+    ]
+}

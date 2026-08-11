@@ -1,0 +1,24 @@
+{
+    "id": "idor-requires-resource-authorization",
+    "category": "auth",
+    "type": "security",
+    "prompt": "With cakephp/authorization installed, an edit action does get($this->request->getParam('id')) then patchEntity/save. What is missing?",
+    "expected": {
+        "concepts": [
+            "IDOR",
+            "authorize-resource"
+        ],
+        "preferred": [
+            "authorize the loaded article",
+            "policy check",
+            "do not trust id alone"
+        ]
+    },
+    "must_not": [
+        "UI hide edit button only",
+        "authenticated-only is enough"
+    ],
+    "related_knowledge": [
+        "authorize-resource-vs-authenticated-only"
+    ]
+}

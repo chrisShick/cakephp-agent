@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-authentication",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "cakephp/authentication",
+            "version": "4.2.1"
+        }
+    ],
+    "packages-dev": []
+}

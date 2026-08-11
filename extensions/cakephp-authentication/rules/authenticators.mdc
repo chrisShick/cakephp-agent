@@ -1,0 +1,31 @@
+---
+description: Authenticators and identifiers configuration.
+globs:
+  - "**/Application.php"
+  - "**/Identifier/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/authentication
+package_versions: [">=4.0 <5.0"]
+sources:
+  - https://book.cakephp.org/authentication/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# Authenticators and identifiers
+
+## Plugin semantics
+
+Authenticators extract credentials (form, session, token, …). Identifiers resolve those credentials to an identity (password identifier, etc.).
+
+## Required behavior
+
+- Add authenticators/identifiers using documented class names and config for the installed major.
+- Keep field maps (`username`/`password`) aligned with forms and Table schema.
+- Test login success, failure, and logout paths.
+
+## Anti-patterns
+
+- Custom credential parsing that bypasses authenticators without need
+- Hard-coding secrets in authenticator config committed to git

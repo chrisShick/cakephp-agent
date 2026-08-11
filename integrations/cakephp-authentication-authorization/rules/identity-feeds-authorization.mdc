@@ -1,0 +1,28 @@
+---
+description: How Authentication identity feeds Authorization checks when both are installed.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+packages: [cakephp/authentication, cakephp/authorization]
+last_verified: 2026-08-10
+---
+
+# Identity feeds authorization
+
+## Package recommendation
+
+When both plugins are installed: Authentication establishes the request identity; Authorization uses that identity in policies and authorize calls. Keep the boundary sharp.
+
+## Required behavior
+
+- Configure middleware order so identity is available before authorization checks that need it.
+- Login/session/token success ≠ permission; still authorize resource actions.
+- Reuse one identity source — do not maintain parallel “current user” hacks.
+- Test matrices: anonymous, authenticated-but-forbidden, authenticated-and-allowed.
+
+## Anti-patterns
+
+- Duplicating role tables in both login and every policy inconsistently
+- Skipping Authorization because Authentication middleware already ran

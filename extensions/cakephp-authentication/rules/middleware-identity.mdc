@@ -1,0 +1,33 @@
+---
+description: Authentication middleware placement and identity access.
+globs:
+  - "**/Application.php"
+  - "**/Middleware/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/authentication
+package_versions: [">=4.0 <5.0"]
+sources:
+  - https://book.cakephp.org/authentication/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# Authentication middleware and identity
+
+## Plugin semantics
+
+Authentication runs in the middleware queue (before controllers). Controllers/components read the identity from the request/authentication result per plugin conventions.
+
+## Required behavior
+
+- Place Authentication middleware according to official docs and existing `Application::middleware` order.
+- Use project patterns for `allowUnauthenticated` / public actions.
+- Access identity through the installed plugin’s request/identity APIs — inspect neighboring controllers first.
+- Prefer middleware for cross-cutting authn gates over ad-hoc controller checks that re-implement login.
+
+## Anti-patterns
+
+- Re-checking credentials in every action instead of middleware/service
+- Assuming session vs JWT authenticator without reading project config

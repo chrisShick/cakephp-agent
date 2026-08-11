@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "cakephp-authentication-authorization",
+  "name": "Authentication + Authorization integration",
+  "description": "Joint guidance when both cakephp/authentication and cakephp/authorization packs are enabled.",
+  "version": "1.0.0",
+  "type": "integration",
+  "detect": {},
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "activateWhenAllExtensionsPresent": [
+    "cakephp-authentication",
+    "cakephp-authorization"
+  ],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

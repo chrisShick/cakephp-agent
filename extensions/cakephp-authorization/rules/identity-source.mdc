@@ -1,0 +1,30 @@
+---
+description: Authorization identity source without assuming Authentication plugin.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/authorization
+package_versions: [">=3.0 <4.0"]
+sources:
+  - https://book.cakephp.org/authorization/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# Authorization identity source
+
+## Plugin semantics
+
+Authorization needs an identity object/actor. That identity may come from `cakephp/authentication`, custom middleware, or other project mechanisms.
+
+## Required behavior
+
+- Inspect Composer and app bootstrap before recommending Authentication APIs.
+- If Authentication is absent, use the project’s existing identity approach.
+- If Authentication is present (or both packs enabled), follow the integration guidance when available.
+
+## Anti-patterns
+
+- Requiring `cakephp/authentication` solely because Authorization is installed
+- Hard-coding a fake admin identity in policies for convenience

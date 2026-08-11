@@ -1,0 +1,25 @@
+{
+    "id": "authn-only-no-policy-apis",
+    "category": "auth",
+    "type": "plugin-awareness",
+    "prompt": "This CakePHP app has cakephp/authentication but not cakephp/authorization. How should I prevent some users from editing Articles?",
+    "expected": {
+        "concepts": [
+            "authentication-vs-authorization",
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "inspect existing permission patterns",
+            "do not invent Policy APIs",
+            "composer packages"
+        ]
+    },
+    "must_not": [
+        "Authorization->authorize",
+        "create ArticlePolicy",
+        "Gate::"
+    ],
+    "related_knowledge": [
+        "authentication-vs-authorization"
+    ]
+}

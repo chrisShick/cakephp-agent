@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "cakephp-authentication",
+  "name": "CakePHP Authentication",
+  "description": "Identity and authentication workflows for cakephp/authentication ^4 (CakePHP 5).",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp/authentication",
+        "constraint": "^4.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

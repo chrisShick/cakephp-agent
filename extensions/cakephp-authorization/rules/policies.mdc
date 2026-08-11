@@ -1,0 +1,32 @@
+---
+description: Authorization policies and resource checks.
+globs:
+  - "**/Policy/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/authorization
+package_versions: [">=3.0 <4.0"]
+sources:
+  - https://book.cakephp.org/authorization/3/en/index.html
+last_verified: 2026-08-10
+---
+
+# Authorization policies
+
+## Plugin semantics
+
+Policies encapsulate allow/deny decisions for resources and actions. Controllers request authorization through the plugin’s authorize APIs used by the project.
+
+## Required behavior
+
+- Create/update policies consistent with app naming and plugin docs for the installed version.
+- Pass the correct resource (entity/query/class) for the check.
+- Cover allow and deny cases in tests.
+- Keep mass-assignment tight on entities involved in authorized updates.
+
+## Anti-patterns
+
+- Giant policies that mix unrelated resources
+- Authorizing only in the browser/API client

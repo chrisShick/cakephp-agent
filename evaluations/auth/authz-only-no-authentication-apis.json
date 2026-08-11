@@ -1,0 +1,25 @@
+{
+    "id": "authz-only-no-authentication-apis",
+    "category": "auth",
+    "type": "plugin-awareness",
+    "prompt": "This CakePHP app has cakephp/authorization but not cakephp/authentication. Identity comes from custom middleware. How do I add an Article policy?",
+    "expected": {
+        "concepts": [
+            "authorization-policy",
+            "identity-source"
+        ],
+        "preferred": [
+            "Policy class",
+            "use existing identity",
+            "inspect custom middleware"
+        ]
+    },
+    "must_not": [
+        "require cakephp/authentication",
+        "AuthenticationMiddleware required",
+        "Form authenticator required"
+    ],
+    "related_knowledge": [
+        "authentication-vs-authorization"
+    ]
+}
