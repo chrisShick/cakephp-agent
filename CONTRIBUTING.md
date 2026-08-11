@@ -35,10 +35,14 @@ composer check              # composer validate --strict + test + phpstan
 
 ## Pull requests
 
+**`main` is PR-only** (GitHub ruleset). Do not push commits directly to `main` — open a branch, open a PR, get approval (code owners), and wait for CI (`composer check`, content validation, and eval).
+
 - Keep scope focused — no drive-by refactors unrelated to the change.
 - Include or update tests for installer/extension/validation behavior.
 - Update public docs when changing CLI flags, install paths, or extension contracts.
 - Do not commit secrets, vendor trees, or local editor lock noise from dogfooding unless intentional.
+
+Release tags (`v*`) are protected; only repository Admins should create version tags (e.g. `v1.0.0-beta.1`).
 
 ## Truth levels
 

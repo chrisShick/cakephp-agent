@@ -27,8 +27,8 @@ Goal: track what remains before calling a public **1.0**.
 
 ## Remaining for 1.0
 
-1. **Publish to Packagist** (or confirm VCS-only policy) and document `composer require chrisshick/cakephp-agent:^0.9`
-2. **Git tag `v0.9.0`** (and later `v1.0.0`) after push
+1. **Publish to Packagist** (or confirm VCS-only policy) and document `composer require chrisshick/cakephp-agent:^0.9` (then `1.0.0-beta.1` / `^1.0` when ready)
+2. **Git tags** after push: `v0.9.0` if missing → **`v1.0.0-beta.1`** → later **`v1.0.0`**
 3. **Soak** — install into a real CakePHP app and fix any friction
 4. Optional: stronger SECURITY contact email; Windows symlink deep notes
 
