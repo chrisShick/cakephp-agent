@@ -503,9 +503,11 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 ---
 
-### Phase 11 — Docs & public 1.0
+### Phase 11 — Docs, adopter preview, CakePHP coverage
 
-**Deliver:** installation, editors, extension authoring, contributing, architecture, compatibility, inspiration matrix, SECURITY, CHANGELOG.
+**Deliver (docs/packaging — done in 0.9.0):** installation, editors, extension authoring, contributing, architecture, SECURITY, CHANGELOG, packaging trust fixes.
+
+**Deliver (coverage — next):** Wave A rules/skills from [coverage-rules-skills.md](../coverage-rules-skills.md) / [HANDOFF-phase-11.md](../HANDOFF-phase-11.md) — routing, behaviors, components, commands, transactions, deeper security/testing.
 
 ---
 

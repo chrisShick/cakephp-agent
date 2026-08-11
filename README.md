@@ -2,7 +2,7 @@
 
 AI engineering knowledge for **CakePHP 5.x** — rules, skills, agents, and a safe installer for **Cursor**, **Claude Code**, and **Codex**.
 
-> **Status: 0.9.0 adopter preview** (not 1.0). Safe to dogfood in existing CakePHP apps via Composer VCS/path. Composer name: **`chrisshick/cakephp-agent`**. See [CHANGELOG](CHANGELOG.md) and [pre-1.0 review](docs/pre-1.0-review.md).
+> **Status: 0.9.0 adopter preview** (not 1.0). Docs/packaging slice is done. **Phase 11 next:** fill CakePHP rules/skills coverage gaps ([HANDOFF](docs/HANDOFF-phase-11.md), [coverage map](docs/coverage-rules-skills.md)). Composer name: **`chrisshick/cakephp-agent`**.
 
 Repository: [github.com/chrisShick/cakephp-agent](https://github.com/chrisShick/cakephp-agent)
 
@@ -115,6 +115,8 @@ Precedence: CLI flags > `.cakephp-agent.json` > `composer.json` extra > defaults
 | [Evaluation baselines](docs/evaluation-baselines.md) | Maintainer eval runner |
 | [Architecture](docs/architecture.md) | Platform shape |
 | [Pre-1.0 review](docs/pre-1.0-review.md) | Gap backlog |
+| [Rules & skills coverage](docs/coverage-rules-skills.md) | CakePHP coverage audit |
+| [Phase 11 handoff](docs/HANDOFF-phase-11.md) | Next agent: Wave A coverage fill |
 
 ## Package development
 
