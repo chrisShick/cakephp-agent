@@ -8,11 +8,11 @@ See the unified plan for the full blueprint:
 
 ## Agent handoff
 
-**Starting Phase 8?** Read **[HANDOFF-phase-8.md](HANDOFF-phase-8.md)** first.
+**Starting Phase 9?** Read **[HANDOFF-phase-9.md](HANDOFF-phase-9.md)** first.
 
 ## Current phase
 
-**Phases 0–7 complete** on `main`.
+**Phases 0–8 complete** on `main`.
 
 | Phase | Status |
 |---|---|
@@ -23,10 +23,11 @@ See the unified plan for the full blueprint:
 | 5 FriendsOfCake CRUD extension | Done |
 | 6 AuthN / AuthZ | Done |
 | 7 Search + CRUD↔Search integration | Done |
-| **8 Agents + deeper reviews** | **Next** |
+| 8 Agents + deeper reviews | Done |
+| **9 Decision intelligence hardening** | **Next** |
 
-Phase 7 delivered:
+Phase 8 delivered:
 
-- `extensions/friendsofcake-search/` — `friendsofcake/search` `^7.0`
-- `integrations/friendsofcake-crud-search/` — activates only when CRUD + Search packs enabled
-- Fixtures: Search-only, CRUD+Search, Search incompatible; evals for non-duplication
+- Core agents: `cakephp-code-reviewer`, `cakephp-orm-reviewer`, `cakephp-security-reviewer`, `cakephp-architecture-reviewer`
+- Capability gates (no phantom CRUD/Search/Auth APIs)
+- Content validation + installer coverage for agents/

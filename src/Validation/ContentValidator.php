@@ -77,6 +77,7 @@ final class ContentValidator
         $errors = array_merge($errors, $this->validateAntiPatterns($root));
         $errors = array_merge($errors, $this->validateEvaluations($root));
         $errors = array_merge($errors, $this->validateCakephpSkills($root));
+        $errors = array_merge($errors, $this->validateAgents($root));
         $errors = array_merge($errors, $this->validateCakephpRules($root));
 
         return $errors;
@@ -303,6 +304,87 @@ final class ContentValidator
 
         if ($skillCount < 12) {
             $errors[] = sprintf('Expected at least 12 CakePHP skills, found %d.', $skillCount);
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function validateAgents(string $root): array
+    {
+        $dir = $root . '/agents';
+        if (!$this->filesystem->isDir($dir)) {
+            return ['Missing agents directory.'];
+        }
+
+        /** @var list<string> $required */
+        $required = [
+            'cakephp-code-reviewer.md',
+            'cakephp-orm-reviewer.md',
+            'cakephp-security-reviewer.md',
+            'cakephp-architecture-reviewer.md',
+        ];
+
+        $errors = [];
+        $names = [];
+
+        foreach ($required as $file) {
+            $path = $dir . '/' . $file;
+            if (!$this->filesystem->isFile($path)) {
+                $errors[] = sprintf('Missing required agent "%s".', $file);
+                continue;
+            }
+
+            $contents = $this->filesystem->read($path);
+            $frontmatter = $this->parseFrontmatter($contents);
+            if ($frontmatter === null) {
+                $errors[] = sprintf('agents/%s: missing frontmatter.', $file);
+                continue;
+            }
+
+            foreach (['name', 'description'] as $field) {
+                if (!isset($frontmatter[$field]) || !is_string($frontmatter[$field]) || $frontmatter[$field] === '') {
+                    $errors[] = sprintf('agents/%s: missing frontmatter field "%s".', $file, $field);
+                }
+            }
+
+            $name = $frontmatter['name'] ?? null;
+            if (is_string($name) && $name !== '') {
+                if (isset($names[$name])) {
+                    $errors[] = sprintf('Duplicate agent name "%s".', $name);
+                }
+                $names[$name] = true;
+
+                $expected = basename($file, '.md');
+                if ($name !== $expected) {
+                    $errors[] = sprintf(
+                        'agents/%s: name "%s" must match filename stem "%s".',
+                        $file,
+                        $name,
+                        $expected
+                    );
+                }
+            }
+
+            foreach (['## Mandatory discovery', '## Capability gates', '## Workflow'] as $section) {
+                if (!str_contains($contents, $section)) {
+                    $errors[] = sprintf('agents/%s: missing section "%s".', $file, $section);
+                }
+            }
+
+            if (!str_contains($contents, 'inspect-before-coding')) {
+                $errors[] = sprintf('agents/%s: must reference inspect-before-coding.', $file);
+            }
+
+            $body = strtolower($this->stripFrontmatter($contents));
+            if (!str_contains($body, 'do not') || (!str_contains($body, 'unless') && !str_contains($body, 'absent'))) {
+                $errors[] = sprintf(
+                    'agents/%s: must include capability-aware guidance (do not assume optional plugins).',
+                    $file
+                );
+            }
         }
 
         return $errors;

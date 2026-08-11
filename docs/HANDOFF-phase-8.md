@@ -35,10 +35,12 @@ Agents must **not** assume CRUD/Search/Auth packs unless those extensions are en
 
 ### Accept
 
-- Agents install via existing adapter paths when present
-- Capability-aware prompts (no phantom plugin APIs)
-- Tests/docs updated; validate/phpunit/phpstan green
-- Handoff for Phase 9 (decision intelligence) or next planned phase
+- [x] Agents install via existing adapter paths when present
+- [x] Capability-aware prompts (no phantom plugin APIs)
+- [x] Tests/docs updated; validate/phpunit/phpstan green
+- [x] Handoff for Phase 9 (decision intelligence) or next planned phase
+
+> **Phase 8 complete.** Continue at [HANDOFF-phase-9.md](HANDOFF-phase-9.md).
 
 ### Out of scope
 

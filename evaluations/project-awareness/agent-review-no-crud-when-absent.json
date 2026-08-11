@@ -1,0 +1,24 @@
+{
+    "id": "agent-review-no-crud-when-absent",
+    "category": "project-awareness",
+    "type": "plugin-awareness",
+    "prompt": "You are reviewing a CakePHP PR. composer.lock has no friendsofcake/crud. Should the cakephp-code-reviewer recommend Crud->execute and CRUD listeners?",
+    "expected": {
+        "concepts": [
+            "capability-aware",
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "do not recommend CRUD APIs",
+            "inspect composer",
+            "standard controller patterns"
+        ]
+    },
+    "must_not": [
+        "require Crud->execute",
+        "assume FriendsOfCake CRUD"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

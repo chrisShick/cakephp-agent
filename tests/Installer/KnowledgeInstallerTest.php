@@ -187,11 +187,17 @@ final class KnowledgeInstallerTest extends TestCase
             ));
 
             $skillPaths = [];
+            $agentPaths = [];
             foreach ($result['actions'] as $action) {
                 if (str_contains($action->relativePath, 'skills/cakephp-agent/cakephp/')
                     && str_ends_with($action->relativePath, 'SKILL.md')
                 ) {
                     $skillPaths[] = $action->relativePath;
+                }
+                if (str_contains($action->relativePath, 'agents/cakephp-agent/')
+                    && str_ends_with($action->relativePath, '.md')
+                ) {
+                    $agentPaths[] = $action->relativePath;
                 }
             }
 
@@ -210,14 +216,42 @@ final class KnowledgeInstallerTest extends TestCase
                 ),
                 'Expected choose-cakephp-abstraction skill in dry-run plan'
             );
+            self::assertNotEmpty($agentPaths);
+            self::assertTrue(
+                (bool) array_filter(
+                    $agentPaths,
+                    static fn (string $p): bool => str_ends_with($p, 'cakephp-code-reviewer.md')
+                ),
+                'Expected cakephp-code-reviewer agent in dry-run plan'
+            );
+            self::assertCount(4, array_filter(
+                $agentPaths,
+                static fn (string $p): bool => (bool) preg_match(
+                    '#agents/cakephp-agent/cakephp-(code|orm|security|architecture)-reviewer\.md$#',
+                    $p
+                )
+            ));
         } finally {
             TestTemp::removeTree($project);
         }
+    }
+
+    public function testInstallsAgentFilesFromPackage(): void
+    {
+        file_put_contents($this->packageRoot . '/agents/cakephp-code-reviewer.md', "# reviewer\n");
+
+        $config = new ProjectConfig(projectRoot: $this->projectRoot, editors: ['cursor']);
+        $this->installer->install($config);
+
+        self::assertFileExists(
+            $this->projectRoot . '/.editor/cursor/agents/cakephp-agent/cakephp-code-reviewer.md'
+        );
     }
 
     public function testPackagePathsPointAtRealRepo(): void
     {
         self::assertDirectoryExists(PackagePaths::rules());
         self::assertDirectoryExists(PackagePaths::skills());
+        self::assertDirectoryExists(PackagePaths::agents());
     }
 }

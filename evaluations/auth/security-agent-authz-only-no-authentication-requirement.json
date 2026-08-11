@@ -1,0 +1,24 @@
+{
+    "id": "security-agent-authz-only-no-authentication-requirement",
+    "category": "auth",
+    "type": "plugin-awareness",
+    "prompt": "cakephp-security-reviewer is reviewing an app with cakephp/authorization but without cakephp/authentication. Custom middleware sets identity. May the reviewer require AuthenticationMiddleware?",
+    "expected": {
+        "concepts": [
+            "capability-aware",
+            "identity-source"
+        ],
+        "preferred": [
+            "use existing identity",
+            "do not require Authentication plugin",
+            "still check authorization"
+        ]
+    },
+    "must_not": [
+        "require AuthenticationMiddleware",
+        "require cakephp/authentication"
+    ],
+    "related_knowledge": [
+        "authentication-vs-authorization"
+    ]
+}
