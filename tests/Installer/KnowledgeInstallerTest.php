@@ -230,6 +230,27 @@ final class KnowledgeInstallerTest extends TestCase
                 ),
                 'Expected review-abstraction-choice skill in dry-run plan'
             );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'add-route/SKILL.md')
+                ),
+                'Expected add-route skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'create-behavior/SKILL.md')
+                ),
+                'Expected create-behavior skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'write-table-test/SKILL.md')
+                ),
+                'Expected write-table-test skill in dry-run plan'
+            );
             self::assertNotEmpty($agentPaths);
             self::assertTrue(
                 (bool) array_filter(

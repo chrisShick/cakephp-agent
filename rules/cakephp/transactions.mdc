@@ -1,0 +1,38 @@
+---
+description: CakePHP database transaction boundaries for multi-write consistency.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/database-basics.html#using-transactions
+last_verified: 2026-08-10
+related_knowledge: [transaction-vs-independent-save]
+---
+
+# Transactions
+
+## Framework semantics
+
+Use connection transactions (`Connection::transactional()` / atomic save options) when multiple writes must commit or roll back together. Independent saves are correct when partial success is intentional.
+
+## Required behavior
+
+- Wrap multi-write consistency units (parent + children, paired ledger rows) in one transaction.
+- Prefer after-commit side effects (mail, search index, webhooks) outside the DB transaction when failures should not undo the primary write.
+- Do not use transactions as a substitute for application rules or validation.
+- Keep transaction closures short and free of remote IO when possible.
+
+## Anti-patterns
+
+- Independent saves for an atomic business pair
+- Bundling best-effort side effects into the same transaction forcing unnecessary rollbacks
+- Long transactions that hold locks while calling external APIs
+
+## Review checklist
+
+- [ ] Atomic pairs use `transactional` (or equivalent atomic save)
+- [ ] Non-critical side effects run after successful commit when appropriate
+- [ ] Failure paths leave no half-written consistency unit

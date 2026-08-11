@@ -1,0 +1,21 @@
+{
+    "id": "reject-http-controller-as-default-cron-entry",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "For a daily cleanup, should we curl an internal controller action from cron as the CakePHP default pattern?",
+    "expected": {
+        "concepts": [
+            "command"
+        ],
+        "preferred": [
+            "Command",
+            "bin/cake"
+        ]
+    },
+    "must_not": [
+        "endorse curling a controller as the default cron entry"
+    ],
+    "related_knowledge": [
+        "command-vs-controller-action"
+    ]
+}

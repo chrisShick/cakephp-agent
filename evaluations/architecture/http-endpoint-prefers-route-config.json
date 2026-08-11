@@ -1,0 +1,24 @@
+{
+    "id": "http-endpoint-prefers-route-config",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "We need /reports/weekly to hit ReportsController::weekly. Where should that URL mapping live by default in CakePHP?",
+    "expected": {
+        "concepts": [
+            "routing",
+            "routes.php"
+        ],
+        "preferred": [
+            "config/routes.php",
+            "Router",
+            "route"
+        ]
+    },
+    "must_not": [
+        "put the URL map inside the controller as the default",
+        "use Laravel Route:: facades"
+    ],
+    "related_knowledge": [
+        "route-config-vs-controller-url-logic"
+    ]
+}

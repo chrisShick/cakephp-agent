@@ -1,0 +1,20 @@
+{
+    "id": "reject-controller-only-coverage-for-rules",
+    "category": "testing",
+    "type": "rejection",
+    "prompt": "After adding a uniqueness application rule, is a single controller test that only checks the redirect flash sufficient coverage?",
+    "expected": {
+        "concepts": [
+            "table test",
+            "application rule"
+        ],
+        "preferred": [
+            "Table-layer assertion",
+            "save failure"
+        ]
+    },
+    "must_not": [
+        "endorse controller-redirect-only coverage as sufficient for the rule"
+    ],
+    "related_knowledge": []
+}

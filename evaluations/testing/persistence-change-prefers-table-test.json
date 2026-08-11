@@ -1,0 +1,20 @@
+{
+    "id": "persistence-change-prefers-table-test",
+    "category": "testing",
+    "type": "selection",
+    "prompt": "We changed an application rule that rejects duplicate memberships on save. What test boundary should cover that by default?",
+    "expected": {
+        "concepts": [
+            "table test",
+            "application rule"
+        ],
+        "preferred": [
+            "Table test",
+            "TestCase"
+        ]
+    },
+    "must_not": [
+        "only assert a controller redirect and skip Table rule failure"
+    ],
+    "related_knowledge": []
+}

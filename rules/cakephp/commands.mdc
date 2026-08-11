@@ -1,0 +1,39 @@
+---
+description: CakePHP console Command ownership for CLI workflows.
+globs:
+  - "**/Command/**/*.php"
+  - "**/Shell/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/console-commands/commands.html
+last_verified: 2026-08-10
+related_knowledge: [command-vs-controller-action]
+---
+
+# Commands
+
+## Framework semantics
+
+CakePHP console Commands (`bin/cake …`) own CLI entry points: arguments/options, IO, exit codes, and batch orchestration. They are not Artisan commands and should not reimplement HTTP controller actions for cron/jobs without a clear shared domain layer.
+
+## Required behavior
+
+- Prefer a Command for scheduled jobs, one-shot ops, and non-HTTP batch work.
+- Keep Commands thin orchestrators: parse IO → call Tables/services already used by the app → report results.
+- Reuse Table/finder/rules ownership; do not paste persistence logic into Commands.
+- Use CakePHP console IO (`$this->io()`), abort/exit codes, and option parsers consistent with neighboring Commands.
+
+## Anti-patterns
+
+- Inventing Artisan / Illuminate console APIs
+- Fat commands that hide domain rules and raw SQL
+- Calling HTTP controllers from CLI as the default batch pattern
+
+## Review checklist
+
+- [ ] CLI concern lives in `Command`, not a fake HTTP endpoint
+- [ ] Persistence goes through Tables; invariants via rules
+- [ ] Options/arguments and help text match project Command style

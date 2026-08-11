@@ -10,7 +10,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
   - https://book.cakephp.org/5.x/orm/behaviors.html
 last_verified: 2026-08-10
-related: [contain-vs-matching]
+related: [contain-vs-matching, behavior-vs-service]
 evaluations: [prefer-custom-finder-for-query-semantics, reject-behavior-for-single-table-query-semantics]
 ---
 

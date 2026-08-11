@@ -8,22 +8,39 @@ truth_level: PACKAGE_RECOMMENDATION
 framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5.x/security.html
+  - https://book.cakephp.org/5.x/core-libraries/form-protection-component.html
   - https://book.cakephp.org/5.x/orm/entities.html
+  - https://book.cakephp.org/5.x/controllers/request-response.html
 last_verified: 2026-08-10
 ---
 
 # Security
 
+## Framework semantics
+
+CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs authorization, safe SQL, uploads, and serialization. Prefer framework middleware/components already configured in the app over inventing parallel token schemes.
+
 ## Required behavior
 
-- Keep Entity mass assignment tight.
+- Keep Entity mass assignment tight (`_accessible` / field lists).
 - Enforce authorization on the server; never only in the UI.
 - Distinguish authentication (identity) from authorization (permission).
+- For HTML forms, use CakePHP FormProtection / CSRF middleware as the project already wires them — do not rely on client-only tokens.
+- Validate and store uploads with explicit type/size/path rules; never trust client filenames as filesystem paths.
 - Avoid unsafe raw SQL concatenation; prefer ORM expressions/bindings.
-- Do not leak secrets in logs or serialized outputs.
+- Do not leak secrets in logs or serialized outputs (`$_hidden`, API shaping).
 
 ## Anti-patterns
 
 - Mass assignment overexposure
 - Authorization only in UI
 - Serialization overexposure
+- Missing FormProtection/CSRF on state-changing HTML forms
+- CSRF-only-in-javascript
+
+## Review checklist
+
+- [ ] Write endpoints check server-side authz
+- [ ] Forms participate in project FormProtection/CSRF setup
+- [ ] Uploads are validated and stored outside webroot when required
+- [ ] Sensitive fields hidden from default serialization

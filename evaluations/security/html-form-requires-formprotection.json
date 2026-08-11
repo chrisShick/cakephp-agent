@@ -1,0 +1,23 @@
+{
+    "id": "html-form-requires-formprotection",
+    "category": "security",
+    "type": "selection",
+    "prompt": "Browser session users submit an HTML POST form that changes data. What CakePHP protection should participate by default?",
+    "expected": {
+        "concepts": [
+            "FormProtection",
+            "CSRF"
+        ],
+        "preferred": [
+            "FormProtection",
+            "CsrfProtectionMiddleware",
+            "CSRF"
+        ]
+    },
+    "must_not": [
+        "rely on JavaScript-only CSRF checks as sufficient"
+    ],
+    "related_knowledge": [
+        "csrf-formprotection-required"
+    ]
+}

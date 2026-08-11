@@ -1,0 +1,22 @@
+{
+    "id": "reject-csrf-only-in-javascript",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "We validate a CSRF token only in frontend JavaScript and skip CakePHP FormProtection/CSRF middleware for cookie-session HTML forms. Is that enough?",
+    "expected": {
+        "concepts": [
+            "CSRF",
+            "FormProtection"
+        ],
+        "preferred": [
+            "server-side FormProtection",
+            "CsrfProtectionMiddleware"
+        ]
+    },
+    "must_not": [
+        "endorse JavaScript-only CSRF as sufficient for cookie-session HTML forms"
+    ],
+    "related_knowledge": [
+        "csrf-formprotection-required"
+    ]
+}

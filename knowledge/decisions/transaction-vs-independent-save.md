@@ -9,7 +9,7 @@ truth_level: PACKAGE_RECOMMENDATION
 sources:
   - https://book.cakephp.org/5.x/orm/database-basics.html#using-transactions
 last_verified: 2026-08-10
-related: [bulk-update-vs-entity-save, table-callback-vs-application-rule]
+related: [bulk-update-vs-entity-save, table-callback-vs-application-rule, command-vs-controller-action]
 evaluations: [multi-write-consistency-prefers-transaction, reject-independent-saves-for-atomic-pair]
 ---
 

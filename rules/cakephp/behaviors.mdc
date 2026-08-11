@@ -1,0 +1,39 @@
+---
+description: CakePHP Behavior ownership for reusable Table capabilities.
+globs:
+  - "**/Model/Behavior/**/*.php"
+  - "**/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/behaviors.html
+last_verified: 2026-08-10
+related_knowledge: [finder-vs-behavior, behavior-vs-service]
+---
+
+# Behaviors
+
+## Framework semantics
+
+Behaviors attach reusable find/save/delete lifecycle capabilities to Tables (Timestamp, Tree, Translate, soft-delete style packs). They are CakePHP’s mixin extension point for ORM concerns — not a dumping ground for HTTP or one-Table query helpers.
+
+## Required behavior
+
+- Prefer a Behavior when the capability must apply across multiple Tables with shared callbacks/finders/config.
+- Prefer a custom finder on one Table when the concern is domain query semantics for that model only.
+- Keep Behaviors focused on one coherent theme; split unrelated concerns.
+- Check for an installed plugin Behavior before inventing a parallel one.
+
+## Anti-patterns
+
+- god-behavior
+- Using a Behavior for single-Table query semantics that belong in a finder
+- Free-floating services that reimplement Behavior lifecycle hooks
+
+## Review checklist
+
+- [ ] Cross-table lifecycle reuse → Behavior; one-Table query → finder
+- [ ] Behavior theme is coherent (not a mixin junk drawer)
+- [ ] No HTTP/authz logic inside Behaviors by default

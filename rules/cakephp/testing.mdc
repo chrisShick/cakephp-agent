@@ -15,14 +15,25 @@ last_verified: 2026-08-10
 
 ## Framework semantics
 
-CakePHP testing is PHPUnit-oriented with Table tests, integration/controller tests, fixtures, and optional factories when present.
+CakePHP testing is PHPUnit-oriented with Table tests (`TestCase` + fixtures), integration/controller tests (`IntegrationTestTrait`), and optional factories when the project already uses them. Prefer CakePHP fixture strategy over inventing Pest/Laravel testing stacks unless the project already uses them.
 
 ## Required behavior
 
-- Prefer deterministic fixtures/data.
+- Prefer deterministic fixtures/data; isolate tests from production network services.
 - Choose test type by boundary: pure unit vs Table persistence vs HTTP integration.
+- Table tests assert validation, application rules, finders, and save/delete behavior through Table APIs.
+- Integration tests hit routes/controllers with session/CSRF helpers consistent with the app.
+- Refresh schema/fixtures the CakePHP way the project already uses (`fixtures`, migrations in test bootstrap) — do not invent ad-hoc DB resets.
 - Do not impose Pest unless the project already uses it.
 
 ## Anti-patterns
 
 - Tests that require production network services without isolation
+- Asserting only controller redirects while skipping Table rule failures
+- Inventing Laravel feature-test helpers as the CakePHP default
+
+## Review checklist
+
+- [ ] Persistence invariants covered at Table layer when changed
+- [ ] HTTP flows covered with IntegrationTestTrait when routes/actions change
+- [ ] Fixtures/factories match project conventions and stay deterministic

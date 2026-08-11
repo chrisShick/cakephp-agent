@@ -1,0 +1,23 @@
+{
+    "id": "reject-client-filename-upload-path",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "Should we store uploads using the browser's original filename directly under webroot without type checks?",
+    "expected": {
+        "concepts": [
+            "upload",
+            "validation"
+        ],
+        "preferred": [
+            "server-generated name",
+            "validate type",
+            "outside webroot"
+        ]
+    },
+    "must_not": [
+        "endorse trusting client filenames as storage paths under webroot"
+    ],
+    "related_knowledge": [
+        "unsafe-upload-handling"
+    ]
+}

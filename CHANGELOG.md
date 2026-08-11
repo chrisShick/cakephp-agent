@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Phase 11 Wave A CakePHP coverage: rules for routing, behaviors, components, commands, transactions; skills `add-route`, `review-routing`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`
+- Decisions `route-config-vs-controller-url-logic`, `command-vs-controller-action`; security anti-patterns for FormProtection/CSRF and unsafe uploads
+- Pos+neg evaluations for routing, CLI vs HTTP, FormProtection, uploads, and Table-test boundaries
+- [HANDOFF-phase-12.md](docs/HANDOFF-phase-12.md) for Packagist / 1.0 (+ optional Wave B)
+
+### Changed
+
+- Deepened `security` and `testing` core rules; updated coverage map and `choose-cakephp-abstraction` defaults
+
 ## [0.9.0] - 2026-08-10
 
 Adopter preview (not 1.0). Safe installer + extension packs + offline eval platform for CakePHP 5, with packaging/docs gap fixes for dogfooding.

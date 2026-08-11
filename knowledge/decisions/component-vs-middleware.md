@@ -10,7 +10,7 @@ sources:
   - https://book.cakephp.org/5.x/controllers.html
   - https://book.cakephp.org/5.x/controllers/middleware.html
 last_verified: 2026-08-10
-related: []
+related: [route-config-vs-controller-url-logic, command-vs-controller-action]
 evaluations: [auth-middleware-not-component-default, reusable-controller-helper-prefers-component, reject-middleware-for-controller-only-flash-helper]
 ---
 

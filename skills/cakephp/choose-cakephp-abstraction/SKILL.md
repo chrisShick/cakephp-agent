@@ -66,16 +66,21 @@ Link and apply as relevant:
 - `knowledge/decisions/transaction-vs-independent-save`
 - `knowledge/decisions/event-vs-direct-call`
 - `knowledge/decisions/plugin-vs-application-code`
+- `knowledge/decisions/route-config-vs-controller-url-logic`
+- `knowledge/decisions/command-vs-controller-action`
 
 Rough defaults (override with project conventions and decisions above):
 
 | Concern | Prefer |
 |---|---|
+| URL → action mapping | Route config (`config/routes.php`) |
 | Request/response pipeline | Middleware |
 | Reusable controller collaboration | Component |
 | HTTP orchestration only | Controller action |
+| CLI / cron / batch entry | Command (`bin/cake`) |
 | Query reuse on one Table | Custom finder |
 | Cross-table persistence feature | Behavior |
+| Multi-write consistency unit | Connection transaction |
 | Field shape/format | Validator |
 | Stateful save/delete invariant | Application rule (`buildRules`) |
 | Persistence side effect | Table callback / event listener |
@@ -99,4 +104,4 @@ Rough defaults (override with project conventions and decisions above):
 ## Completion criteria
 
 - Ownership decision documented and ready for implementation.
-- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `review-abstraction-choice`).
+- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `add-route`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `review-abstraction-choice`).

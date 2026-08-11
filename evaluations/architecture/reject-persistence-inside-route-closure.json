@@ -1,0 +1,22 @@
+{
+    "id": "reject-persistence-inside-route-closure",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "A teammate wants the route closure for /signup to create the User entity and save it before dispatching a controller. Is that appropriate?",
+    "expected": {
+        "concepts": [
+            "routing",
+            "persistence"
+        ],
+        "preferred": [
+            "controller",
+            "Table"
+        ]
+    },
+    "must_not": [
+        "endorse persistence inside the route closure"
+    ],
+    "related_knowledge": [
+        "route-config-vs-controller-url-logic"
+    ]
+}

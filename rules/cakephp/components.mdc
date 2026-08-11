@@ -1,0 +1,39 @@
+---
+description: CakePHP Component ownership for reusable controller-layer collaboration.
+globs:
+  - "**/Controller/Component/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/controllers/components.html
+last_verified: 2026-08-10
+related_knowledge: [component-vs-middleware]
+---
+
+# Components
+
+## Framework semantics
+
+Components provide reusable controller-layer helpers and callback integration (`startup`, `beforeRender`, etc.). They are not middleware substitutes and must not own persistence or domain invariants.
+
+## Required behavior
+
+- Prefer Components for shared controller collaboration tightly coupled to controller callbacks.
+- Prefer Middleware for PSR request/response pipeline work that should run regardless of controller.
+- Keep Components HTTP/orchestration helpers only — Tables own persistence.
+- Avoid god Components that accumulate unrelated Flash/Auth/billing/API concerns.
+
+## Anti-patterns
+
+- god-component
+- Using Components as a global request pipeline (use middleware)
+- Persistence concern in component
+
+## Review checklist
+
+- [ ] Reuse is controller-scoped, not pipeline-global
+- [ ] No Table/save/query ownership hidden in the Component
+- [ ] Auth identity loading still follows project middleware norms when that is the convention

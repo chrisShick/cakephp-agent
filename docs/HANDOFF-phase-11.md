@@ -67,13 +67,15 @@ Migrations pack, Bake intelligence, mailer/queues, I18n, HTTP client — do **no
 
 ### Accept
 
-- [ ] Wave A rules + skills present and pass `php bin/cakephp-agent validate`
-- [ ] New skills reference `inspect-before-coding`
-- [ ] Critical new boundaries have pos+neg evals; `php bin/cakephp-agent eval` self-check green
-- [ ] `vendor/bin/phpunit` + `vendor/bin/phpstan analyse --memory-limit=512M` green
-- [ ] [coverage-rules-skills.md](coverage-rules-skills.md) updated (Wave A marked done)
-- [ ] README / architecture note Phase 11 coverage status
-- [ ] Handoff for **Phase 12** (Packagist / 1.0 cut, or Wave B leftovers) written
+- [x] Wave A rules + skills present and pass `php bin/cakephp-agent validate`
+- [x] New skills reference `inspect-before-coding`
+- [x] Critical new boundaries have pos+neg evals; `php bin/cakephp-agent eval` self-check green
+- [x] `vendor/bin/phpunit` + `vendor/bin/phpstan analyse --memory-limit=512M` green
+- [x] [coverage-rules-skills.md](coverage-rules-skills.md) updated (Wave A marked done)
+- [x] README / architecture note Phase 11 coverage status
+- [x] Handoff for **Phase 12** (Packagist / 1.0 cut, or Wave B leftovers) written
+
+> **Phase 11 Wave A complete.** Continue at [HANDOFF-phase-12.md](HANDOFF-phase-12.md).
 
 ### Out of scope
 

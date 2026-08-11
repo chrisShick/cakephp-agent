@@ -507,7 +507,9 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 **Deliver (docs/packaging — done in 0.9.0):** installation, editors, extension authoring, contributing, architecture, SECURITY, CHANGELOG, packaging trust fixes.
 
-**Deliver (coverage — next):** Wave A rules/skills from [coverage-rules-skills.md](../coverage-rules-skills.md) / [HANDOFF-phase-11.md](../HANDOFF-phase-11.md) — routing, behaviors, components, commands, transactions, deeper security/testing.
+**Deliver (coverage Wave A — done):** routing, behaviors, components, commands, transactions, deeper security/testing — see [coverage-rules-skills.md](../coverage-rules-skills.md).
+
+**Phase 12:** Packagist / 1.0 + optional Wave B — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
 
 ---
 

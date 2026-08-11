@@ -1,0 +1,23 @@
+{
+    "id": "cli-batch-prefers-command",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "We need a nightly job to expire stale invitations with no HTTP involved. What CakePHP entry point should own that by default?",
+    "expected": {
+        "concepts": [
+            "command",
+            "console"
+        ],
+        "preferred": [
+            "Command",
+            "bin/cake"
+        ]
+    },
+    "must_not": [
+        "default to an HTTP controller action for the cron entry point",
+        "artisan"
+    ],
+    "related_knowledge": [
+        "command-vs-controller-action"
+    ]
+}

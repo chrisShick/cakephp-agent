@@ -1,0 +1,39 @@
+---
+description: CakePHP Router ownership — connect URLs to controllers without inventing foreign routers.
+globs:
+  - "**/config/routes.php"
+  - "**/Application.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/development/routing.html
+last_verified: 2026-08-10
+related_knowledge: [route-config-vs-controller-url-logic]
+---
+
+# Routing
+
+## Framework semantics
+
+CakePHP maps URLs to controller actions via `config/routes.php` (and plugin route files) using the Router. Dashed/inflected defaults, scopes, prefixes, and resource routes are first-class — not Laravel `Route::` facades or Artisan route lists.
+
+## Required behavior
+
+- Define URL → controller/action mappings in route config; keep controllers free of ad-hoc URL dispatch logic.
+- Prefer scoped/prefixed routes and named routes consistent with the app’s existing style.
+- Keep route callables thin — no persistence, validation, or authorization decisions inside route closures.
+- Use `bin/cake routes` (not Artisan) when inspecting the route table.
+
+## Anti-patterns
+
+- Inventing Eloquent/Laravel router APIs
+- Domain/persistence logic inside route definitions
+- Duplicating the same path map in controllers
+
+## Review checklist
+
+- [ ] New endpoints have an explicit route or intentional fallback
+- [ ] Route files remain declarative (connect/scope/resources only)
+- [ ] No Laravel Route facade / artisan mental model
