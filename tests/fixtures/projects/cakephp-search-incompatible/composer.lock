@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-search-incompatible",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "friendsofcake/search",
+            "version": "6.2.5"
+        }
+    ],
+    "packages-dev": []
+}

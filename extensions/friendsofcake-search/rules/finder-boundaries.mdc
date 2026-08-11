@@ -1,0 +1,28 @@
+---
+description: Search filters vs custom CakePHP finders.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+package: friendsofcake/search
+package_versions: [">=7.0 <8.0"]
+last_verified: 2026-08-10
+---
+
+# Search vs custom finders
+
+## Package recommendation
+
+- **Search filters:** request-driven, optional query params for list UIs.
+- **Custom finders:** reusable named query semantics used from multiple entry points (including non-HTTP).
+
+## Required behavior
+
+- Do not replace every finder with a Search filter.
+- Do not ignore Search when the app already standardizes list filtering on it.
+- Combine: filters may call into finders for shared semantics when that matches project style.
+
+## Anti-patterns
+
+- One-off controller `where` instead of either a filter or a finder

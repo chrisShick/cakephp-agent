@@ -1,0 +1,25 @@
+{
+    "id": "search-only-no-crud-apis",
+    "category": "search",
+    "type": "plugin-awareness",
+    "prompt": "This app has friendsofcake/search but not friendsofcake/crud. How do I build a filtered Articles index?",
+    "expected": {
+        "concepts": [
+            "search-filter",
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "Search filters",
+            "standard controller pagination",
+            "no Crud->execute"
+        ]
+    },
+    "must_not": [
+        "Crud->execute",
+        "Crud.beforePaginate",
+        "assume FriendsOfCake CRUD"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

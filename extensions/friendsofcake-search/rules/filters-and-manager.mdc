@@ -1,0 +1,31 @@
+---
+description: Search manager and filter configuration.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/search
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://github.com/FriendsOfCake/search
+last_verified: 2026-08-10
+---
+
+# Search filters and manager
+
+## Plugin semantics
+
+Filters are declared via the Table’s search manager (e.g. `searchManager()` / behavior-backed configuration — follow the installed major’s API). Each filter maps request params to query conditions.
+
+## Required behavior
+
+- Inspect existing Table search configuration before adding filters.
+- Use the narrowest filter type that matches the need (value, like, boolean, callback, etc. per docs).
+- Keep callback filters focused; extract complex reusable query pieces to finders when appropriate.
+- Align filter parameter names with forms/query strings used by the UI.
+
+## Anti-patterns
+
+- God callback filters that reimplement half the ORM
+- Duplicate filter definitions across Tables without shared patterns the project already uses

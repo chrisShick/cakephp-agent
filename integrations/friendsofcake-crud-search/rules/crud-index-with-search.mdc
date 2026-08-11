@@ -1,0 +1,31 @@
+---
+description: Compose FriendsOfCake CRUD index actions with FriendsOfCake Search filters.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Listener/**/*.php"
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+packages: [friendsofcake/crud, friendsofcake/search]
+last_verified: 2026-08-10
+---
+
+# CRUD index with Search
+
+## Package recommendation
+
+When both plugins are installed: keep **filter definitions on the Table (Search)** and use **CRUD index/query lifecycle** (config, `Crud.beforePaginate` / listeners, or the project’s Search listener if loaded) to apply those filters — do not duplicate filter logic into CRUD listeners or vice versa.
+
+## Required behavior
+
+- Declare filters once on the Table search manager.
+- Wire CRUD index to consume Search the way neighboring CRUD+Search controllers already do (Search listener, explicit query event, etc.).
+- Do not copy Search rules into the CRUD pack or CRUD action boilerplate into the Search pack.
+- Persistence invariants remain on Validator/RulesChecker — neither plugin replaces them.
+
+## Anti-patterns
+
+- Re-implementing the same `where` in a CRUD listener and a Search filter
+- Assuming Search listener is loaded when only one plugin is present
+- Putting HTTP flash/redirect concerns into Search filters

@@ -1,0 +1,26 @@
+{
+    "id": "search-absent-no-search-apis",
+    "category": "search",
+    "type": "plugin-awareness",
+    "prompt": "This CakePHP app does not have friendsofcake/search. How should I add optional list filtering for Articles?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness",
+            "custom-finder"
+        ],
+        "preferred": [
+            "custom finder",
+            "controller query with care",
+            "inspect composer"
+        ]
+    },
+    "must_not": [
+        "searchManager",
+        "assume FriendsOfCake Search",
+        "Search.like filter"
+    ],
+    "related_knowledge": [
+        "search-filter-vs-custom-finder",
+        "plugin-vs-application-code"
+    ]
+}

@@ -297,4 +297,82 @@ final class ExtensionInstallIntegrationTest extends TestCase
             TestTemp::removeTree($project);
         }
     }
+
+    public function testSearchOnlyInstallsSearchNotCrud(): void
+    {
+        $project = TestTemp::dir('search-only');
+        $fixture = PackagePaths::root() . '/tests/fixtures/projects/cakephp-search';
+        copy($fixture . '/composer.json', $project . '/composer.json');
+        copy($fixture . '/composer.lock', $project . '/composer.lock');
+
+        try {
+            $resolver = new ExtensionResolver(
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            );
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                extensionResolver: $resolver,
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+            ));
+
+            self::assertContains('friendsofcake-search', $result['resolution']->enabledIds());
+            self::assertNotContains('friendsofcake-crud', $result['resolution']->enabledIds());
+            self::assertFileExists(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-search/search.mdc'
+            );
+            self::assertFileDoesNotExist(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud/crud.mdc'
+            );
+            self::assertFileDoesNotExist(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud-search/crud-index-with-search.mdc'
+            );
+        } finally {
+            TestTemp::removeTree($project);
+        }
+    }
+
+    public function testCrudSearchBothInstallsIntegrationWithoutDuplicatingAbsence(): void
+    {
+        $project = TestTemp::dir('crud-search-both');
+        $fixture = PackagePaths::root() . '/tests/fixtures/projects/cakephp-crud-search';
+        copy($fixture . '/composer.json', $project . '/composer.json');
+        copy($fixture . '/composer.lock', $project . '/composer.lock');
+
+        try {
+            $resolver = new ExtensionResolver(
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            );
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                extensionResolver: $resolver,
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+            ));
+
+            $ids = $result['resolution']->enabledIds();
+            self::assertContains('friendsofcake-crud', $ids);
+            self::assertContains('friendsofcake-search', $ids);
+            self::assertContains('friendsofcake-crud-search', $ids);
+            self::assertFileExists(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud/crud.mdc'
+            );
+            self::assertFileExists(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-search/search.mdc'
+            );
+            self::assertFileExists(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud-search/crud-index-with-search.mdc'
+            );
+        } finally {
+            TestTemp::removeTree($project);
+        }
+    }
 }

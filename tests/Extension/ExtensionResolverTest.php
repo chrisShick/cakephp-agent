@@ -204,4 +204,51 @@ final class ExtensionResolverTest extends TestCase
             $result->decisionFor('cakephp-authentication')?->status
         );
     }
+
+    public function testSearchOnlyDoesNotEnableCrud(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-search',
+        ));
+
+        self::assertContains('friendsofcake-search', $result->enabledIds());
+        self::assertNotContains('friendsofcake-crud', $result->enabledIds());
+        self::assertNotContains('friendsofcake-crud-search', $result->enabledIds());
+    }
+
+    public function testCrudOnlyDoesNotEnableSearch(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud',
+        ));
+
+        self::assertContains('friendsofcake-crud', $result->enabledIds());
+        self::assertNotContains('friendsofcake-search', $result->enabledIds());
+        self::assertNotContains('friendsofcake-crud-search', $result->enabledIds());
+    }
+
+    public function testCrudAndSearchActivateIntegration(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud-search',
+        ));
+
+        $ids = $result->enabledIds();
+        self::assertContains('friendsofcake-crud', $ids);
+        self::assertContains('friendsofcake-search', $ids);
+        self::assertContains('friendsofcake-crud-search', $ids);
+    }
+
+    public function testSearchIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-search-incompatible',
+        ));
+
+        self::assertNotContains('friendsofcake-search', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('friendsofcake-search')?->status
+        );
+    }
 }

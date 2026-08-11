@@ -28,12 +28,14 @@ Ship **FriendsOfCake Search** extension and the first **CRUD + Search integratio
 
 ### Accept
 
-- Search-only fixture → Search pack, no CRUD knowledge
-- CRUD-only → CRUD pack, no Search knowledge
-- Both present → both packs + integration (no duplicated conflicting guidance)
-- Detection via Composer with supported majors; incompatible majors diagnosed
-- `phpunit` + `phpstan` + `validate` green
-- Update architecture + handoff for Phase 8 (agents)
+- [x] Search-only fixture → Search pack, no CRUD knowledge
+- [x] CRUD-only → CRUD pack, no Search knowledge
+- [x] Both present → both packs + integration (no duplicated conflicting guidance)
+- [x] Detection via Composer with supported majors; incompatible majors diagnosed
+- [x] `phpunit` + `phpstan` + `validate` green
+- [x] Update architecture + handoff for Phase 8 (agents)
+
+> **Phase 7 complete.** Continue at [HANDOFF-phase-8.md](HANDOFF-phase-8.md).
 
 ### Out of scope
 

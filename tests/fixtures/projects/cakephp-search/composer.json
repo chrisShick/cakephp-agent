@@ -1,0 +1,8 @@
+{
+    "name": "fixture/cakephp-search",
+    "require": {
+        "php": "^8.2",
+        "cakephp/cakephp": "^5.4",
+        "friendsofcake/search": "^7.0"
+    }
+}

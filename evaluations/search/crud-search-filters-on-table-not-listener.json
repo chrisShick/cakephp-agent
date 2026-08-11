@@ -1,0 +1,22 @@
+{
+    "id": "crud-search-filters-on-table-not-listener",
+    "category": "search",
+    "type": "selection",
+    "prompt": "Both friendsofcake/crud and friendsofcake/search are installed. Where should Articles index filter definitions live when wiring CRUD index filtering?",
+    "expected": {
+        "concepts": [
+            "search-filter",
+            "crud-search-integration"
+        ],
+        "preferred": [
+            "Table searchManager",
+            "Search filters once",
+            "CRUD applies Search"
+        ]
+    },
+    "must_not": [
+        "duplicate where in Crud.beforePaginate and Search filters",
+        "put filter SQL only in CRUD listener"
+    ],
+    "related_knowledge": []
+}

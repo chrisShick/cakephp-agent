@@ -1,0 +1,30 @@
+---
+description: Applying Search in controllers and PRG-friendly flows.
+globs:
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/search
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://github.com/FriendsOfCake/search
+last_verified: 2026-08-10
+---
+
+# Search in controllers (PRG)
+
+## Plugin semantics
+
+Search commonly uses Post/Redirect/Get friendly filtering so filter state lives in the query string for pagination. Controllers should apply search to the query then paginate — not rebuild filters inline.
+
+## Required behavior
+
+- Follow neighboring controllers for Search component / `searchManager` / `find('search')` patterns used in this app.
+- Keep filter definitions on the Table; controllers pass request params into the search find.
+- Preserve pagination compatibility with filtered query strings.
+
+## Anti-patterns
+
+- POST-only filter handling that breaks pagination bookmarks without project convention
+- Copying Table filter logic into the controller

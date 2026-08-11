@@ -1,0 +1,24 @@
+{
+    "id": "search-filter-not-controller-where",
+    "category": "search",
+    "type": "selection",
+    "prompt": "friendsofcake/search is installed. The Articles index needs an optional title query filter. Where should that live?",
+    "expected": {
+        "concepts": [
+            "search-filter",
+            "search-filter-vs-custom-finder"
+        ],
+        "preferred": [
+            "searchManager",
+            "Table search filter",
+            "Search plugin filter"
+        ]
+    },
+    "must_not": [
+        "large where pile in the controller",
+        "Laravel Scout"
+    ],
+    "related_knowledge": [
+        "search-filter-vs-custom-finder"
+    ]
+}

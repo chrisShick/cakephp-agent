@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-search",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "friendsofcake/search",
+            "version": "7.9.0"
+        }
+    ],
+    "packages-dev": []
+}

@@ -1,0 +1,9 @@
+{
+    "name": "fixture/cakephp-crud-search",
+    "require": {
+        "php": "^8.2",
+        "cakephp/cakephp": "^5.4",
+        "friendsofcake/crud": "^7.0",
+        "friendsofcake/search": "^7.0"
+    }
+}

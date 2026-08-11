@@ -1,0 +1,25 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "friendsofcake-search",
+  "name": "FriendsOfCake Search",
+  "description": "Rules and workflows for friendsofcake/search ^7 (CakePHP 5) — filters, managers, finders, PRG.",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "friendsofcake/search",
+        "constraint": "^7.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": ["rules/*.mdc"],
+  "skills": ["skills/*"],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "friendsofcake-crud-search",
+  "name": "FriendsOfCake CRUD + Search integration",
+  "description": "Joint guidance when both friendsofcake-crud and friendsofcake-search packs are enabled — no duplicated conflicting rules.",
+  "version": "1.0.0",
+  "type": "integration",
+  "detect": {},
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "activateWhenAllExtensionsPresent": [
+    "friendsofcake-crud",
+    "friendsofcake-search"
+  ],
+  "rules": ["rules/*.mdc"],
+  "skills": ["skills/*"],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

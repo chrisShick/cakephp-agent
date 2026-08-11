@@ -1,0 +1,33 @@
+---
+description: FriendsOfCake Search plugin ownership and basics.
+globs:
+  - "**/Model/Table/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/search
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://github.com/FriendsOfCake/search
+last_verified: 2026-08-10
+---
+
+# FriendsOfCake Search
+
+## Plugin semantics
+
+`friendsofcake/search` provides paginate-able filters via a Search manager/filters on Tables (commonly through the Search behavior) and controller integration for applying request filter params. Prefer plugin filters over ad-hoc `where` piles in controllers.
+
+## Required behavior
+
+- Apply only when `friendsofcake/search` ^7 is installed.
+- Configure filters on the Table/search manager; keep HTTP orchestration in the controller thin.
+- Do not assume FriendsOfCake CRUD APIs from this pack alone.
+- Prefer named Table finders for reusable non-filter query semantics still.
+
+## Anti-patterns
+
+- Building large uncontrolled query strings in controllers instead of filters
+- Inventing Laravel Scout APIs
+- Requiring CRUD listeners for plain Search usage
