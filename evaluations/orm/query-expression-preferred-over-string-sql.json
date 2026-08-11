@@ -1,0 +1,24 @@
+{
+    "id": "query-expression-preferred-over-string-sql",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "I need a complex WHERE with optional filters from the request. Prefer a raw SQL string or CakePHP QueryExpression callbacks with bindings?",
+    "expected": {
+        "concepts": [
+            "QueryExpression",
+            "bindings"
+        ],
+        "preferred": [
+            "QueryExpression",
+            "where callback",
+            "bindings"
+        ]
+    },
+    "must_not": [
+        "endorse concatenating request params into a SQL string"
+    ],
+    "related_knowledge": [
+        "orm-vs-connection-sql",
+        "unsafe-sql-concatenation"
+    ]
+}

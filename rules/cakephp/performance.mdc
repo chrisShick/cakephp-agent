@@ -9,7 +9,7 @@ framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
   - https://book.cakephp.org/5.x/core-libraries/caching.html
-last_verified: 2026-08-10
+last_verified: 2026-08-11
 related_knowledge: [hidden-n-plus-one, over-eager-contain]
 ---
 

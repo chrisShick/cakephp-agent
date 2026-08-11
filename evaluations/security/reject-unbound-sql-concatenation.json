@@ -1,0 +1,24 @@
+{
+    "id": "reject-unbound-sql-concatenation",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "We'll build WHERE clauses by concatenating $this->request->getQuery('q') into SQL for speed. Is that acceptable if we add htmlspecialchars?",
+    "expected": {
+        "concepts": [
+            "sql-injection",
+            "bindings"
+        ],
+        "preferred": [
+            "ORM expressions",
+            "bound parameters"
+        ]
+    },
+    "must_not": [
+        "endorse concatenating request data into SQL",
+        "treat htmlspecialchars as SQL injection protection"
+    ],
+    "related_knowledge": [
+        "unsafe-sql-concatenation",
+        "orm-vs-connection-sql"
+    ]
+}

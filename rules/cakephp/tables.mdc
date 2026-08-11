@@ -8,15 +8,15 @@ truth_level: FRAMEWORK_DEFAULT
 framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5.x/orm/table-objects.html
-last_verified: 2026-08-10
-related_knowledge: [table-callback-vs-application-rule]
+last_verified: 2026-08-11
+related_knowledge: [table-callback-vs-application-rule, orm-vs-connection-sql]
 ---
 
 # Tables
 
 ## Framework semantics
 
-Tables are the primary persistence/query interface. Configure associations, validation, application rules, finders, and behaviors in `initialize()` / `buildRules()` / `validation*` methods.
+Tables are the primary persistence/query interface. Configure associations, validation, application rules, finders, and behaviors in `initialize()` / `buildRules()` / `validation*` methods. Prefer Table/ORM APIs over ad-hoc Connection SQL for domain data.
 
 ## Required behavior
 
@@ -24,6 +24,7 @@ Tables are the primary persistence/query interface. Configure associations, vali
 - Use `buildRules()` for stateful invariants.
 - Prefer behaviors for reusable cross-table persistence features.
 - Obtain tables via locator/`fetchTable` conventions used by the project.
+- Keep exceptional raw SQL out of controllers; encapsulate on the Table or a dedicated command when truly required.
 
 ## Anti-patterns
 

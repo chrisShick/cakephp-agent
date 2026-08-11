@@ -1,7 +1,7 @@
 # Rules & skills coverage map (CakePHP 5)
 
 Audit date: 2026-08-11 · Package **1.0.0-beta.1** · **Apache-2.0**  
-**Phase ownership:** Phase 13 **done** — [HANDOFF-phase-13.md](HANDOFF-phase-13.md). Phase 14: Packagist live + beta cut — [HANDOFF-phase-14.md](HANDOFF-phase-14.md) (soak → stable 1.0).
+**Phase ownership:** Phase 14 Packagist/beta done path — [HANDOFF-phase-14.md](HANDOFF-phase-14.md). Phase **14b** ORM-first + 1.0 polish — [HANDOFF-phase-14b.md](HANDOFF-phase-14b.md) (soak → stable 1.0).
 
 Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so agents don’t invent foreign frameworks. **Book-complete enough for 1.0 trust** after Phase 13; not an encyclopedia of every plugin.
 
@@ -28,7 +28,7 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 
 | Topic | Rules | Skills | Status |
 |---|---|---|---|
-| Ownership / ORM / validation / rules / transactions | ✅ | ✅ | Strong |
+| Ownership / ORM / validation / rules / transactions | ✅ | ✅ | **Strong** (+ ORM-first 14b) |
 | Controllers / middleware / routing / request-response | ✅ | ✅ | Strong |
 | Behaviors / components / commands / events | ✅ | ✅ | Strong |
 | Pagination / forms / errors / config/DI / performance | ✅ | ✅ | Strong |
@@ -38,8 +38,8 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 | HTTP client | ✅ | ✅ | Phase 13 |
 | Mailer | ✅ | ✅ | Phase 13 |
 | Views / cells / helpers | ✅ | ✅ `work-with-views` | Good (project-following) |
-| Advanced ORM (subquery/EXISTS/counter-cache) | ✅ | ✅ | Phase 13 |
-| Security | ✅ deepened | ✅ `review-cakephp-security` | Phase 13 Track B |
+| Advanced ORM (subquery/EXISTS/counter-cache/expressions) | ✅ | ✅ | Phase 13 + 14b |
+| Security | ✅ deepened | ✅ `review-cakephp-security` | Phase 13 + SQL concat 14b |
 | PHP / engineering base | ✅ | ✅ | Phase 13 Track B |
 
 ### Capability packs
@@ -62,7 +62,8 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 - **Phase 13 Track A:** remaining core Book surfaces + queue/DebugKit packs  
 - **Phase 13 Track B:** security review skill, deeper security rule, PHP safety, engineering P2  
 - **Phase 14 prep:** CRUD harden (evals, decisions, security, smells, AuthZ integration) + `muffin/trash` pack + core polish  
-- **Phase 14:** Packagist published; **`1.0.0-beta.1`** cut — remaining: soak → stable `1.0.0`
+- **Phase 14:** Packagist published; **`1.0.0-beta.1`** cut  
+- **Phase 14b:** ORM-first mandate + thin security/knowledge polish — soak → stable `1.0.0`
 
 ---
 
@@ -75,4 +76,4 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 - Auth/CRUD/Search/Migrations/Bake/Queue/DebugKit remain capability-gated.
 - Security + PHP baseline are actionable skills, not slogans.
 
-**Still optional later:** deeper AppSec catalogs, live LLM evals, MCP, niche plugins.
+**Still optional later:** full AppSec/ORM expert encyclopedias, live LLM evals, MCP, niche plugins, DB packs.

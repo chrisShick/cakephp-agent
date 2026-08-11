@@ -12,7 +12,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/entities.html
   - https://book.cakephp.org/5.x/controllers/request-response.html
   - https://book.cakephp.org/5.x/development/configuration.html
-last_verified: 2026-08-10
+last_verified: 2026-08-11
 ---
 
 # Security
@@ -28,7 +28,7 @@ CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs a
 - Distinguish authentication (identity) from authorization (permission).
 - For HTML forms, use CakePHP FormProtection / CSRF middleware as the project already wires them — do not rely on client-only tokens.
 - Validate and store uploads with explicit type/size/path rules; never trust client filenames as filesystem paths.
-- Avoid unsafe raw SQL concatenation; prefer ORM expressions/bindings.
+- Prefer ORM Query expressions and bindings; never concatenate untrusted input into SQL (`unsafe-sql-concatenation`, `orm-vs-connection-sql`).
 - Do not leak secrets in logs, exceptions, or serialized outputs (`$_hidden`, API shaping).
 - Keep credentials and API keys in config/env — never commit them.
 - Reject open redirects: only redirect to known-safe local routes/paths.
@@ -43,6 +43,7 @@ CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs a
 - Missing FormProtection/CSRF on state-changing HTML forms
 - CSRF-only-in-javascript
 - unsafe-upload-handling
+- unsafe-sql-concatenation
 - Open redirects from user-supplied URLs
 - Debug-in-production
 - Secrets in source control or logs
@@ -55,3 +56,4 @@ CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs a
 - [ ] Sensitive fields hidden from default serialization
 - [ ] Redirect targets are allow-listed / local
 - [ ] Production debug/DebugKit off; secrets not logged
+- [ ] No unbound SQL concatenation; prefer ORM bindings

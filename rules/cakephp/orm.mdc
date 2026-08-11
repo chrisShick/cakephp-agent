@@ -1,5 +1,5 @@
 ---
-description: CakePHP 5 ORM overview and query efficiency expectations.
+description: CakePHP 5 ORM overview — prefer ORM for application data access.
 globs:
   - "**/Model/**/*.php"
 alwaysApply: false
@@ -9,27 +9,32 @@ framework_versions: [">=5.0 <6.0"]
 sources:
   - https://book.cakephp.org/5.x/orm.html
   - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
-last_verified: 2026-08-10
-related_knowledge: [contain-vs-matching, bulk-update-vs-entity-save]
+  - https://book.cakephp.org/5.x/orm/query-builder.html
+last_verified: 2026-08-11
+related_knowledge: [contain-vs-matching, bulk-update-vs-entity-save, orm-vs-connection-sql]
 ---
 
 # ORM
 
 ## Framework semantics
 
-The CakePHP ORM centers on Tables, Entities, associations, `SelectQuery`, finders, and marshaling via `newEntity`/`patchEntity`.
+The CakePHP ORM centers on Tables, Entities, associations, `SelectQuery`, finders, and marshaling via `newEntity`/`patchEntity`. Tables are the default interface for application domain data — not ad-hoc `Connection::execute` / PDO.
 
 ## Required behavior
 
+- Prefer Table/ORM APIs for ordinary reads and writes; treat raw Connection SQL as exceptional (`orm-vs-connection-sql`).
 - Compose queries; prefer custom finders for reusable semantics.
+- Prefer Query expressions and bindings over string SQL fragments.
 - Prevent N+1 with deliberate `contain` / join strategies.
 - Distinguish filtering associations (`matching` / joinWith) from eager loading (`contain`).
-- Do not assume bulk updates run entity callbacks/rules.
+- Do not assume bulk updates (`updateAll` / query `update`) run entity callbacks/rules.
 
 ## Anti-patterns
 
 - Hidden N+1
 - Over-eager contain
+- Bypassing ORM for convenience
+- Unsafe SQL concatenation
 - Eloquent-style mental models (not Laravel)
 
 ## Review checklist
@@ -37,3 +42,4 @@ The CakePHP ORM centers on Tables, Entities, associations, `SelectQuery`, finder
 - [ ] Query composable and intentional
 - [ ] Association loading justified
 - [ ] Lifecycle implications understood for writes
+- [ ] No unnecessary Connection/raw SQL for domain CRUD

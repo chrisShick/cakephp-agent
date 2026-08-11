@@ -63,6 +63,7 @@ Link and apply as relevant:
 - `knowledge/decisions/contain-vs-matching`
 - `knowledge/decisions/contain-vs-join`
 - `knowledge/decisions/bulk-update-vs-entity-save`
+- `knowledge/decisions/orm-vs-connection-sql`
 - `knowledge/decisions/transaction-vs-independent-save`
 - `knowledge/decisions/event-vs-direct-call`
 - `knowledge/decisions/plugin-vs-application-code`
@@ -92,6 +93,7 @@ Rough defaults (override with project conventions and decisions above):
 | Shared infra / secrets | Config + `Application::services()` |
 | Query reuse on one Table | Custom finder |
 | Advanced filters / counters | Advanced finder / CounterCache behavior |
+| Ordinary domain reads/writes | Table / ORM (not Connection SQL) |
 | Cross-table persistence feature | Behavior |
 | Multi-write consistency unit | Connection transaction |
 | Field shape/format | Validator |
@@ -107,6 +109,7 @@ Rough defaults (override with project conventions and decisions above):
 - Premature service/repository layers that wrap a single Table with no orchestration value.
 - Putting uniqueness only in validation.
 - Assuming optional plugin APIs in core guidance.
+- Defaulting to `Connection::execute` / raw SQL for ordinary domain finds and saves.
 
 ## Validation
 

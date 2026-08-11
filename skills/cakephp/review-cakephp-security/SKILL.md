@@ -34,7 +34,7 @@ Perform a CakePHP-native security review of a diff or area: exploitable ownershi
 3. **CSRF/FormProtection:** state-changing HTML forms must participate.
 4. **Uploads:** validate type/size; server-side names; not raw webroot exec paths.
 5. **Serialization:** hide secrets; shape API output explicitly.
-6. **SQL:** no unbound concatenation; prefer ORM expressions.
+6. **SQL:** no unbound concatenation; prefer ORM expressions (`unsafe-sql-concatenation`, `orm-vs-connection-sql`).
 7. **Redirects:** no open redirects from user input.
 8. **Secrets/debug:** no credentials in code/logs; debug off in production.
 9. Produce findings with severity, evidence, and CakePHP-native remediation skills.

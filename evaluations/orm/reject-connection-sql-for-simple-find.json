@@ -1,0 +1,26 @@
+{
+    "id": "reject-connection-sql-for-simple-find",
+    "category": "orm",
+    "type": "rejection",
+    "prompt": "Fetching one article by primary key via Connection::execute('SELECT * FROM articles WHERE id = ' . $id) is fine as a default, right?",
+    "expected": {
+        "concepts": [
+            "orm",
+            "sql-injection"
+        ],
+        "preferred": [
+            "Table get",
+            "find",
+            "bound query"
+        ]
+    },
+    "must_not": [
+        "endorse Connection::execute with concatenated ids as the default",
+        "ignore SQL injection risk"
+    ],
+    "related_knowledge": [
+        "orm-vs-connection-sql",
+        "unsafe-sql-concatenation",
+        "bypassing-orm-for-convenience"
+    ]
+}

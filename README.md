@@ -104,7 +104,7 @@ Precedence: CLI flags > `.cakephp-agent.json` > `composer.json` extra > defaults
 | [Architecture](docs/architecture.md) | Platform shape |
 | [Pre-1.0 review](docs/pre-1.0-review.md) | Gap backlog |
 | [Rules & skills coverage](docs/coverage-rules-skills.md) | CakePHP coverage audit |
-| [Phase 14 handoff](docs/HANDOFF-phase-14.md) | Beta cut / soak → stable 1.0 |
+| [Phase 14b handoff](docs/HANDOFF-phase-14b.md) | ORM-first polish → soak → stable 1.0 |
 
 ## Package development
 
