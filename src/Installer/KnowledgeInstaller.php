@@ -7,6 +7,9 @@ namespace CakePhpAgent\Installer;
 use CakePhpAgent\Configuration\ProjectConfig;
 use CakePhpAgent\Editor\EditorAdapterInterface;
 use CakePhpAgent\Editor\EditorRegistry;
+use CakePhpAgent\Extension\Extension;
+use CakePhpAgent\Extension\ExtensionResolver;
+use CakePhpAgent\Extension\ResolutionResult;
 use CakePhpAgent\Filesystem\Filesystem;
 use CakePhpAgent\PackagePaths;
 
@@ -28,6 +31,7 @@ final class KnowledgeInstaller
         private readonly Filesystem $filesystem = new Filesystem(),
         private readonly EditorRegistry $editors = new EditorRegistry(),
         private readonly InstallationStateStore $stateStore = new InstallationStateStore(),
+        private readonly ExtensionResolver $extensionResolver = new ExtensionResolver(),
         private readonly string $packageRoot = '',
     ) {
     }
@@ -35,17 +39,18 @@ final class KnowledgeInstaller
     /**
      * @return list<InstallAction>
      */
-    public function plan(ProjectConfig $config): array
+    public function plan(ProjectConfig $config, ?ResolutionResult $resolution = null): array
     {
         $packageRoot = $this->packageRoot !== '' ? $this->packageRoot : PackagePaths::root();
         $previous = $this->stateStore->load($config->projectRoot);
         $adapters = $this->editors->resolveMany($config->editors);
+        $resolution ??= $this->extensionResolver->resolve($config);
 
         $planned = [];
         $managedRelatives = [];
 
         foreach ($adapters as $adapter) {
-            foreach ($this->collectSources($packageRoot) as $source) {
+            foreach ($this->collectSources($packageRoot, $resolution->enabled) as $source) {
                 $targetDir = $this->targetDirectory($adapter, $source['kind'], $config->projectRoot);
                 if ($targetDir === null) {
                     continue;
@@ -89,11 +94,12 @@ final class KnowledgeInstaller
     }
 
     /**
-     * @return array{actions: list<InstallAction>, state: InstallationState}
+     * @return array{actions: list<InstallAction>, state: InstallationState, resolution: ResolutionResult}
      */
     public function install(ProjectConfig $config): array
     {
-        $actions = $this->plan($config);
+        $resolution = $this->extensionResolver->resolve($config);
+        $actions = $this->plan($config, $resolution);
         $packageVersion = $this->detectPackageVersion();
         $newFiles = [];
 
@@ -146,7 +152,6 @@ final class KnowledgeInstaller
             }
         }
 
-        // Retain managed files that were not touched this run but still belong.
         if (!$config->prune) {
             $previous = $this->stateStore->load($config->projectRoot);
             foreach ($previous->files as $relative => $meta) {
@@ -159,7 +164,7 @@ final class KnowledgeInstaller
         $state = InstallationState::empty($packageVersion)->withInstallResult(
             packageVersion: $packageVersion,
             editors: $config->editors,
-            extensions: [],
+            extensions: $resolution->enabledIds(),
             files: $newFiles,
         );
 
@@ -167,7 +172,7 @@ final class KnowledgeInstaller
             $this->stateStore->save($config->projectRoot, $state);
         }
 
-        return ['actions' => $actions, 'state' => $state];
+        return ['actions' => $actions, 'state' => $state, 'resolution' => $resolution];
     }
 
     private function planFileAction(
@@ -246,7 +251,6 @@ final class KnowledgeInstaller
             );
         }
 
-        // Unmanaged existing file
         if ($config->force) {
             return new InstallAction(
                 action: InstallAction::UPDATE,
@@ -285,9 +289,10 @@ final class KnowledgeInstaller
     }
 
     /**
+     * @param list<Extension> $enabledExtensions
      * @return list<array{kind: string, relative: string, absolute: string}>
      */
-    private function collectSources(string $packageRoot): array
+    private function collectSources(string $packageRoot, array $enabledExtensions): array
     {
         $sources = [];
 
@@ -325,6 +330,65 @@ final class KnowledgeInstaller
                 $sources[] = [
                     'kind' => 'agent',
                     'relative' => $relative,
+                    'absolute' => $agentsDir . '/' . $relative,
+                ];
+            }
+        }
+
+        foreach ($enabledExtensions as $extension) {
+            foreach ($this->collectExtensionSources($extension) as $source) {
+                $sources[] = $source;
+            }
+        }
+
+        return $sources;
+    }
+
+    /**
+     * @return list<array{kind: string, relative: string, absolute: string}>
+     */
+    private function collectExtensionSources(Extension $extension): array
+    {
+        $sources = [];
+        $id = $extension->id();
+
+        $rulesDir = $extension->rulesDirectory();
+        if ($this->filesystem->isDir($rulesDir)) {
+            foreach ($this->filesystem->listFilesRelative($rulesDir) as $relative) {
+                if (str_ends_with($relative, '.gitkeep')) {
+                    continue;
+                }
+                $sources[] = [
+                    'kind' => 'rule',
+                    'relative' => 'extensions/' . $id . '/' . $relative,
+                    'absolute' => $rulesDir . '/' . $relative,
+                ];
+            }
+        }
+
+        $skillsDir = $extension->skillsDirectory();
+        if ($this->filesystem->isDir($skillsDir)) {
+            foreach ($this->filesystem->listFilesRelative($skillsDir) as $relative) {
+                if (str_ends_with($relative, '.gitkeep')) {
+                    continue;
+                }
+                $sources[] = [
+                    'kind' => 'skill',
+                    'relative' => 'extensions/' . $id . '/' . $relative,
+                    'absolute' => $skillsDir . '/' . $relative,
+                ];
+            }
+        }
+
+        $agentsDir = $extension->agentsDirectory();
+        if ($this->filesystem->isDir($agentsDir)) {
+            foreach ($this->filesystem->listFilesRelative($agentsDir) as $relative) {
+                if (str_ends_with($relative, '.gitkeep')) {
+                    continue;
+                }
+                $sources[] = [
+                    'kind' => 'agent',
+                    'relative' => 'extensions/' . $id . '/' . $relative,
                     'absolute' => $agentsDir . '/' . $relative,
                 ];
             }

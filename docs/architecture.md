@@ -8,13 +8,13 @@ See the unified plan for the full blueprint:
 
 ## Current phase
 
-**Phase 0–1 complete in skeleton form:**
+**Phase 0–1 complete.** Phase 2 extension engine is in progress / landed:
 
-- Composer package + CLI
-- Project root / Composer metadata discovery
-- Editor adapters: Cursor, Claude Code, Codex
-- Managed-file installer with lock state, dry-run, force, symlink, prune
-- `.ai/` project overlay reserved and never overwritten
-- Stub engineering / PHP / CakePHP convention rules
+- Extension manifests + loader/validator
+- Composer detection with semver constraints
+- Enable/disable, dependsOn, conflicts, cycles
+- `detect` / `extensions` / `explain` CLI
+- Fake reference extensions: `test-fake-plugin`, `test-fake-addon`
+- Installer installs enabled extension rules/skills under `extensions/<id>/`
 
-**Next:** Phase 2 — extension manifests, detection, enable/disable, fake extension + fixture matrix.
+**Next:** Phase 3 — canonical knowledge + CakePHP core rules (source-verified).

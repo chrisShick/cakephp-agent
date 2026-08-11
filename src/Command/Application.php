@@ -9,8 +9,12 @@ use CakePhpAgent\Configuration\ProjectConfigLoader;
 use CakePhpAgent\Discovery\ComposerMetadataReader;
 use CakePhpAgent\Discovery\ProjectRootLocator;
 use CakePhpAgent\Editor\EditorRegistry;
+use CakePhpAgent\Extension\ExtensionDecision;
+use CakePhpAgent\Extension\ExtensionRegistry;
+use CakePhpAgent\Extension\ExtensionResolver;
 use CakePhpAgent\Installer\InstallAction;
 use CakePhpAgent\Installer\KnowledgeInstaller;
+use CakePhpAgent\Manifest\ManifestLoader;
 use CakePhpAgent\PackagePaths;
 use Throwable;
 
@@ -22,6 +26,9 @@ final class Application
         private readonly ComposerMetadataReader $composerReader = new ComposerMetadataReader(),
         private readonly EditorRegistry $editorRegistry = new EditorRegistry(),
         private readonly KnowledgeInstaller $installer = new KnowledgeInstaller(),
+        private readonly ExtensionResolver $extensionResolver = new ExtensionResolver(),
+        private readonly ExtensionRegistry $extensionRegistry = new ExtensionRegistry(),
+        private readonly ManifestLoader $manifestLoader = new ManifestLoader(),
     ) {
     }
 
@@ -38,6 +45,8 @@ final class Application
                 'help', '--help', '-h' => $this->help(),
                 'install' => $this->install($options),
                 'detect' => $this->detect($options),
+                'extensions' => $this->extensions($options),
+                'explain' => $this->explain($options),
                 'validate' => $this->validate(),
                 'doctor' => $this->doctor($options),
                 'version', '--version', '-V' => $this->version(),
@@ -59,15 +68,19 @@ Usage:
   cakephp-agent <command> [options]
 
 Commands:
-  install    Install rules/skills into editor target directories
-  detect     Show detected project / Composer capabilities (Phase 1: basic)
-  validate   Validate package content layout
-  doctor     Sanity-check project + package
-  version    Show package version
-  help       Show this help
+  install      Install rules/skills for core + enabled extensions
+  detect       Show Composer capabilities and enabled extensions
+  extensions   List known extension packs and status for a project
+  explain      Explain why each extension is enabled or not
+  validate     Validate package content + extension manifests
+  doctor       Sanity-check project + package
+  version      Show package version
+  help         Show this help
 
 Install options:
   --editor=cursor|claude|codex|all   Target editor(s) (default: cursor)
+  --extension=ID                     Force-enable extension (repeatable / comma-separated)
+  --without=ID                       Force-disable extension (repeatable / comma-separated)
   --force                            Overwrite managed / conflicting files
   --symlink                          Symlink instead of copy
   --prune                            Remove previously managed files no longer present
@@ -97,11 +110,17 @@ HELP;
         $config = $this->resolveConfig($options);
         $result = $this->installer->install($config);
         $actions = $result['actions'];
+        $resolution = $result['resolution'];
 
         echo 'CakePHP Agent' . PHP_EOL . PHP_EOL;
         echo 'Project:' . PHP_EOL;
         echo '  ' . $config->projectRoot . PHP_EOL . PHP_EOL;
         echo 'Editors: ' . implode(', ', $config->editors) . PHP_EOL;
+        echo 'Enabled extensions: ' . (
+            $resolution->enabledIds() === []
+                ? '(none)'
+                : implode(', ', $resolution->enabledIds())
+        ) . PHP_EOL;
         if ($config->dryRun) {
             echo 'Mode: dry-run' . PHP_EOL;
         }
@@ -148,20 +167,30 @@ HELP;
      */
     private function detect(array $options): int
     {
-        $projectRoot = $this->projectRoot($options);
-        $packages = $this->composerReader->installedPackages($projectRoot);
+        $config = $this->resolveConfig($options);
+        $packages = $this->composerReader->installedPackages($config->projectRoot);
+        $resolution = $this->extensionResolver->resolve($config);
 
-        echo 'Project: ' . $projectRoot . PHP_EOL . PHP_EOL;
-        echo 'Composer packages (resolved or constrained):' . PHP_EOL;
+        echo 'CakePHP Agent' . PHP_EOL . PHP_EOL;
+        echo 'Project:' . PHP_EOL;
+        echo '  ' . $config->projectRoot . PHP_EOL . PHP_EOL;
 
+        $php = $packages['php'] ?? PHP_VERSION;
+        $cake = $packages['cakephp/cakephp'] ?? '(not detected)';
+        echo 'Detected:' . PHP_EOL;
+        echo '  PHP ' . $php . PHP_EOL;
+        echo '  CakePHP ' . $cake . PHP_EOL . PHP_EOL;
+
+        echo 'Composer capabilities:' . PHP_EOL;
         $interesting = [
             'cakephp/cakephp',
             'cakephp/authentication',
             'cakephp/authorization',
             'friendsofcake/crud',
             'friendsofcake/search',
+            'cakephp-agent/fake-plugin',
+            'cakephp-agent/fake-addon',
         ];
-
         foreach ($interesting as $name) {
             if (isset($packages[$name])) {
                 echo sprintf("  ✓ %s (%s)\n", $name, $packages[$name]);
@@ -170,7 +199,61 @@ HELP;
             }
         }
 
-        echo PHP_EOL . 'Extension auto-enable lands in Phase 2.' . PHP_EOL;
+        echo PHP_EOL . 'Enabled knowledge packs:' . PHP_EOL;
+        echo "  ✓ engineering\n  ✓ php\n  ✓ cakephp\n";
+        foreach ($resolution->enabled as $extension) {
+            echo sprintf("  ✓ %s\n", $extension->id());
+        }
+
+        $incompatible = array_filter(
+            $resolution->decisions,
+            static fn (ExtensionDecision $d): bool => $d->status === ExtensionDecision::INCOMPATIBLE
+        );
+        if ($incompatible !== []) {
+            echo PHP_EOL . 'Incompatible:' . PHP_EOL;
+            foreach ($incompatible as $decision) {
+                echo sprintf("  ✗ %s — %s\n", $decision->extensionId, $decision->reason);
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    private function extensions(array $options): int
+    {
+        $config = $this->resolveConfig($options);
+        $resolution = $this->extensionResolver->resolve($config);
+
+        echo 'Known extensions:' . PHP_EOL;
+        foreach ($resolution->decisions as $decision) {
+            $mark = match ($decision->status) {
+                ExtensionDecision::ENABLED => '✓',
+                ExtensionDecision::INCOMPATIBLE => '✗',
+                ExtensionDecision::DISABLED => '–',
+                default => '·',
+            };
+            echo sprintf("  %s %-28s [%s]\n", $mark, $decision->extensionId, $decision->status);
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    private function explain(array $options): int
+    {
+        $config = $this->resolveConfig($options);
+        $resolution = $this->extensionResolver->resolve($config);
+
+        echo 'Extension decisions for ' . $config->projectRoot . PHP_EOL . PHP_EOL;
+        foreach ($resolution->decisions as $decision) {
+            echo sprintf("[%s] %s\n", strtoupper($decision->status), $decision->extensionId);
+            echo '  ' . $decision->reason . PHP_EOL . PHP_EOL;
+        }
 
         return 0;
     }
@@ -180,10 +263,25 @@ HELP;
         $root = PackagePaths::root();
         $errors = [];
 
-        foreach (['rules/engineering', 'rules/php', 'rules/cakephp', 'skills', 'schemas', 'src'] as $rel) {
+        foreach (['rules/engineering', 'rules/php', 'rules/cakephp', 'skills', 'schemas', 'src', 'extensions'] as $rel) {
             if (!is_dir($root . '/' . $rel)) {
                 $errors[] = "Missing directory: {$rel}";
             }
+        }
+
+        try {
+            $loaded = $this->manifestLoader->loadAll($root);
+            $ids = [];
+            foreach ($loaded as $extension) {
+                $id = $extension->id();
+                if (isset($ids[$id])) {
+                    $errors[] = sprintf('Duplicate extension id "%s".', $id);
+                }
+                $ids[$id] = true;
+            }
+            echo sprintf("Loaded %d extension manifest(s).\n", count($loaded));
+        } catch (Throwable $e) {
+            $errors[] = $e->getMessage();
         }
 
         if ($errors === []) {
@@ -210,6 +308,7 @@ HELP;
         echo '  Package root: ' . PackagePaths::root() . PHP_EOL;
         echo '  PHP: ' . PHP_VERSION . PHP_EOL;
         echo '  Editors supported: ' . implode(', ', $this->editorRegistry->ids()) . PHP_EOL;
+        echo '  Extensions registered: ' . implode(', ', $this->extensionRegistry->ids()) . PHP_EOL;
         echo '  .ai overlay: ' . (is_dir($projectRoot . '/.ai') ? 'present' : 'not present') . PHP_EOL;
         echo '  Lock file: ' . (is_file($projectRoot . '/' . ProjectConfig::LOCK_FILENAME) ? 'present' : 'not present') . PHP_EOL;
 
@@ -238,6 +337,16 @@ HELP;
                 : [(string) $options['editor']];
         }
 
+        $enable = $this->optionIdList($options, 'extension');
+        $disable = $this->optionIdList($options, 'without');
+
+        if ($enable !== []) {
+            $enable = array_values(array_unique([...$base->enableExtensions, ...$enable]));
+        }
+        if ($disable !== []) {
+            $disable = array_values(array_unique([...$base->disableExtensions, ...$disable]));
+        }
+
         return $base->withCliOverrides(
             editors: $editors,
             force: isset($options['force']) ? true : null,
@@ -245,7 +354,40 @@ HELP;
             prune: isset($options['prune']) ? true : null,
             dryRun: isset($options['dry-run']) ? true : null,
             verbose: isset($options['verbose']) ? true : null,
+            enableExtensions: $enable !== [] ? $enable : null,
+            disableExtensions: $disable !== [] ? $disable : null,
         );
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     * @return list<string>
+     */
+    private function optionIdList(array $options, string $key): array
+    {
+        if (!isset($options[$key])) {
+            return [];
+        }
+
+        $raw = $options[$key];
+        if (is_array($raw)) {
+            $parts = $raw;
+        } else {
+            $parts = explode(',', (string) $raw);
+        }
+
+        $ids = [];
+        foreach ($parts as $part) {
+            if (!is_string($part)) {
+                continue;
+            }
+            $part = trim($part);
+            if ($part !== '') {
+                $ids[] = $part;
+            }
+        }
+
+        return $ids;
     }
 
     /**
@@ -274,7 +416,16 @@ HELP;
             $arg = substr($arg, 2);
             if (str_contains($arg, '=')) {
                 [$key, $value] = explode('=', $arg, 2);
-                $options[$key] = $value;
+                if (in_array($key, ['extension', 'without'], true)) {
+                    $existing = $options[$key] ?? [];
+                    if (!is_array($existing)) {
+                        $existing = [(string) $existing];
+                    }
+                    $existing[] = $value;
+                    $options[$key] = $existing;
+                } else {
+                    $options[$key] = $value;
+                }
             } else {
                 $options[$arg] = true;
             }

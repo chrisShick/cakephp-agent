@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "test-fake-plugin",
+  "name": "Test Fake Plugin",
+  "description": "Phase 2 reference extension used to prove detection and resolution without real plugin content.",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp-agent/fake-plugin",
+        "constraint": "^1.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

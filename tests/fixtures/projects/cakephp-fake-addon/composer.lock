@@ -1,0 +1,18 @@
+{
+  "name": "fixture/cakephp-fake-addon",
+  "packages": [
+    {
+      "name": "cakephp/cakephp",
+      "version": "5.4.2"
+    },
+    {
+      "name": "cakephp-agent/fake-plugin",
+      "version": "1.2.0"
+    },
+    {
+      "name": "cakephp-agent/fake-addon",
+      "version": "1.0.1"
+    }
+  ],
+  "packages-dev": []
+}

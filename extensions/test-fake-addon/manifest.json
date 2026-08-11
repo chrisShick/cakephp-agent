@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "test-fake-addon",
+  "name": "Test Fake Addon",
+  "description": "Depends on test-fake-plugin to exercise dependency resolution.",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp-agent/fake-addon",
+        "constraint": "^1.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [
+    "test-fake-plugin"
+  ],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [],
+  "defaultEnabledWhenDetected": true
+}

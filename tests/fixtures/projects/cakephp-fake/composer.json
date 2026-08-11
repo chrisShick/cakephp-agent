@@ -1,0 +1,8 @@
+{
+  "name": "fixture/cakephp-fake",
+  "require": {
+    "php": "^8.2",
+    "cakephp/cakephp": "^5.4",
+    "cakephp-agent/fake-plugin": "^1.0"
+  }
+}

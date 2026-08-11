@@ -28,6 +28,8 @@ vendor/bin/cakephp-agent help
 vendor/bin/cakephp-agent install --editor=cursor
 vendor/bin/cakephp-agent install --editor=all --dry-run
 vendor/bin/cakephp-agent detect
+vendor/bin/cakephp-agent extensions
+vendor/bin/cakephp-agent explain
 vendor/bin/cakephp-agent doctor
 vendor/bin/cakephp-agent validate
 ```
@@ -37,6 +39,8 @@ vendor/bin/cakephp-agent validate
 | Flag | Meaning |
 |---|---|
 | `--editor=cursor\|claude\|codex\|all` | Target editor layout(s) |
+| `--extension=ID` | Force-enable extension (repeatable) |
+| `--without=ID` | Force-disable extension (repeatable) |
 | `--force` | Overwrite managed / conflicting files |
 | `--symlink` | Symlink package files instead of copying |
 | `--prune` | Remove previously managed files no longer present |

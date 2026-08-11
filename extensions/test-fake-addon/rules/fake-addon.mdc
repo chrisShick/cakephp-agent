@@ -1,0 +1,10 @@
+---
+description: Addon rules that depend on the fake plugin extension.
+alwaysApply: false
+priority: normal
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# Test fake addon
+
+Enabled only when the fake addon package is present; depends on `test-fake-plugin`.

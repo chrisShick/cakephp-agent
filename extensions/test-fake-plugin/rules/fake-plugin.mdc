@@ -1,0 +1,16 @@
+---
+description: Fake plugin rules for Phase 2 extension resolution tests.
+globs:
+alwaysApply: false
+priority: normal
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# Test fake plugin
+
+This rule exists only to verify extension installation.
+
+## Required behavior
+
+- Apply fake-plugin guidance only when `cakephp-agent/fake-plugin` is installed.
+- Do not invent APIs for this package beyond what project code shows.

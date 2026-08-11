@@ -1,0 +1,10 @@
+{
+  "name": "fixture/cakephp-only",
+  "packages": [
+    {
+      "name": "cakephp/cakephp",
+      "version": "5.4.2"
+    }
+  ],
+  "packages-dev": []
+}
