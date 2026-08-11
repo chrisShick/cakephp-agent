@@ -25,7 +25,7 @@ use Throwable;
 
 final class Application
 {
-    public const VERSION = '0.9.0';
+    public const VERSION = '1.0.0-beta.1';
 
     public function __construct(
         private readonly ProjectRootLocator $rootLocator = new ProjectRootLocator(),

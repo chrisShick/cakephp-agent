@@ -2,7 +2,7 @@
 
 AI engineering knowledge for **CakePHP 5.x** — rules, skills, agents, and a safe installer for **Cursor**, **Claude Code**, and **Codex**.
 
-> **Status: 0.9.0 adopter preview** (not 1.0). Phase 13 full CakePHP coverage + security/PHP base is done. **Phase 14 next:** Packagist / 1.0 ([HANDOFF](docs/HANDOFF-phase-14.md), [coverage map](docs/coverage-rules-skills.md)). License: **Apache-2.0**. Composer: **`chrisshick/cakephp-agent`**.
+> **Status: 1.0.0-beta.1** (public beta — not stable 1.0 yet). On Packagist: [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent). License: **Apache-2.0**. Soak then stable `1.0.0` — [HANDOFF](docs/HANDOFF-phase-14.md), [pre-1.0](docs/pre-1.0-review.md).
 
 Repository: [github.com/chrisShick/cakephp-agent](https://github.com/chrisShick/cakephp-agent)
 
@@ -22,28 +22,16 @@ Offline `eval` self-checks prove fixture/scorer plumbing. They are **not** live 
 
 Follow **[docs/install-existing-app.md](docs/install-existing-app.md)**.
 
-Quick start (until Packagist):
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/chrisShick/cakephp-agent.git"
-    }
-  ],
-  "require-dev": {
-    "chrisshick/cakephp-agent": "dev-main"
-  }
-}
-```
+Quick start (Packagist):
 
 ```bash
-composer update chrisshick/cakephp-agent
+composer require --dev chrisshick/cakephp-agent:^1.0@beta
 vendor/bin/cakephp-agent doctor
 vendor/bin/cakephp-agent install --editor=cursor --dry-run --verbose
 vendor/bin/cakephp-agent install --editor=cursor
 ```
+
+After stable `1.0.0`: `composer require --dev chrisshick/cakephp-agent:^1.0`
 
 **Codex** gets rules/skills only (no agents directory).
 
@@ -116,7 +104,7 @@ Precedence: CLI flags > `.cakephp-agent.json` > `composer.json` extra > defaults
 | [Architecture](docs/architecture.md) | Platform shape |
 | [Pre-1.0 review](docs/pre-1.0-review.md) | Gap backlog |
 | [Rules & skills coverage](docs/coverage-rules-skills.md) | CakePHP coverage audit |
-| [Phase 14 handoff](docs/HANDOFF-phase-14.md) | Next agent: Packagist / 1.0 cut |
+| [Phase 14 handoff](docs/HANDOFF-phase-14.md) | Beta cut / soak → stable 1.0 |
 
 ## Package development
 

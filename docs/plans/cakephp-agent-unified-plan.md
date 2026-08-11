@@ -519,7 +519,7 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 ### Phase 14 — Packagist / public 1.0
 
-**Deliver:** Packagist publish path, pre-1.0 triage, version bump — [HANDOFF-phase-14.md](../HANDOFF-phase-14.md).
+**Deliver (in progress):** Packagist published; `1.0.0-beta.1` version bump; remaining soak → stable `1.0.0` — [HANDOFF-phase-14.md](../HANDOFF-phase-14.md).
 
 ---
 

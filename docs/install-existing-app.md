@@ -2,7 +2,7 @@
 
 This guide is for developers who already have a **CakePHP 5.x** app and want AI coding tools (Cursor, Claude Code, Codex) to follow CakePHP-native conventions.
 
-> **Status:** Adopter preview **0.9.0** — not 1.0 yet. Composer package name is `chrisshick/cakephp-agent` (lowercase vendor required by Composer); GitHub stays `chrisShick/cakephp-agent`. Not on Packagist yet — use VCS or path until published.
+> **Status:** Public beta **1.0.0-beta.1** — not stable 1.0 yet. Composer package: [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent) (lowercase vendor required by Composer); GitHub stays `chrisShick/cakephp-agent`.
 
 ## Prerequisites
 
@@ -13,7 +13,18 @@ This guide is for developers who already have a **CakePHP 5.x** app and want AI 
 
 ## 1. Require the package
 
-### Option A — VCS (recommended until Packagist)
+Prefer `require-dev` unless you intentionally want the package available in production deploys (usually you do not).
+
+### Option A — Packagist (recommended)
+
+```bash
+composer require --dev chrisshick/cakephp-agent:^1.0@beta
+```
+
+Pin an exact beta if you prefer: `chrisshick/cakephp-agent:1.0.0-beta.1`.  
+After stable `1.0.0`: `composer require --dev chrisshick/cakephp-agent:^1.0`.
+
+### Option B — VCS (GitHub)
 
 In your **application** `composer.json`:
 
@@ -37,9 +48,7 @@ Then:
 composer update chrisshick/cakephp-agent
 ```
 
-Prefer `require-dev` unless you intentionally want the package available in production deploys (usually you do not).
-
-### Option B — Path repository (local clone)
+### Option C — Path repository (local clone)
 
 ```json
 {
