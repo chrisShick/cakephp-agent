@@ -1,0 +1,17 @@
+# Packaging / export hygiene for dist archives and similar exports.
+# Keep schemas, knowledge, rules, skills, agents, extensions, integrations,
+# and public docs/*.md in the exported tree.
+
+# Test & CI tooling
+/tests/                 export-ignore
+/phpunit.xml            export-ignore
+/phpstan.neon           export-ignore
+/.phpunit-tmp           export-ignore
+/.phpunit.cache         export-ignore
+
+# Internal planning / handoffs
+/docs/plans/            export-ignore
+/docs/HANDOFF-*.md      export-ignore
+
+# Local editor dogfood (if present)
+/.cursor/               export-ignore

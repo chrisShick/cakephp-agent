@@ -15,6 +15,36 @@ final class ContentValidator
     private const MIN_EVALUATIONS = 20;
 
     /** @var list<string> */
+    private const EVAL_CATEGORIES = [
+        'architecture',
+        'orm',
+        'validation',
+        'security',
+        'crud',
+        'auth',
+        'search',
+        'plugins',
+        'anti-laravel',
+        'performance',
+        'upgrades',
+        'testing',
+        'lifecycle',
+        'project-awareness',
+    ];
+
+    /** @var list<string> */
+    private const EVAL_TYPES = [
+        'selection',
+        'rejection',
+        'lifecycle',
+        'project-awareness',
+        'plugin-awareness',
+        'security',
+        'performance',
+        'anti-hallucination',
+    ];
+
+    /** @var list<string> */
     private const LARAVEL_TERMS = [
         'Eloquent',
         'FormRequest',
@@ -73,9 +103,15 @@ final class ContentValidator
         $root = $this->packageRoot !== '' ? $this->packageRoot : PackagePaths::root();
         $errors = [];
 
-        $errors = array_merge($errors, $this->validateDecisions($root));
-        $errors = array_merge($errors, $this->validateAntiPatterns($root));
-        $errors = array_merge($errors, $this->validateEvaluations($root));
+        $decisionIds = [];
+        $errors = array_merge($errors, $this->validateDecisions($root, $decisionIds));
+
+        $antiPatternIds = [];
+        $errors = array_merge($errors, $this->validateAntiPatterns($root, $antiPatternIds));
+
+        $extensionDecisionIds = $this->collectExtensionDecisionIds($root);
+        $knownKnowledge = $decisionIds + $antiPatternIds + $extensionDecisionIds;
+        $errors = array_merge($errors, $this->validateEvaluations($root, $knownKnowledge));
         $errors = array_merge($errors, $this->validateCakephpSkills($root));
         $errors = array_merge($errors, $this->validateAgents($root));
         $errors = array_merge($errors, $this->validateCakephpRules($root));
@@ -84,9 +120,37 @@ final class ContentValidator
     }
 
     /**
+     * @return array<string, true>
+     */
+    private function collectExtensionDecisionIds(string $root): array
+    {
+        $ids = [];
+        foreach (['extensions', 'integrations'] as $dirname) {
+            $base = $root . '/' . $dirname;
+            if (!$this->filesystem->isDir($base)) {
+                continue;
+            }
+            foreach ($this->filesystem->listFilesRelative($base) as $relative) {
+                if (!str_contains($relative, '/knowledge/decisions/') || !str_ends_with($relative, '.md')) {
+                    continue;
+                }
+                $contents = $this->filesystem->read($base . '/' . $relative);
+                $frontmatter = $this->parseFrontmatter($contents);
+                $id = is_array($frontmatter) ? ($frontmatter['id'] ?? null) : null;
+                if (is_string($id) && $id !== '') {
+                    $ids[$id] = true;
+                }
+            }
+        }
+
+        return $ids;
+    }
+
+    /**
+     * @param array<string, true> $ids
      * @return list<string>
      */
-    private function validateDecisions(string $root): array
+    private function validateDecisions(string $root, array &$ids = []): array
     {
         $dir = $root . '/knowledge/decisions';
         if (!$this->filesystem->isDir($dir)) {
@@ -141,9 +205,10 @@ final class ContentValidator
     }
 
     /**
+     * @param array<string, true> $ids
      * @return list<string>
      */
-    private function validateAntiPatterns(string $root): array
+    private function validateAntiPatterns(string $root, array &$ids = []): array
     {
         $dir = $root . '/knowledge/anti-patterns';
         if (!$this->filesystem->isDir($dir)) {
@@ -151,6 +216,7 @@ final class ContentValidator
         }
 
         $errors = [];
+        $ids = [];
         foreach ($this->filesystem->listFilesRelative($dir) as $relative) {
             if (!str_ends_with($relative, '.md') || str_ends_with($relative, '.gitkeep')) {
                 continue;
@@ -164,6 +230,13 @@ final class ContentValidator
             if (($frontmatter['type'] ?? null) !== 'anti-pattern') {
                 $errors[] = sprintf('anti-patterns/%s: type must be "anti-pattern".', $relative);
             }
+            $id = $frontmatter['id'] ?? null;
+            if (is_string($id) && $id !== '') {
+                if (isset($ids[$id])) {
+                    $errors[] = sprintf('Duplicate anti-pattern id "%s".', $id);
+                }
+                $ids[$id] = true;
+            }
             foreach (['## Symptoms', '## Why it matters', '## Preferred refactoring'] as $section) {
                 if (!str_contains($contents, $section)) {
                     $errors[] = sprintf('anti-patterns/%s: missing section "%s".', $relative, $section);
@@ -175,13 +248,23 @@ final class ContentValidator
     }
 
     /**
+     * @param list<string>|array<string, true> $knownKnowledgeIds
      * @return list<string>
      */
-    private function validateEvaluations(string $root): array
+    private function validateEvaluations(string $root, array $knownKnowledgeIds = []): array
     {
         $dir = $root . '/evaluations';
         if (!$this->filesystem->isDir($dir)) {
             return ['Missing evaluations directory.'];
+        }
+
+        $known = [];
+        foreach ($knownKnowledgeIds as $key => $value) {
+            if (is_string($key) && $value === true) {
+                $known[$key] = true;
+            } elseif (is_string($value)) {
+                $known[$value] = true;
+            }
         }
 
         $errors = [];
@@ -218,8 +301,43 @@ final class ContentValidator
                 $ids[$data['id']] = true;
             }
 
+            if (isset($data['category']) && is_string($data['category'])
+                && !in_array($data['category'], self::EVAL_CATEGORIES, true)
+            ) {
+                $errors[] = sprintf(
+                    'evaluations/%s: invalid category "%s".',
+                    $relative,
+                    $data['category']
+                );
+            }
+
+            if (isset($data['type']) && is_string($data['type']) && $data['type'] !== ''
+                && !in_array($data['type'], self::EVAL_TYPES, true)
+            ) {
+                $errors[] = sprintf(
+                    'evaluations/%s: invalid type "%s".',
+                    $relative,
+                    $data['type']
+                );
+            }
+
             if (isset($data['expected']) && !is_array($data['expected'])) {
                 $errors[] = sprintf('evaluations/%s: expected must be an object.', $relative);
+            }
+
+            if (isset($data['related_knowledge']) && is_array($data['related_knowledge']) && $known !== []) {
+                foreach ($data['related_knowledge'] as $related) {
+                    if (!is_string($related) || $related === '') {
+                        continue;
+                    }
+                    if (!isset($known[$related])) {
+                        $errors[] = sprintf(
+                            'evaluations/%s: related_knowledge "%s" not found in decisions/anti-patterns.',
+                            $relative,
+                            $related
+                        );
+                    }
+                }
             }
 
             $count++;

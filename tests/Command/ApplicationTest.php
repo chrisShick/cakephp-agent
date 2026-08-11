@@ -58,4 +58,34 @@ final class ApplicationTest extends TestCase
         self::assertTrue($data['self_check_ok']);
         self::assertGreaterThan(0, $data['catalog']['count']);
     }
+
+    public function testUninstallDryRunWithNoLock(): void
+    {
+        $dir = \CakePhpAgent\Test\TestTemp::dir('uninstall-empty');
+        try {
+            file_put_contents($dir . '/composer.json', '{"name":"tmp/app","require":{}}');
+            ob_start();
+            $code = (new Application())->run([
+                'cakephp-agent',
+                'uninstall',
+                '--project=' . $dir,
+                '--dry-run',
+            ]);
+            $output = ob_get_clean();
+            self::assertSame(0, $code);
+            self::assertStringContainsString($dir, (string) $output);
+            self::assertStringContainsString('nothing to remove', (string) $output);
+        } finally {
+            \CakePhpAgent\Test\TestTemp::removeTree($dir);
+        }
+    }
+
+    public function testHelpMentionsUninstallAndCodexNote(): void
+    {
+        ob_start();
+        (new Application())->run(['cakephp-agent', 'help']);
+        $output = (string) ob_get_clean();
+        self::assertStringContainsString('uninstall', $output);
+        self::assertStringContainsString('Codex', $output);
+    }
 }

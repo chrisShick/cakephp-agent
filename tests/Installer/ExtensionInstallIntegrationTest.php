@@ -37,7 +37,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
     public function testInstallIncludesDetectedExtensionContent(): void
     {
         $resolver = new ExtensionResolver(
-            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
         );
         $installer = new KnowledgeInstaller(
             editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -63,7 +63,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
     public function testDisablePreventsExtensionInstall(): void
     {
         $resolver = new ExtensionResolver(
-            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
         );
         $installer = new KnowledgeInstaller(
             editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -92,7 +92,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
     public function testCoreRulesStillInstallWithoutExtensions(): void
     {
         $resolver = new ExtensionResolver(
-            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
         );
         $installer = new KnowledgeInstaller(
             editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -137,7 +137,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -171,7 +171,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -203,7 +203,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -238,7 +238,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -276,7 +276,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -307,7 +307,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
@@ -345,7 +345,7 @@ final class ExtensionInstallIntegrationTest extends TestCase
 
         try {
             $resolver = new ExtensionResolver(
-                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
             );
             $installer = new KnowledgeInstaller(
                 editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),

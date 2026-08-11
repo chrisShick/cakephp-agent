@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CakePhpAgent\Installer;
 
+use CakePhpAgent\Command\Application;
 use CakePhpAgent\Configuration\ProjectConfig;
 use CakePhpAgent\Editor\EditorAdapterInterface;
 use CakePhpAgent\Editor\EditorRegistry;
@@ -173,6 +174,78 @@ final class KnowledgeInstaller
         }
 
         return ['actions' => $actions, 'state' => $state, 'resolution' => $resolution];
+    }
+
+    /**
+     * Remove package-managed files recorded in the lock file, then delete the lock.
+     *
+     * Never touches `.ai/` overlays. Only deletes paths listed in `.cakephp-agent.lock.json`.
+     *
+     * @return array{actions: list<InstallAction>, removedLock: bool}
+     */
+    public function uninstall(ProjectConfig $config): array
+    {
+        $previous = $this->stateStore->load($config->projectRoot);
+        $editorFilter = $config->editors;
+        $actions = [];
+
+        foreach ($previous->files as $relative => $meta) {
+            if ($editorFilter !== [] && !in_array($meta['editor'], $editorFilter, true)) {
+                continue;
+            }
+
+            $targetPath = $config->projectRoot . '/' . $relative;
+            $actions[] = new InstallAction(
+                action: InstallAction::PRUNE,
+                relativePath: $relative,
+                sourcePath: '',
+                targetPath: $targetPath,
+                editor: $meta['editor'],
+                kind: $meta['kind'],
+                reason: 'Uninstall managed file',
+            );
+        }
+
+        if ($config->dryRun) {
+            return ['actions' => $actions, 'removedLock' => false];
+        }
+
+        foreach ($actions as $action) {
+            if ($this->filesystem->exists($action->targetPath)) {
+                $this->filesystem->remove($action->targetPath);
+            }
+        }
+
+        $remaining = [];
+        foreach ($previous->files as $relative => $meta) {
+            if ($editorFilter !== [] && in_array($meta['editor'], $editorFilter, true)) {
+                continue;
+            }
+            $remaining[$relative] = $meta;
+        }
+
+        $lockPath = $this->stateStore->path($config->projectRoot);
+        if ($remaining === []) {
+            if ($this->filesystem->isFile($lockPath)) {
+                $this->filesystem->remove($lockPath);
+            }
+
+            return ['actions' => $actions, 'removedLock' => true];
+        }
+
+        $editorsLeft = [];
+        foreach ($remaining as $meta) {
+            $editorsLeft[$meta['editor']] = true;
+        }
+        $state = $previous->withInstallResult(
+            packageVersion: $previous->packageVersion,
+            editors: array_keys($editorsLeft),
+            extensions: $previous->extensions,
+            files: $remaining,
+        );
+        $this->stateStore->save($config->projectRoot, $state);
+
+        return ['actions' => $actions, 'removedLock' => false];
     }
 
     private function planFileAction(
@@ -427,17 +500,17 @@ final class KnowledgeInstaller
     {
         $composer = ($this->packageRoot !== '' ? $this->packageRoot : PackagePaths::root()) . '/composer.json';
         if (!$this->filesystem->isFile($composer)) {
-            return '0.1.0';
+            return Application::VERSION;
         }
 
         try {
             $data = json_decode($this->filesystem->read($composer), true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException) {
-            return '0.1.0';
+            return Application::VERSION;
         }
 
         return is_array($data) && isset($data['version']) && is_string($data['version'])
             ? $data['version']
-            : '0.1.0';
+            : Application::VERSION;
     }
 }

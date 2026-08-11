@@ -18,38 +18,58 @@ final class ManifestLoader
     }
 
     /**
-     * Load all extensions from package extensions/ and integrations/ directories.
+     * Load extensions from package extensions/ and integrations/.
+     *
+     * When $includeTestFixtures is true, also load tests/fixtures/extensions/
+     * (used by the package test suite only — never for consumer installs).
      *
      * @return list<Extension>
      */
-    public function loadAll(string $packageRoot): array
+    public function loadAll(string $packageRoot, bool $includeTestFixtures = false): array
     {
         $extensions = [];
         foreach (['extensions', 'integrations'] as $dirname) {
-            $base = $packageRoot . '/' . $dirname;
-            if (!$this->filesystem->isDir($base)) {
+            $extensions = [...$extensions, ...$this->loadFromDirectory($packageRoot . '/' . $dirname)];
+        }
+
+        if ($includeTestFixtures) {
+            $extensions = [
+                ...$extensions,
+                ...$this->loadFromDirectory($packageRoot . '/tests/fixtures/extensions'),
+            ];
+        }
+
+        return $extensions;
+    }
+
+    /**
+     * @return list<Extension>
+     */
+    private function loadFromDirectory(string $base): array
+    {
+        if (!$this->filesystem->isDir($base)) {
+            return [];
+        }
+
+        $entries = scandir($base);
+        if ($entries === false) {
+            throw new RuntimeException(sprintf('Unable to scan "%s".', $base));
+        }
+
+        $extensions = [];
+        foreach ($entries as $entry) {
+            if ($entry === '.' || $entry === '..' || str_starts_with($entry, '.')) {
                 continue;
             }
-
-            $entries = scandir($base);
-            if ($entries === false) {
-                throw new RuntimeException(sprintf('Unable to scan "%s".', $base));
+            $dir = $base . '/' . $entry;
+            if (!$this->filesystem->isDir($dir)) {
+                continue;
             }
-
-            foreach ($entries as $entry) {
-                if ($entry === '.' || $entry === '..' || str_starts_with($entry, '.')) {
-                    continue;
-                }
-                $dir = $base . '/' . $entry;
-                if (!$this->filesystem->isDir($dir)) {
-                    continue;
-                }
-                $manifestPath = $dir . '/manifest.json';
-                if (!$this->filesystem->isFile($manifestPath)) {
-                    continue;
-                }
-                $extensions[] = $this->loadOne($dir);
+            $manifestPath = $dir . '/manifest.json';
+            if (!$this->filesystem->isFile($manifestPath)) {
+                continue;
             }
+            $extensions[] = $this->loadOne($dir);
         }
 
         return $extensions;

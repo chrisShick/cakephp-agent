@@ -18,6 +18,7 @@ final class ExtensionRegistry
     public function __construct(
         private readonly ManifestLoader $loader = new ManifestLoader(),
         private readonly string $packageRoot = '',
+        private readonly bool $includeTestFixtures = false,
     ) {
     }
 
@@ -65,7 +66,7 @@ final class ExtensionRegistry
         }
 
         $root = $this->packageRoot !== '' ? $this->packageRoot : PackagePaths::root();
-        foreach ($this->loader->loadAll($root) as $extension) {
+        foreach ($this->loader->loadAll($root, $this->includeTestFixtures) as $extension) {
             $id = $extension->id();
             if (isset($this->extensions[$id])) {
                 throw new RuntimeException(sprintf('Duplicate extension id "%s".', $id));

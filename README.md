@@ -1,32 +1,58 @@
 # CakePHP Agent
 
-AI engineering knowledge platform for **CakePHP 5.x** — rules, skills, extensions, and a safe installer for Cursor, Claude Code, and Codex.
+AI engineering knowledge for **CakePHP 5.x** — rules, skills, agents, and a safe installer for **Cursor**, **Claude Code**, and **Codex**.
 
-> Status: early development (Phases 0–10). Offline evaluation runner and baselines are in place. Docs & public 1.0 polish is next.
+> **Status: 0.9.0 adopter preview** (not 1.0). Safe to dogfood in existing CakePHP apps via Composer VCS/path. See [CHANGELOG](CHANGELOG.md) and [pre-1.0 review](docs/pre-1.0-review.md).
+
+Repository: [github.com/chrisShick/cakephp-agent](https://github.com/chrisShick/cakephp-agent)
 
 ## What this is
 
-Not “Cursor rules for CakePHP.” The product is **canonical CakePHP engineering knowledge** plus evidence (evaluations) that agents reason correctly. Editor rule files are delivery adapters.
+Canonical CakePHP engineering knowledge (decisions, smells, workflows) delivered as editor rules/skills/agents — with behavioral evaluation fixtures for maintainers. Not “Laravel tips rewritten for CakePHP.”
+
+Offline `eval` self-checks prove fixture/scorer plumbing. They are **not** live model quality scores.
 
 ## Requirements
 
 - PHP 8.2+
 - Composer 2
+- CakePHP 5.x application (for install targets)
 
-## Install (development)
+## Install into an existing CakePHP app
+
+Follow **[docs/install-existing-app.md](docs/install-existing-app.md)**.
+
+Quick start (until Packagist):
+
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/chrisShick/cakephp-agent.git"
+    }
+  ],
+  "require-dev": {
+    "cakephp-agent/cakephp-agent": "dev-main"
+  }
+}
+```
 
 ```bash
-git clone <repo> cakephp-agent
-cd cakephp-agent
-composer install
+composer update cakephp-agent/cakephp-agent
+vendor/bin/cakephp-agent doctor
+vendor/bin/cakephp-agent install --editor=cursor --dry-run --verbose
+vendor/bin/cakephp-agent install --editor=cursor
 ```
+
+**Codex** gets rules/skills only (no agents directory).
 
 ## CLI
 
 ```bash
 vendor/bin/cakephp-agent help
 vendor/bin/cakephp-agent install --editor=cursor
-vendor/bin/cakephp-agent install --editor=all --dry-run
+vendor/bin/cakephp-agent uninstall --editor=all --dry-run
 vendor/bin/cakephp-agent detect
 vendor/bin/cakephp-agent extensions
 vendor/bin/cakephp-agent explain
@@ -43,7 +69,7 @@ vendor/bin/cakephp-agent eval
 | `--extension=ID` | Force-enable extension (repeatable) |
 | `--without=ID` | Force-disable extension (repeatable) |
 | `--force` | Overwrite managed / conflicting files |
-| `--symlink` | Symlink package files instead of copying |
+| `--symlink` | Symlink package files instead of copying (Unix) |
 | `--prune` | Remove previously managed files no longer present |
 | `--dry-run` | Plan only |
 | `--project=PATH` | Explicit project root |
@@ -51,9 +77,9 @@ vendor/bin/cakephp-agent eval
 
 ### Safety
 
-- Project-owned overlays live under **`.ai/`** and are never overwritten.
+- Project-owned overlays live under **`.ai/`** and are never overwritten or uninstalled.
 - Managed files are tracked in **`.cakephp-agent.lock.json`**.
-- `--prune` only deletes paths recorded in that lock file.
+- `--prune` / `uninstall` only delete paths recorded in that lock file.
 
 ## Configuration
 
@@ -77,31 +103,32 @@ Or `.cakephp-agent.json` in the project root (overrides `extra`).
 
 Precedence: CLI flags > `.cakephp-agent.json` > `composer.json` extra > defaults.
 
-## Architecture (short)
+## Documentation
 
-```text
-knowledge/ (canonical — growing)
-    ↓
-rules/ + skills/ + agents/
-    ↓
-installer + editor adapters
-    ↓
-Cursor / Claude / Codex + .ai project overlays
-```
+| Doc | Topic |
+|---|---|
+| [Install into existing app](docs/install-existing-app.md) | Composer require, dry-run, upgrade, uninstall |
+| [Editors](docs/editors.md) | Cursor / Claude / Codex paths |
+| [`.ai` overlays](docs/ai-overlays.md) | Project-owned conventions |
+| [Extension authoring](docs/extension-authoring.md) | Writing packs |
+| [Troubleshooting](docs/troubleshooting.md) | Common failures |
+| [Evaluation baselines](docs/evaluation-baselines.md) | Maintainer eval runner |
+| [Architecture](docs/architecture.md) | Platform shape |
+| [Pre-1.0 review](docs/pre-1.0-review.md) | Gap backlog |
 
-See [docs/plans/cakephp-agent-unified-plan.md](docs/plans/cakephp-agent-unified-plan.md).
-
-**New agent / Phase 11 pickup:** [docs/HANDOFF-phase-11.md](docs/HANDOFF-phase-11.md)
-
-Evaluation baselines: [docs/evaluation-baselines.md](docs/evaluation-baselines.md)
-
-## Development
+## Package development
 
 ```bash
+git clone https://github.com/chrisShick/cakephp-agent.git
+cd cakephp-agent
+composer install
 composer test
 composer phpstan
-composer check
+php bin/cakephp-agent validate
+php bin/cakephp-agent eval
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

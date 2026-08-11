@@ -4,7 +4,11 @@ This package installs into developer repositories and may later offer an opt-in 
 
 ## Reporting
 
-Please open a private security advisory or email the maintainers. Do not file public issues for undisclosed vulnerabilities.
+Report vulnerabilities via a **GitHub private security advisory**:
+
+https://github.com/chrisShick/cakephp-agent/security/advisories/new
+
+Do not file public issues for undisclosed vulnerabilities.
 
 ## Guarantees we aim for
 
@@ -14,3 +18,4 @@ Please open a private security advisory or email the maintainers. Do not file pu
 - Path traversal protection for extension/manifest paths
 - Read-only Composer metadata inspection for detection
 - Opt-in only for any future Composer plugin auto-install
+- Project overlays under `.ai/` are never overwritten or uninstalled by this package

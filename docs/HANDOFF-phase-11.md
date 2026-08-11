@@ -31,10 +31,13 @@ Installer, extensions, skills, agents, decision intelligence, and the offline ev
 
 ### Accept
 
-- Docs cover install, editors, extension authoring, contributing
-- CHANGELOG + SECURITY present
-- `phpunit` + `phpstan` + `validate` (+ `eval` self-check) green
-- Versioning/release notes ready for 1.0 cut (or explicit pre-1.0 status)
+- [x] Docs cover install, editors, extension authoring, contributing
+- [x] CHANGELOG + SECURITY present
+- [x] Adopter gaps from pre-1.0 review addressed (uninstall, doctor, fakes, schema, overlays)
+- [ ] Packagist publish (manual; repo ready at github.com/chrisShick/cakephp-agent)
+- [ ] Tag/release after push
+
+> **Phase 11 in progress as 0.9.0 adopter preview** — not declaring 1.0 until Packagist/tag + soak.
 
 ### Out of scope
 

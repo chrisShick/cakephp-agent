@@ -16,6 +16,7 @@ use CakePhpAgent\Extension\ExtensionDecision;
 use CakePhpAgent\Extension\ExtensionRegistry;
 use CakePhpAgent\Extension\ExtensionResolver;
 use CakePhpAgent\Installer\InstallAction;
+use CakePhpAgent\Installer\InstallationStateStore;
 use CakePhpAgent\Installer\KnowledgeInstaller;
 use CakePhpAgent\Manifest\ManifestLoader;
 use CakePhpAgent\PackagePaths;
@@ -24,7 +25,7 @@ use Throwable;
 
 final class Application
 {
-    public const VERSION = '0.1.0';
+    public const VERSION = '0.9.0';
 
     public function __construct(
         private readonly ProjectRootLocator $rootLocator = new ProjectRootLocator(),
@@ -51,6 +52,7 @@ final class Application
             return match ($command) {
                 'help', '--help', '-h' => $this->help(),
                 'install' => $this->install($options),
+                'uninstall' => $this->uninstall($options),
                 'detect' => $this->detect($options),
                 'extensions' => $this->extensions($options),
                 'explain' => $this->explain($options),
@@ -77,12 +79,13 @@ Usage:
 
 Commands:
   install      Install rules/skills for core + enabled extensions
+  uninstall    Remove lock-tracked managed editor files
   detect       Show Composer capabilities and enabled extensions
   extensions   List known extension packs and status for a project
   explain      Explain why each extension is enabled or not
   validate     Validate package content, manifests, knowledge, evaluations
   eval         Run evaluation corpus self-check / baselines (offline)
-  doctor       Sanity-check project + package
+  doctor       Sanity-check project + package install health
   version      Show package version
   help         Show this help
 
@@ -91,11 +94,17 @@ Install options:
   --extension=ID                     Force-enable extension (repeatable / comma-separated)
   --without=ID                       Force-disable extension (repeatable / comma-separated)
   --force                            Overwrite managed / conflicting files
-  --symlink                          Symlink instead of copy
+  --symlink                          Symlink instead of copy (Unix; see docs)
   --prune                            Remove previously managed files no longer present
   --dry-run                          Show actions without writing
   --verbose                          Verbose output
   --project=PATH                     Project root (default: discover from cwd)
+
+Uninstall options:
+  --editor=cursor|claude|codex|all   Limit removal to editor(s) (default: all in lock)
+  --dry-run                          Show deletions without removing
+  --project=PATH                     Project root
+  --verbose                          Show each path
 
 Eval options:
   --category=NAME                    Filter by category (repeatable / comma-separated)
@@ -108,6 +117,11 @@ Eval options:
   --write-baseline=PATH              Write baseline JSON after the run
   --compare-baseline=PATH            Compare run to a previous baseline
 
+Notes:
+  - Codex installs rules/skills only (no agents directory).
+  - Offline eval self-check proves fixture/scorer plumbing — not live model quality.
+  - Project overlays under .ai/ are never overwritten or uninstalled.
+
 Project-owned overlays live under .ai/ and are never overwritten.
 
 HELP;
@@ -118,6 +132,60 @@ HELP;
     private function version(): int
     {
         echo 'cakephp-agent ' . self::VERSION . PHP_EOL;
+
+        return 0;
+    }
+
+    /**
+     * Remove lock-tracked managed files for selected editors.
+     *
+     * @param array<string, mixed> $options
+     */
+    private function uninstall(array $options): int
+    {
+        $projectRoot = $this->projectRoot($options);
+        $base = $this->configLoader->load($projectRoot);
+
+        $editors = ['cursor', 'claude', 'codex'];
+        if (isset($options['editor'])) {
+            $editors = $options['editor'] === 'all'
+                ? ['cursor', 'claude', 'codex']
+                : [(string) $options['editor']];
+        }
+
+        $config = $base->withCliOverrides(
+            editors: $editors,
+            dryRun: isset($options['dry-run']) ? true : null,
+            verbose: isset($options['verbose']) ? true : null,
+        );
+
+        $result = $this->installer->uninstall($config);
+        $actions = $result['actions'];
+
+        echo 'CakePHP Agent uninstall' . PHP_EOL . PHP_EOL;
+        echo 'Project:' . PHP_EOL;
+        echo '  ' . $config->projectRoot . PHP_EOL;
+        if ($config->dryRun) {
+            echo 'Mode: dry-run' . PHP_EOL;
+        }
+        echo PHP_EOL . 'Actions:' . PHP_EOL;
+
+        if ($actions === []) {
+            echo '  (nothing to remove — no matching lock entries)' . PHP_EOL;
+        }
+
+        foreach ($actions as $action) {
+            echo sprintf("  [PRUNE] %s\n", $action->relativePath);
+        }
+
+        echo PHP_EOL . sprintf("Summary: %d prune\n", count($actions));
+        if ($config->dryRun) {
+            echo 'Dry-run complete. No files removed.' . PHP_EOL;
+        } elseif ($result['removedLock']) {
+            echo 'Lock file removed. .ai/ overlays left untouched.' . PHP_EOL;
+        } else {
+            echo 'Selected editor files removed; lock updated for remaining editors.' . PHP_EOL;
+        }
 
         return 0;
     }
@@ -454,16 +522,83 @@ HELP;
     private function doctor(array $options): int
     {
         $projectRoot = $this->projectRoot($options);
-        echo 'Doctor' . PHP_EOL;
+        $config = $this->resolveConfig($options);
+        $packages = $this->composerReader->installedPackages($projectRoot);
+        $resolution = $this->extensionResolver->resolve($config);
+        $lockPath = $projectRoot . '/' . ProjectConfig::LOCK_FILENAME;
+        $lockPresent = is_file($lockPath);
+        $lockCount = 0;
+        $lockEditors = [];
+        $missingManaged = 0;
+        if ($lockPresent) {
+            $state = (new InstallationStateStore())->load($projectRoot);
+            $lockCount = count($state->files);
+            $lockEditors = $state->editors;
+            foreach ($state->files as $relative => $_meta) {
+                if (!file_exists($projectRoot . '/' . $relative)) {
+                    $missingManaged++;
+                }
+            }
+        }
+
+        $contentErrors = (new ContentValidator())->validate();
+        $exit = 0;
+
+        echo 'CakePHP Agent doctor' . PHP_EOL . PHP_EOL;
+        echo 'Environment' . PHP_EOL;
         echo '  Project root: ' . $projectRoot . PHP_EOL;
         echo '  Package root: ' . PackagePaths::root() . PHP_EOL;
+        echo '  Package version: ' . self::VERSION . PHP_EOL;
         echo '  PHP: ' . PHP_VERSION . PHP_EOL;
-        echo '  Editors supported: ' . implode(', ', $this->editorRegistry->ids()) . PHP_EOL;
-        echo '  Extensions registered: ' . implode(', ', $this->extensionRegistry->ids()) . PHP_EOL;
-        echo '  .ai overlay: ' . (is_dir($projectRoot . '/.ai') ? 'present' : 'not present') . PHP_EOL;
-        echo '  Lock file: ' . (is_file($projectRoot . '/' . ProjectConfig::LOCK_FILENAME) ? 'present' : 'not present') . PHP_EOL;
+        echo '  CakePHP: ' . ($packages['cakephp/cakephp'] ?? '(not detected)') . PHP_EOL;
+        echo PHP_EOL;
 
-        return 0;
+        echo 'Editors' . PHP_EOL;
+        echo '  Supported: ' . implode(', ', $this->editorRegistry->ids()) . PHP_EOL;
+        echo '  Codex agents: unsupported (rules/skills only)' . PHP_EOL;
+        echo PHP_EOL;
+
+        echo 'Extensions' . PHP_EOL;
+        echo '  Registered: ' . implode(', ', $this->extensionRegistry->ids()) . PHP_EOL;
+        echo '  Enabled for project: ' . (
+            $resolution->enabledIds() === [] ? '(none)' : implode(', ', $resolution->enabledIds())
+        ) . PHP_EOL;
+        echo PHP_EOL;
+
+        echo 'Install state' . PHP_EOL;
+        echo '  .ai overlay: ' . (is_dir($projectRoot . '/.ai') ? 'present' : 'not present') . PHP_EOL;
+        echo '  Lock file: ' . ($lockPresent ? 'present (' . $lockCount . ' managed files)' : 'not present') . PHP_EOL;
+        if ($lockPresent) {
+            echo '  Lock editors: ' . ($lockEditors === [] ? '(none)' : implode(', ', $lockEditors)) . PHP_EOL;
+            if ($missingManaged > 0) {
+                echo '  WARNING: ' . $missingManaged . ' lock-tracked path(s) missing on disk' . PHP_EOL;
+                $exit = 1;
+            }
+        }
+        echo PHP_EOL;
+
+        echo 'Package content' . PHP_EOL;
+        if ($contentErrors === []) {
+            echo '  validate: OK' . PHP_EOL;
+        } else {
+            echo '  validate: FAILED (' . count($contentErrors) . ' issue(s))' . PHP_EOL;
+            foreach (array_slice($contentErrors, 0, 5) as $error) {
+                echo '    - ' . $error . PHP_EOL;
+            }
+            $exit = 1;
+        }
+        echo PHP_EOL;
+
+        echo 'Suggested next step' . PHP_EOL;
+        if (!$lockPresent) {
+            echo '  vendor/bin/cakephp-agent install --editor=cursor --dry-run --verbose' . PHP_EOL;
+        } elseif ($missingManaged > 0) {
+            echo '  vendor/bin/cakephp-agent install --editor=all' . PHP_EOL;
+        } else {
+            echo '  vendor/bin/cakephp-agent detect' . PHP_EOL;
+        }
+
+        return $exit;
     }
 
     private function unknown(string $command): int

@@ -21,7 +21,7 @@ final class ExtensionResolverTest extends TestCase
     {
         $this->fixtures = PackagePaths::root() . '/tests/fixtures/projects';
         $this->resolver = new ExtensionResolver(
-            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            new ExtensionRegistry(new ManifestLoader(), PackagePaths::root(), true)
         );
     }
 

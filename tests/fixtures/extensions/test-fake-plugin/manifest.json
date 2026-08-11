@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/extension-manifest.schema.json",
+  "$schema": "../../../schemas/extension-manifest.schema.json",
   "id": "test-fake-plugin",
   "name": "Test Fake Plugin",
   "description": "Phase 2 reference extension used to prove detection and resolution without real plugin content.",

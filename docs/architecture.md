@@ -1,36 +1,45 @@
 # Architecture
 
-See the unified plan for the full blueprint:
+CakePHP Agent is a **Composer library** that installs CakePHP-native AI guidance into editor trees. It does not boot inside the CakePHP HTTP runtime.
 
-- [Unified plan](plans/cakephp-agent-unified-plan.md)
-- [Original project plan](plans/cakephp-agent-project-plan.md)
-- [Expansion plan](plans/cakephp-ai-knowledge-platform-expansion-plan.md)
+## Layers
 
-## Agent handoff
+```text
+knowledge/          canonical decisions & anti-patterns (package-local)
+rules/ skills/ agents/
+extensions/ + integrations/   capability packs (Composer-detected)
+        ↓
+installer + editor adapters (Cursor / Claude / Codex)
+        ↓
+project .cursor|.claude|.codex/cakephp-agent/  +  .ai/ overlays
+```
 
-**Starting Phase 11?** Read **[HANDOFF-phase-11.md](HANDOFF-phase-11.md)** first.
+## Design rules
 
-## Current phase
+1. **Discover before prescribing** — skills/agents start with project inspection.
+2. **Capability honesty** — do not assume CRUD/Search/Auth APIs unless packs are enabled.
+3. **Safe install** — lock file, dry-run, preserve local edits, never touch `.ai/` or app `src/`.
+4. **Decisions own ownership logic; skills own workflows; rules stay thin.**
+5. **Evaluate critical boundaries** — curated fixtures with positive and negative cases.
 
-**Phases 0–10 complete** on `main`.
+## Editors
 
-| Phase | Status |
-|---|---|
-| 0–1 Installer foundation | Done |
-| 2 Extension engine | Done |
-| 3 Canonical knowledge + core rules + eval seed | Done |
-| 4 P0 skills | Done |
-| 5 FriendsOfCake CRUD extension | Done |
-| 6 AuthN / AuthZ | Done |
-| 7 Search + CRUD↔Search integration | Done |
-| 8 Agents + deeper reviews | Done |
-| 9 Decision intelligence hardening | Done |
-| 10 Evaluation platform | Done |
-| **11 Docs & public 1.0** | **Next** |
+| Editor | Rules | Skills | Agents |
+|---|---|---|---|
+| Cursor | yes | yes | yes |
+| Claude Code | yes | yes | yes |
+| Codex | yes | yes | no |
 
-Phase 10 delivered:
+Details: [editors.md](editors.md).
 
-- `cakephp-agent eval` offline runner (deterministic catalog load + heuristic self-check)
-- Baseline write/compare (`docs/evaluation-baselines.md`)
-- Anti-Laravel suite expansion
-- Tests for runner plumbing (no live model calls)
+## Versioning
+
+- Package CLI version: `Application::VERSION` (currently **0.9.0** adopter preview).
+- 1.0 requires Packagist (or equivalent) + remaining trust polish in [pre-1.0-review.md](pre-1.0-review.md).
+
+## Related docs
+
+- [Install existing app](install-existing-app.md)
+- [Extension authoring](extension-authoring.md)
+- [Evaluation baselines](evaluation-baselines.md)
+- [Unified plan](plans/cakephp-agent-unified-plan.md) (historical blueprint)

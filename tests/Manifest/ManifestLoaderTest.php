@@ -10,13 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 final class ManifestLoaderTest extends TestCase
 {
-    public function testLoadsFakeExtensions(): void
+    public function testConsumerLoadExcludesTestFixtures(): void
     {
         $extensions = (new ManifestLoader())->loadAll(PackagePaths::root());
         $ids = array_map(static fn ($e) => $e->id(), $extensions);
 
-        self::assertContains('test-fake-plugin', $ids);
-        self::assertContains('test-fake-addon', $ids);
+        self::assertNotContains('test-fake-plugin', $ids);
+        self::assertNotContains('test-fake-addon', $ids);
         self::assertContains('friendsofcake-crud', $ids);
         self::assertContains('cakephp-authentication', $ids);
         self::assertContains('cakephp-authorization', $ids);
@@ -25,10 +25,19 @@ final class ManifestLoaderTest extends TestCase
         self::assertContains('friendsofcake-crud-search', $ids);
     }
 
+    public function testTestFixturesLoadWhenRequested(): void
+    {
+        $extensions = (new ManifestLoader())->loadAll(PackagePaths::root(), true);
+        $ids = array_map(static fn ($e) => $e->id(), $extensions);
+
+        self::assertContains('test-fake-plugin', $ids);
+        self::assertContains('test-fake-addon', $ids);
+    }
+
     public function testFakePluginManifestFields(): void
     {
         $extension = (new ManifestLoader())->loadOne(
-            PackagePaths::root() . '/extensions/test-fake-plugin'
+            PackagePaths::root() . '/tests/fixtures/extensions/test-fake-plugin'
         );
 
         self::assertSame('test-fake-plugin', $extension->id());
