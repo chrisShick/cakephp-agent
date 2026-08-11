@@ -1,0 +1,22 @@
+---
+description: Framework-neutral clean code expectations for AI agents.
+globs:
+alwaysApply: true
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# Clean code
+
+Prefer clear names, small focused units, and explicit error handling.
+
+## Required behavior
+
+- Inspect existing project conventions before inventing new ones.
+- Prefer readable code over clever abstractions.
+- Do not expand scope beyond the requested change.
+
+## Anti-patterns
+
+- Drive-by refactors unrelated to the task.
+- Silent catches that hide failures.

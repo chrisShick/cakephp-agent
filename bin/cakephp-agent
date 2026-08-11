@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use CakePhpAgent\Command\Application;
+
+$autoloadCandidates = [
+    dirname(__DIR__) . '/vendor/autoload.php',
+    dirname(__DIR__, 3) . '/autoload.php',
+];
+
+$loaded = false;
+foreach ($autoloadCandidates as $autoload) {
+    if (is_file($autoload)) {
+        require $autoload;
+        $loaded = true;
+        break;
+    }
+}
+
+if (!$loaded) {
+    fwrite(STDERR, "Unable to locate Composer autoloader.\n");
+    exit(1);
+}
+
+$app = new Application();
+exit($app->run($argv));

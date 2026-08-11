@@ -1,0 +1,56 @@
+{
+    "name": "cakephp-agent/cakephp-agent",
+    "description": "AI engineering knowledge platform for CakePHP 5 — rules, skills, extensions, and installer for Cursor, Claude Code, and Codex.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "cakephp",
+        "ai",
+        "cursor",
+        "claude",
+        "codex",
+        "rules",
+        "skills",
+        "agent"
+    ],
+    "authors": [
+        {
+            "name": "CakePHP Agent Contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CakePhpAgent\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CakePhpAgent\\Test\\": "tests/"
+        }
+    },
+    "bin": [
+        "bin/cakephp-agent"
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "validate-content": "php bin/cakephp-agent validate",
+        "check": [
+            "@composer validate --strict",
+            "@test",
+            "@phpstan"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

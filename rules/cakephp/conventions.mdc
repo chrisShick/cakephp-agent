@@ -1,0 +1,32 @@
+---
+description: CakePHP 5 convention-first architecture guidance.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions:
+  - ">=5.0 <6.0"
+---
+
+# CakePHP conventions
+
+Prefer CakePHP conventions and extension points before inventing framework replacements.
+
+## Framework semantics
+
+- Tables own query/persistence configuration; Entities own record state.
+- Validation checks request/data shape; application rules check persistence-state invariants.
+- Controllers orchestrate HTTP flow; keep substantial domain/persistence logic out of controllers.
+
+## Required behavior
+
+- Inspect `composer.json` / installed plugins before recommending plugin APIs.
+- Follow existing project folder and naming conventions.
+- Do not invent Laravel concepts (FormRequest, Eloquent, ServiceProvider, Artisan, Gate, Blade).
+
+## Anti-patterns
+
+- Active Record Entities that query the database by default.
+- Wrapping every Table in a repository without architectural value.
+- Adding a service solely to shorten a controller.

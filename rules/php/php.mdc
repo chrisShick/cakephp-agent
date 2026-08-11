@@ -1,0 +1,23 @@
+---
+description: Modern PHP engineering guidance for CakePHP Agent consumers.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# PHP
+
+Target supported PHP versions with strict typing and clear boundaries.
+
+## Required behavior
+
+- Use `declare(strict_types=1);` in new PHP files.
+- Prefer typed properties, parameters, and return types.
+- Avoid suppressing type errors to “make it work.”
+
+## Anti-patterns
+
+- Mixing Laravel Eloquent / Artisan mental models into PHP application code.
+- Untyped public APIs in new code.

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cakephp-agent.dev/schemas/extension-manifest.schema.json",
+  "title": "CakePHP Agent Extension Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "version", "type"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "version": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["composer-package", "architecture", "infrastructure", "integration"]
+    },
+    "detect": {
+      "type": "object",
+      "properties": {
+        "composer": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["package"],
+            "properties": {
+              "package": { "type": "string" },
+              "constraint": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "requires": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "dependsOn": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "conflictsWith": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rules": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agents": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "defaultEnabledWhenDetected": { "type": "boolean" },
+    "activateWhenAllExtensionsPresent": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
