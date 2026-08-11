@@ -41,7 +41,7 @@ Details: [editors.md](editors.md).
 | 11 CakePHP coverage (Wave A) | Done |
 | 12 CakePHP coverage (Wave B + C) | Done |
 | 13 Full coverage + security/PHP base | Done |
-| **14 Packagist / 1.0** | **Next** — [HANDOFF-phase-14.md](HANDOFF-phase-14.md) |
+| **14 Packagist / 1.0** | **Next** — beta `1.0.0-beta.1` then stable; [HANDOFF-phase-14.md](HANDOFF-phase-14.md) |
 
 Coverage audit: [coverage-rules-skills.md](coverage-rules-skills.md).
 

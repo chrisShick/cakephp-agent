@@ -62,7 +62,7 @@ Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so 
 - **Phase 13 Track A:** remaining core Book surfaces + queue/DebugKit packs  
 - **Phase 13 Track B:** security review skill, deeper security rule, PHP safety, engineering P2  
 - **Phase 14 prep:** CRUD harden (evals, decisions, security, smells, AuthZ integration) + `muffin/trash` pack + core polish  
-- **Phase 14:** Packagist / public 1.0
+- **Phase 14:** Packagist / public path — cut `1.0.0-beta.1`, then stable `1.0.0`
 
 ---
 
