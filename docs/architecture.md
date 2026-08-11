@@ -8,13 +8,11 @@ See the unified plan for the full blueprint:
 
 ## Agent handoff
 
-**Starting Phase 5?** Read **[HANDOFF-phase-5.md](HANDOFF-phase-5.md)** first.
-
-Phase 4 pickup notes remain in [HANDOFF-phase-4.md](HANDOFF-phase-4.md) (historical).
+**Starting Phase 6?** Read **[HANDOFF-phase-6.md](HANDOFF-phase-6.md)** first.
 
 ## Current phase
 
-**Phases 0–4 complete** on `main`.
+**Phases 0–5 complete** on `main`.
 
 | Phase | Status |
 |---|---|
@@ -22,11 +20,11 @@ Phase 4 pickup notes remain in [HANDOFF-phase-4.md](HANDOFF-phase-4.md) (histori
 | 2 Extension engine | Done |
 | 3 Canonical knowledge + core rules + eval seed | Done |
 | 4 P0 skills | Done |
-| **5 FriendsOfCake CRUD extension** | **Next** |
+| 5 FriendsOfCake CRUD extension | Done |
+| **6 AuthN / AuthZ** | **Next** |
 
-Phase 4 delivered:
+Phase 5 delivered:
 
-- 13 P0 skills under `skills/cakephp/*/SKILL.md` (including `inspect-before-coding` and `choose-cakephp-abstraction`)
-- Skills reference shared discovery; content validation enforces skill contract
-- Evaluations ≥20 (skill-tied scenarios included)
-- Installer dry-run / tests cover nested skill folders
+- `extensions/friendsofcake-crud/` — detect `friendsofcake/crud` `^7.0`
+- Rules, skills, decision `crud-listener-vs-orm-callback`, CRUD evals
+- Fixtures: `cakephp-crud`, `cakephp-crud-incompatible` (scenarios B/D/F + CakePHP-only clean)

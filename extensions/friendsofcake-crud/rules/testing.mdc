@@ -1,0 +1,32 @@
+---
+description: Testing FriendsOfCake CRUD controllers and listeners.
+globs:
+  - "**/tests/**/*.php"
+  - "**/Test/**/*.php"
+alwaysApply: false
+priority: normal
+truth_level: PACKAGE_RECOMMENDATION
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/
+  - https://book.cakephp.org/5.x/development/testing.html
+last_verified: 2026-08-10
+---
+
+# CRUD testing
+
+## Package recommendation
+
+Test CRUD controllers via integration/controller tests that exercise HTTP + Crud execute paths. Test listeners by triggering the relevant `Crud.*` events or full actions.
+
+## Required behavior
+
+- Cover success and failure paths (validation/rule errors, not-found) that the listener/config claims to handle.
+- Prefer project existing CRUD test helpers/patterns when present.
+- Assert persistence invariants at the Table layer, not only via HTTP.
+
+## Anti-patterns
+
+- Only testing listener methods in isolation when the bug is registration/config
+- Skipping Table rule tests because a CRUD UI test passed

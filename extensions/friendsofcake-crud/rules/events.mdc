@@ -1,0 +1,42 @@
+---
+description: FriendsOfCake CRUD events vs CakePHP ORM events.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Listener/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/events.html
+last_verified: 2026-08-10
+---
+
+# CRUD events
+
+## Plugin semantics
+
+CRUD emits events such as `Crud.beforeFilter`, `Crud.startup`, `Crud.beforeFind`, `Crud.afterFind`, `Crud.beforePaginate`, `Crud.afterPaginate`, `Crud.beforeSave`, `Crud.afterSave`, `Crud.beforeDelete`, `Crud.afterDelete`, `Crud.beforeRender`, `Crud.beforeRedirect`, `Crud.recordNotFound`, `Crud.setFlash` (action-dependent). These are **not** Table/ORM callbacks.
+
+## Required behavior
+
+- Select events from concern ownership, not similar names.
+- When binding via controller `implementedEvents()`, prefix with `Crud.` as CRUD docs require for that technique.
+- Ensure CRUD actions `return $this->Crud->execute();` when using action-level `on()` hooks.
+
+## Decision reminders
+
+| Need | Prefer |
+|---|---|
+| HTTP/API response around CRUD save | CRUD listener/event |
+| Persist invariant for all paths | RulesChecker / Table |
+| Field format | Validator |
+| Reusable query outside CRUD | Table finder |
+| CRUD index query before paginate | `Crud.beforePaginate` / configured finder |
+
+## Anti-patterns
+
+- Using `Model.beforeSave` for flash/redirect/API envelope
+- Using `Crud.beforeSave` as the only uniqueness enforcement
+- Halting/skipping without understanding subject/event stop semantics

@@ -77,15 +77,17 @@ Ship the **FriendsOfCake CRUD reference extension** — architectural proof that
 
 ## 5. Acceptance checklist (Phase 5 done when)
 
-- [ ] CRUD extension manifest + detection for supported versions
-- [ ] Rules/skills/decisions/evals for CRUD pack
-- [ ] Scenario B: CRUD present → pack installed
-- [ ] Scenario D: CRUD present but disabled → no CRUD knowledge
-- [ ] Scenario F: unsupported CRUD major → diagnose, do not install incompatible rules
-- [ ] CakePHP-only fixture still has **no** CRUD skills/rules
-- [ ] `phpunit` + `phpstan` + `cakephp-agent validate` green
-- [ ] `docs/architecture.md` → Phase 5 complete → Phase 6
-- [ ] New `HANDOFF-phase-6.md` (or update this file)
+- [x] CRUD extension manifest + detection for supported versions
+- [x] Rules/skills/decisions/evals for CRUD pack
+- [x] Scenario B: CRUD present → pack installed
+- [x] Scenario D: CRUD present but disabled → no CRUD knowledge
+- [x] Scenario F: unsupported CRUD major → diagnose, do not install incompatible rules
+- [x] CakePHP-only fixture still has **no** CRUD skills/rules
+- [x] `phpunit` + `phpstan` + `cakephp-agent validate` green
+- [x] `docs/architecture.md` → Phase 5 complete → Phase 6
+- [x] New `HANDOFF-phase-6.md` (or update this file)
+
+> **Phase 5 complete.** Continue at [HANDOFF-phase-6.md](HANDOFF-phase-6.md).
 
 ---
 

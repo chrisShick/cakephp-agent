@@ -1,0 +1,25 @@
+{
+    "id": "crud-absent-no-crud-apis",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "This CakePHP app has no friendsofcake/crud package. How should I build index/view/add/edit/delete for Articles?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness",
+            "inspect-before-coding"
+        ],
+        "preferred": [
+            "standard CakePHP controller",
+            "Table finders",
+            "inspect composer"
+        ]
+    },
+    "must_not": [
+        "Crud->execute",
+        "assume FriendsOfCake CRUD",
+        "Crud.beforePaginate"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

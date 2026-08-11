@@ -1,0 +1,24 @@
+{
+    "id": "crud-response-uses-crud-listener",
+    "category": "crud",
+    "type": "selection",
+    "prompt": "Using FriendsOfCake CRUD, I want to add extra JSON metadata to the response after a successful edit action. Where should that live?",
+    "expected": {
+        "concepts": [
+            "crud-listener",
+            "crud-listener-vs-orm-callback"
+        ],
+        "preferred": [
+            "Crud listener",
+            "Crud.beforeRender",
+            "Crud.afterSave"
+        ]
+    },
+    "must_not": [
+        "Table afterSave for HTTP JSON envelope",
+        "Model.beforeSave for response metadata"
+    ],
+    "related_knowledge": [
+        "crud-listener-vs-orm-callback"
+    ]
+}

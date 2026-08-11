@@ -104,4 +104,57 @@ final class ExtensionResolverTest extends TestCase
             $result->decisionFor('test-fake-plugin')?->status
         );
     }
+
+    public function testCrudDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud',
+        ));
+
+        self::assertContains('friendsofcake-crud', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::ENABLED,
+            $result->decisionFor('friendsofcake-crud')?->status
+        );
+    }
+
+    public function testCakephpOnlyDoesNotEnableCrud(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-only',
+        ));
+
+        self::assertNotContains('friendsofcake-crud', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::UNDETECTED,
+            $result->decisionFor('friendsofcake-crud')?->status
+        );
+    }
+
+    public function testCrudIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud-incompatible',
+        ));
+
+        self::assertNotContains('friendsofcake-crud', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('friendsofcake-crud')?->status
+        );
+    }
+
+    public function testCrudExplicitDisableOverridesDetection(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-crud',
+            disableExtensions: ['friendsofcake-crud'],
+        ));
+
+        self::assertNotContains('friendsofcake-crud', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::DISABLED,
+            $result->decisionFor('friendsofcake-crud')?->status
+        );
+    }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "fixture/cakephp-crud-incompatible",
+  "packages": [
+    {
+      "name": "cakephp/cakephp",
+      "version": "5.4.2"
+    },
+    {
+      "name": "friendsofcake/crud",
+      "version": "6.2.0"
+    }
+  ],
+  "packages-dev": []
+}

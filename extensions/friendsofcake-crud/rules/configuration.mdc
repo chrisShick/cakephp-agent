@@ -1,0 +1,30 @@
+---
+description: Prefer FriendsOfCake CRUD configuration before custom code.
+globs:
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/
+last_verified: 2026-08-10
+---
+
+# CRUD configuration
+
+## Plugin semantics
+
+Many behaviors are expressible via Crud component/action configuration (enabled actions, related models, messages, find methods, etc.). Prefer documented config keys for the installed version.
+
+## Required behavior
+
+- Check CRUD docs/config for the installed major before writing a listener.
+- Keep configuration discoverable (controller initialize / shared AppController patterns as the project already does).
+- Escalate to events only when config cannot express the need.
+
+## Anti-patterns
+
+- Custom listeners that only set values already supported by config
+- Inventing undocumented config keys

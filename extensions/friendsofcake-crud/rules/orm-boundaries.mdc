@@ -1,0 +1,31 @@
+---
+description: Keep ORM boundaries clear when using FriendsOfCake CRUD.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/events.html
+  - https://book.cakephp.org/5.x/orm/validation.html
+last_verified: 2026-08-10
+---
+
+# CRUD ORM boundaries
+
+## Plugin semantics
+
+CRUD orchestrates controller/HTTP lifecycle around Table operations. It does not replace Validator, RulesChecker, or Table callbacks for persistence truth.
+
+## Required behavior
+
+- Validation → `Validator`; stateful invariants → `buildRules`; persistence side effects for all paths → Table callbacks/behaviors.
+- CRUD listeners may adjust queries/subjects for actions but must not become the only place critical invariants live.
+- See extension decision `crud-listener-vs-orm-callback`.
+
+## Anti-patterns
+
+- Moving domain invariants into controller CRUD hooks “because the event exists”
+- Skipping Table rules because CRUD succeeded in the happy-path UI

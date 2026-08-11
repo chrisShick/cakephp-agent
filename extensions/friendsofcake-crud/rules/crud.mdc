@@ -1,0 +1,39 @@
+---
+description: FriendsOfCake CRUD ownership and decision order.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Listener/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/
+last_verified: 2026-08-10
+---
+
+# FriendsOfCake CRUD
+
+## Plugin semantics
+
+CRUD owns common controller action boilerplate via actions, configuration, and `Crud.*` events. Apply this pack only when `friendsofcake/crud` ^7 is installed.
+
+## Decision order
+
+1. Can standard CRUD **configuration** express it?
+2. If not, and it is tied to CRUD action lifecycle → CRUD **listener/event**.
+3. If it is a persistence/domain invariant → Table / Validator / RulesChecker (not only CRUD).
+4. Do not recreate CRUD action flow manually when CRUD already provides it.
+
+## Required behavior
+
+- Prefer config before listeners; listeners before forking away from CRUD.
+- Keep ORM invariants on the model layer for all entry points.
+- Treat similarly named CRUD and ORM events as different ownership boundaries.
+
+## Anti-patterns
+
+- Reimplementing index/view/add/edit/delete boilerplate beside enabled CRUD actions
+- Enforcing uniqueness only in a CRUD listener
+- Assuming CRUD APIs when the package is absent

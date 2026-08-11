@@ -1,0 +1,30 @@
+---
+description: FriendsOfCake CRUD actions configuration and usage.
+globs:
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/actions.html
+last_verified: 2026-08-10
+---
+
+# CRUD actions
+
+## Plugin semantics
+
+CRUD ships Index, View, Add, Edit, Delete (and related) actions. Behavior changes should prefer action configuration and events over copying action internals.
+
+## Required behavior
+
+- Change simple behavior via Crud action config when possible.
+- Use action-scoped events when customization is lifecycle-specific.
+- Verify the installed CRUD version's action docs before inventing settings.
+
+## Anti-patterns
+
+- Forking plugin action classes without need
+- Mixing unrelated domain workflows into a single CRUD action without events/config

@@ -1,0 +1,31 @@
+---
+description: API usage patterns with FriendsOfCake CRUD listeners.
+globs:
+  - "**/Controller/Api/**/*.php"
+  - "**/Listener/Api/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/listeners.html
+last_verified: 2026-08-10
+---
+
+# CRUD API
+
+## Plugin semantics
+
+CRUD provides API-oriented listeners (e.g. Api, ApiPagination, JsonApi — verify which are enabled in the project). Use installed listeners and project API conventions together.
+
+## Required behavior
+
+- Inspect which CRUD API listeners the app loads before adding response shaping.
+- Keep serialization exposure tight (hidden fields, mass assignment).
+- Do not invent Laravel Resource/API Resource patterns.
+
+## Anti-patterns
+
+- Reimplementing API pagination envelopes when CRUD API listeners already provide them
+- Assuming Search listener behavior without `friendsofcake/search` (separate extension)

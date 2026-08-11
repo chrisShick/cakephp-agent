@@ -1,0 +1,44 @@
+---
+description: Application CRUD listeners and recommended path mirroring.
+globs:
+  - "**/Listener/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/listeners.html
+last_verified: 2026-08-10
+---
+
+# CRUD listeners
+
+## Package recommendation
+
+Prefer dedicated listener classes extending CRUD's listener base (`Crud\Listener\Base`) or matching the project's established listener style. Substantial lifecycle behavior should not live only as closures.
+
+**Recommended default layout** (overridable via `.ai/`):
+
+```text
+src/Controller/Api/PeopleController.php
+        ↓
+src/Listener/Api/PeopleListener.php
+```
+
+Mirror controller subnamespaces under `src/Listener/`.
+
+## Required behavior
+
+- Inspect existing listener conventions before creating new ones.
+- Implement only needed `implementedEvents()` entries.
+- Keep methods narrowly scoped to one concern.
+- Register listeners using the project's established pattern.
+
+## Anti-patterns
+
+- Giant listeners that own unrelated domains
+- Duplicate listeners for identical reusable behavior
+- Encoding application rules only in listeners
+- Ignoring project `.ai/` listener conventions

@@ -118,8 +118,114 @@ final class ExtensionInstallIntegrationTest extends TestCase
                 static fn ($a) => $a->action === InstallAction::CREATE
             );
             self::assertNotEmpty($creates);
+            $crudActions = array_filter(
+                $result['actions'],
+                static fn ($a) => str_contains($a->relativePath, 'friendsofcake-crud')
+            );
+            self::assertSame([], array_values($crudActions));
         } finally {
             TestTemp::removeTree($only);
+        }
+    }
+
+    public function testCrudExtensionInstallsWhenDetected(): void
+    {
+        $project = TestTemp::dir('crud-install');
+        $fixture = PackagePaths::root() . '/tests/fixtures/projects/cakephp-crud';
+        copy($fixture . '/composer.json', $project . '/composer.json');
+        copy($fixture . '/composer.lock', $project . '/composer.lock');
+
+        try {
+            $resolver = new ExtensionResolver(
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            );
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                extensionResolver: $resolver,
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+            ));
+
+            self::assertContains('friendsofcake-crud', $result['resolution']->enabledIds());
+            self::assertFileExists(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud/crud.mdc'
+            );
+            self::assertFileExists(
+                $project . '/.editor/cursor/skills/cakephp-agent/extensions/friendsofcake-crud/create-crud-listener/SKILL.md'
+            );
+        } finally {
+            TestTemp::removeTree($project);
+        }
+    }
+
+    public function testCrudDisabledDoesNotInstallPack(): void
+    {
+        $project = TestTemp::dir('crud-disabled');
+        $fixture = PackagePaths::root() . '/tests/fixtures/projects/cakephp-crud';
+        copy($fixture . '/composer.json', $project . '/composer.json');
+        copy($fixture . '/composer.lock', $project . '/composer.lock');
+
+        try {
+            $resolver = new ExtensionResolver(
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            );
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                extensionResolver: $resolver,
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+                disableExtensions: ['friendsofcake-crud'],
+            ));
+
+            self::assertNotContains('friendsofcake-crud', $result['resolution']->enabledIds());
+            self::assertFileDoesNotExist(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud/crud.mdc'
+            );
+        } finally {
+            TestTemp::removeTree($project);
+        }
+    }
+
+    public function testCrudIncompatibleDoesNotInstallPack(): void
+    {
+        $project = TestTemp::dir('crud-incompatible');
+        $fixture = PackagePaths::root() . '/tests/fixtures/projects/cakephp-crud-incompatible';
+        copy($fixture . '/composer.json', $project . '/composer.json');
+        copy($fixture . '/composer.lock', $project . '/composer.lock');
+
+        try {
+            $resolver = new ExtensionResolver(
+                new ExtensionRegistry(new ManifestLoader(), PackagePaths::root())
+            );
+            $installer = new KnowledgeInstaller(
+                editors: new EditorRegistry([new FakeEditorAdapter('cursor')]),
+                extensionResolver: $resolver,
+                packageRoot: PackagePaths::root(),
+            );
+
+            $result = $installer->install(new ProjectConfig(
+                projectRoot: $project,
+                editors: ['cursor'],
+            ));
+
+            self::assertNotContains('friendsofcake-crud', $result['resolution']->enabledIds());
+            self::assertSame(
+                \CakePhpAgent\Extension\ExtensionDecision::INCOMPATIBLE,
+                $result['resolution']->decisionFor('friendsofcake-crud')?->status
+            );
+            self::assertFileDoesNotExist(
+                $project . '/.editor/cursor/rules/cakephp-agent/extensions/friendsofcake-crud/crud.mdc'
+            );
+        } finally {
+            TestTemp::removeTree($project);
         }
     }
 }

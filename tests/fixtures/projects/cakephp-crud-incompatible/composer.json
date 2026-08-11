@@ -1,0 +1,8 @@
+{
+  "name": "fixture/cakephp-crud-incompatible",
+  "require": {
+    "php": "^8.2",
+    "cakephp/cakephp": "^5.4",
+    "friendsofcake/crud": "^6.0"
+  }
+}

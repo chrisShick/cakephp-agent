@@ -1,0 +1,37 @@
+---
+description: Design CakePHP controllers that use FriendsOfCake CRUD.
+globs:
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: friendsofcake/crud
+package_versions: [">=7.0 <8.0"]
+sources:
+  - https://crud.readthedocs.io/en/latest/
+last_verified: 2026-08-10
+---
+
+# CRUD controller design
+
+## Plugin semantics
+
+Controllers load the Crud component, enable actions, and return `$this->Crud->execute()` for CRUD-handled actions. Business customization prefers config and listeners over fat action methods.
+
+## Required behavior
+
+- Follow the project's existing Crud component / listener registration patterns.
+- Keep controller actions thin when CRUD executes them.
+- Place reusable lifecycle behavior in listeners (see listeners rule) unless `.ai/` says otherwise.
+
+## Preferred patterns
+
+- Enable only needed actions.
+- Configure action settings in controller `initialize` / Crud config consistent with the app.
+- Delegate substantial `Crud.*` handling to dedicated listener classes.
+
+## Anti-patterns
+
+- Large action methods that duplicate Crud execute flow
+- Anonymous closures for substantial reusable lifecycle logic
+- Persistence rules implemented only in the controller
