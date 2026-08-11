@@ -1,0 +1,23 @@
+{
+    "id": "queue-absent-no-should-queue",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "cakephp/queue is not installed. How should we defer a webhook fan-out?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "Command/cron",
+            "consider installing cakephp/queue"
+        ]
+    },
+    "must_not": [
+        "ShouldQueue",
+        "artisan queue"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code",
+        "command-vs-controller-action"
+    ]
+}

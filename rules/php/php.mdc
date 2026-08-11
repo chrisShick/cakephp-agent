@@ -9,15 +9,21 @@ truth_level: PACKAGE_RECOMMENDATION
 
 # PHP
 
-Target supported PHP versions with strict typing and clear boundaries.
+Target supported PHP versions (8.2+) with strict typing and clear boundaries.
 
 ## Required behavior
 
 - Use `declare(strict_types=1);` in new PHP files.
-- Prefer typed properties, parameters, and return types.
-- Avoid suppressing type errors to “make it work.”
+- Prefer typed properties, parameters, return types, and honest nullability.
+- Prefer exceptions for hard failures; avoid error-suppression `@` to “make it work.”
+- Use `password_hash` / `password_verify` (or framework auth hashers) for passwords — never reversible encoding.
+- Treat request input as untrusted until validated/marshaled.
+- Avoid dangerous APIs: `eval`, `create_function`, `unserialize` on untrusted data, shell execution of user input.
+- Keep Composer autoload PSR-4 honest; do not dump class files in random roots.
 
 ## Anti-patterns
 
-- Mixing Laravel Eloquent / Artisan mental models into PHP application code.
-- Untyped public APIs in new code.
+- Mixing Laravel Eloquent / Artisan mental models into PHP application code
+- Untyped public APIs in new code
+- `@` error suppression as control flow
+- `unserialize` / `eval` on user-controlled strings

@@ -9,15 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Phase 11 Wave A CakePHP coverage: rules for routing, behaviors, components, commands, transactions; skills `add-route`, `review-routing`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`
-- Decisions `route-config-vs-controller-url-logic`, `command-vs-controller-action`; security anti-patterns for FormProtection/CSRF and unsafe uploads
-- Phase 12 Wave B: rules/skills for pagination, forms, views scope, errors, configuration/DI, performance
-- Phase 12 Wave C: `cakephp-migrations` and light `cakephp-bake` extension packs; mailer/queue absent honesty evals
-- Pos+neg evaluations across Waves A–C; [HANDOFF-phase-13.md](docs/HANDOFF-phase-13.md) for Packagist / 1.0
+- Phase 11 Wave A CakePHP coverage: routing, behaviors, components, commands, transactions; deeper security/testing
+- Phase 12 Wave B/C: pagination, forms, views scope, errors, config/DI, performance; Migrations + Bake packs
+- Phase 13 Track A: sessions, cache, logging, I18n, HTTP client, request/response, mailer, advanced ORM, `work-with-views`; `cakephp-queue` + `cakephp-debug-kit` packs
+- Phase 13 Track B: `review-cakephp-security`; deepened security rule; PHP safety rules/skills; engineering testing + dependency honesty
+- Pos+neg evaluations across phases; [HANDOFF-phase-14.md](docs/HANDOFF-phase-14.md) for Packagist / 1.0
 
 ### Changed
 
-- Deepened `security` and `testing` core rules; updated coverage map and `choose-cakephp-abstraction` defaults through Wave B
+- Coverage map and `choose-cakephp-abstraction` defaults through Phase 13
 - Relicensed from MIT to **Apache-2.0** (`LICENSE`, `NOTICE`, `composer.json`, README)
 
 ## [0.9.0] - 2026-08-10

@@ -1,0 +1,32 @@
+---
+description: DebugKit usage boundaries — development only.
+globs:
+  - "**/Application.php"
+  - "**/plugins.php"
+alwaysApply: false
+priority: medium
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/debug_kit
+package_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/debugkit/5/en/
+last_verified: 2026-08-10
+---
+
+# DebugKit
+
+## Plugin semantics
+
+DebugKit provides a development toolbar and panels for requests/SQL. It is a require-dev aid — not a production monitoring stack.
+
+## Required behavior
+
+- Apply only when `cakephp/debug_kit` ^5 is installed.
+- Keep DebugKit out of production deployments.
+- Use panels to diagnose N+1/history — then fix ownership in code.
+- Do not invent Telescope/Debugbar Laravel APIs.
+
+## Anti-patterns
+
+- Enabling DebugKit in production
+- Shipping debug panels as the only “APM”

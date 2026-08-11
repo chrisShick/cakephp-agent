@@ -1,0 +1,14 @@
+{
+  "name": "fixture/cakephp-queue",
+  "packages": [
+    {
+      "name": "cakephp/cakephp",
+      "version": "5.4.2"
+    },
+    {
+      "name": "cakephp/queue",
+      "version": "2.3.1"
+    }
+  ],
+  "packages-dev": []
+}

@@ -28,5 +28,12 @@ Primary authoritative sources for framework-sensitive knowledge in this package.
 | Configuration | https://book.cakephp.org/5.x/development/configuration.html | 2026-08-10 |
 | Dependency injection | https://book.cakephp.org/5.x/development/dependency-injection.html | 2026-08-10 |
 | Caching | https://book.cakephp.org/5.x/core-libraries/caching.html | 2026-08-10 |
+| Logging | https://book.cakephp.org/5.x/core-libraries/logging.html | 2026-08-10 |
+| Sessions | https://book.cakephp.org/5.x/development/sessions.html | 2026-08-10 |
+| I18n | https://book.cakephp.org/5.x/core-libraries/internationalization-and-localization.html | 2026-08-10 |
+| HTTP client | https://book.cakephp.org/5.x/core-libraries/httpclient.html | 2026-08-10 |
+| Email / Mailer | https://book.cakephp.org/5.x/core-libraries/email.html | 2026-08-10 |
+| Request / response | https://book.cakephp.org/5.x/controllers/request-response.html | 2026-08-10 |
+| Counter cache | https://book.cakephp.org/5.x/orm/behaviors/counter-cache.html | 2026-08-10 |
 
 When updating rules or decisions, verify against these pages (or CakePHP source) and bump `last_verified`.

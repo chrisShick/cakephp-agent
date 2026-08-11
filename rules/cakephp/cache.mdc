@@ -1,0 +1,38 @@
+---
+description: CakePHP Cache engine ownership and invalidation honesty.
+globs:
+  - "**/config/**/*.php"
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/caching.html
+last_verified: 2026-08-10
+---
+
+# Cache
+
+## Framework semantics
+
+CakePHP `Cache` engines are configured in `config/app.php`. Caching is an optimization with an invalidation story — not a substitute for correct query ownership or fixing N+1.
+
+## Required behavior
+
+- Configure engines/prefixes in config; use `Cache::write/read/remember` (or project wrappers) consistently.
+- Cache derived/expensive reads with explicit keys and TTL; document invalidation on writes.
+- Do not cache authorization decisions in a way that outlives permission changes without invalidation.
+- Prefer fixing queries before adding Redis for a single hot path.
+
+## Anti-patterns
+
+- Caching as a band-aid for fat controllers / N+1
+- Unbounded keys without prefixes colliding across apps/envs
+- Do not invent Laravel Cache facades as CakePHP defaults
+
+## Review checklist
+
+- [ ] Engine config is environment-aware
+- [ ] Write paths invalidate or version keys
+- [ ] Authz not stale-cached unsafely

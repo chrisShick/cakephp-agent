@@ -1,115 +1,74 @@
 # Rules & skills coverage map (CakePHP 5)
 
-Audit date: 2026-08-10 · Package **0.9.0**  
-**Phase ownership:** Phase 12 Wave B + Wave C **done** — see [HANDOFF-phase-12.md](HANDOFF-phase-12.md). Next: [Phase 13 Packagist/1.0](HANDOFF-phase-13.md).
+Audit date: 2026-08-10 · Package **0.9.0** · **Apache-2.0**  
+**Phase ownership:** Phase 13 **done** (full CakePHP coverage + security/PHP base) — [HANDOFF-phase-13.md](HANDOFF-phase-13.md). Next: [Phase 14 Packagist/1.0](HANDOFF-phase-14.md).
 
-Goal: honest answer to “is CakePHP entirely covered?” — **Much closer for everyday ownership.** Wave A–C close core holes and add Migrations/Bake packs; Mailer/Queues remain honesty-only (absent → do not invent). Full Book parity is still not the bar.
+Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so agents don’t invent foreign frameworks. **Book-complete enough for 1.0 trust** after Phase 13; not an encyclopedia of every plugin.
 
 ## Inventory
 
 | Layer | Count | Notes |
 |---|---|---|
-| Core rules (`rules/cakephp/`) | **27** | Wave B added pagination/forms/views/errors/configuration/performance |
-| Core skills (`skills/cakephp/`) | **27** | Wave B added paginate/form/error/DI/performance skills |
-| Extension rules | **26** | + Migrations 2, Bake 1 (CRUD/Auth/Search unchanged) |
-| Extension skills | **28** | + Migrations 2, Bake 1 |
-| Engineering/PHP rules | **2** | Thin base layers |
-| Engineering/PHP skills | **0** | Directories empty (by design so far) |
+| Core rules (`rules/cakephp/`) | **35** | Phase 13 added sessions/cache/logging/i18n/http-client/request-response/mailer/advanced-orm |
+| Core skills (`skills/cakephp/`) | **36** | + session/cache/logging/i18n/http/mailer/views/advanced-finder/security-review |
+| PHP rules (`rules/php/`) | **2** | Typing + php-safety |
+| PHP skills (`skills/php/`) | **2** | `apply-strict-types`, `review-php-safety` |
+| Engineering rules | **3** | clean-code, testing-discipline, dependency-honesty |
+| Engineering skills | **1** | `review-change-safety` |
+| Extension rules | **28** | + queue, DebugKit |
+| Extension skills | **30** | + queue job, use-debug-kit |
 
-### Core rules present
+### Core CakePHP rules
 
-`philosophy`, `conventions`, `architecture`, `controllers`, `middleware`, `routing`, `orm`, `tables`, `entities`, `associations`, `finders`, `behaviors`, `components`, `commands`, `transactions`, `validation`, `application-rules`, `events`, `plugins`, `testing`, `security`, `pagination`, `forms`, `views`, `errors`, `configuration`, `performance`
-
-### Core skills present
-
-`inspect-before-coding`, `choose-cakephp-abstraction`, `analyze-cakephp-project`, `create-finder`, `add-association`, `add-validation`, `add-application-rule`, `create-controller-action`, `create-api-endpoint`, `create-event-listener`, `diagnose-orm-query`, `cakephp-code-review`, `select-lifecycle-hook`, `detect-architectural-smells`, `review-abstraction-choice`, `add-route`, `review-routing`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `paginate-results`, `create-form`, `configure-error-handling`, `configure-application-services`, `review-query-performance`
+`philosophy`, `conventions`, `architecture`, `controllers`, `middleware`, `routing`, `request-response`, `orm`, `tables`, `entities`, `associations`, `finders`, `advanced-orm`, `behaviors`, `components`, `commands`, `transactions`, `validation`, `application-rules`, `events`, `plugins`, `testing`, `security`, `pagination`, `forms`, `views`, `errors`, `configuration`, `performance`, `sessions`, `cache`, `logging`, `i18n`, `http-client`, `mailer`
 
 ---
 
-## Coverage vs unified-plan rule priorities
+## CakePHP Book-shaped map
 
-| Plan priority | Status | Gap |
-|---|---|---|
-| 1. conventions / architecture / philosophy | **Strong** | — |
-| 2. controllers, middleware, routing, requests/responses | **Strong** | Flash/request minutiae still thin |
-| 3. ORM / tables / entities / associations / finders | **Strong** | Advanced query topics thin (subqueries, EXISTS, counter-cache) |
-| 4. validation / application-rules / transactions | **Strong** | — |
-| 5. events, behaviors, components, commands, plugins | **Strong** | — |
-| 6. testing, fixtures, security, performance | **Strong** | Performance rule + review skill added |
-| 7. DI / configuration / errors / cache / logging | **Good** | Config/DI + errors filled; cache/logging still thin |
-
----
-
-## CakePHP Book-shaped gap map
-
-Legend: ✅ covered · 🟡 thin / implied · ❌ missing as dedicated rule or skill
-
-### Always needed for “everyday CakePHP”
-
-| Topic | Rules | Skills | Notes |
+| Topic | Rules | Skills | Status |
 |---|---|---|---|
-| Ownership / philosophy | ✅ | ✅ | — |
-| Controllers / Middleware / Routing | ✅ | ✅ | — |
-| Tables / Entities / Associations / Finders | ✅ | ✅ | — |
-| Validation / Rules / Transactions | ✅ | ✅ | — |
-| Behaviors / Components / Commands / Events | ✅ | ✅ | — |
-| **Pagination** | ✅ | ✅ | Wave B |
-| **Forms / FormProtection** | ✅ | ✅ | Wave B (+ security CSRF bar) |
-| **Views / cells / helpers** | ✅ scope note | 🟡 | Explicit v1 “follow project templates” — no deep catalog |
-| **Error handling** | ✅ | ✅ | Wave B |
-| **Configuration / DI** | ✅ | ✅ | Wave B |
-| **Performance** | ✅ | ✅ | Wave B |
-| **Testing** | ✅ | ✅ | — |
-| **Security** | ✅ | 🟡 | Via security rule + form skill |
-| Sessions / cookies | ❌ | ❌ | P2 later |
-| Cache / logging depth | 🟡 | ❌ | Mentioned in performance; no dedicated pack |
-| I18n / HTTP client | ❌ | ❌ | P2 later |
+| Ownership / ORM / validation / rules / transactions | ✅ | ✅ | Strong |
+| Controllers / middleware / routing / request-response | ✅ | ✅ | Strong |
+| Behaviors / components / commands / events | ✅ | ✅ | Strong |
+| Pagination / forms / errors / config/DI / performance | ✅ | ✅ | Strong |
+| Sessions / cookies / flash | ✅ | ✅ | Phase 13 |
+| Cache / logging | ✅ | ✅ | Phase 13 |
+| I18n | ✅ | ✅ | Phase 13 |
+| HTTP client | ✅ | ✅ | Phase 13 |
+| Mailer | ✅ | ✅ | Phase 13 |
+| Views / cells / helpers | ✅ | ✅ `work-with-views` | Good (project-following) |
+| Advanced ORM (subquery/EXISTS/counter-cache) | ✅ | ✅ | Phase 13 |
+| Security | ✅ deepened | ✅ `review-cakephp-security` | Phase 13 Track B |
+| PHP / engineering base | ✅ | ✅ | Phase 13 Track B |
 
-### Capability packs (when installed)
+### Capability packs
 
 | Pack | Coverage |
 |---|---|
-| FriendsOfCake CRUD | **Strong** |
-| Authentication / Authorization / Search | **Good** |
-| Integrations AuthN↔AuthZ / CRUD↔Search | **Thin but real** |
-| **cakephp/migrations** | **Good** (Wave C) |
-| **cakephp/bake** | **Light** (Wave C — generate then review) |
-| Mailer / Queues | **Honesty evals only** (absent → do not invent Laravel mail/jobs) |
-| DebugKit | **Not started** |
+| CRUD / AuthN / AuthZ / Search + integrations | Strong / Good |
+| Migrations / Bake | Good / Light |
+| **cakephp/queue** | Good (Phase 13) |
+| **cakephp/debug_kit** | Light dev-only (Phase 13) |
 
 ---
 
-## Recommended fill order
+## Waves
 
-### Wave A — **DONE (Phase 11)**
-
-Routing, behaviors, components, commands, transactions, deeper security/testing.
-
-### Wave B — **DONE (Phase 12)**
-
-Pagination; forms + FormProtection; views scope note; errors; configuration/DI; performance.
-
-### Wave C — **DONE (Phase 12 slice)**
-
-- Migrations pack + Bake light pack  
-- Mailer/Queue: absent honesty evals (full packs deferred until demand)
-
-### After Phase 12
-
-Packagist / **1.0** — [HANDOFF-phase-13.md](HANDOFF-phase-13.md). Optional later: mailer/queue packs, DebugKit, deeper views, cache/logging rules.
+- **A–C (Phases 11–12):** everyday ownership + migrations/bake  
+- **Phase 13 Track A:** remaining core Book surfaces + queue/DebugKit packs  
+- **Phase 13 Track B:** security review skill, deeper security rule, PHP safety, engineering P2  
+- **Phase 14:** Packagist / public 1.0
 
 ---
 
-## What “entirely covered” should mean for 1.0
+## What “entirely covered” means for 1.0
 
-**Pass bar (recommended):**
+**Met after Phase 13:**
 
-- Every common ownership question has a decision or skill path — **Wave A+B met.**
-- Agents do not invent Laravel substitutes for CakePHP surfaces — **met for Wave A–C topics.**
-- Auth/CRUD/Search/Migrations/Bake remain capability-gated.
-- Security/testing/performance are actionable.
+- Common ownership questions have decision/skill paths.
+- Agents should not invent Laravel substitutes for CakePHP surfaces listed above.
+- Auth/CRUD/Search/Migrations/Bake/Queue/DebugKit remain capability-gated.
+- Security + PHP baseline are actionable skills, not slogans.
 
-**Not required for 1.0:**
-
-- Full Book parity (I18n, deep Mailer/Queue, Cache internals).
-- Expansion-plan P1–P3 skill dumps.
+**Still optional later:** deeper AppSec catalogs, live LLM evals, MCP, niche plugins.

@@ -1,0 +1,8 @@
+{
+  "name": "fixture/cakephp-queue-incompatible",
+  "require": {
+    "php": "^8.2",
+    "cakephp/cakephp": "^5.4",
+    "cakephp/queue": "^1.0"
+  }
+}

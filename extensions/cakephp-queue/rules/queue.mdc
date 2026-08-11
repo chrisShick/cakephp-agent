@@ -1,0 +1,32 @@
+---
+description: cakephp/queue background job ownership.
+globs:
+  - "**/*Job*.php"
+  - "**/Queue/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/queue
+package_versions: [">=2.0 <3.0"]
+sources:
+  - https://github.com/cakephp/queue
+last_verified: 2026-08-10
+---
+
+# CakePHP Queue
+
+## Plugin semantics
+
+`cakephp/queue` provides queued listeners/jobs via Enqueue integration. Prefer queue jobs for deferred IO when the plugin is installed; prefer Commands for simple cron without a queue stack.
+
+## Required behavior
+
+- Apply only when `cakephp/queue` ^2 is installed.
+- Keep jobs thin: load IDs, call Tables/Mailers, handle failure/retry per project config.
+- Do not invent Laravel `ShouldQueue` / `artisan queue` APIs.
+- Do not put persistence invariants only inside jobs — Tables/rules still own them.
+
+## Anti-patterns
+
+- Laravel queue mental models
+- Jobs that hide domain rules

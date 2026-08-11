@@ -189,7 +189,7 @@ final class KnowledgeInstallerTest extends TestCase
             $skillPaths = [];
             $agentPaths = [];
             foreach ($result['actions'] as $action) {
-                if (str_contains($action->relativePath, 'skills/cakephp-agent/cakephp/')
+                if (str_contains($action->relativePath, 'skills/cakephp-agent/')
                     && str_ends_with($action->relativePath, 'SKILL.md')
                 ) {
                     $skillPaths[] = $action->relativePath;
@@ -264,6 +264,27 @@ final class KnowledgeInstallerTest extends TestCase
                     static fn (string $p): bool => str_contains($p, 'create-form/SKILL.md')
                 ),
                 'Expected create-form skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'review-cakephp-security/SKILL.md')
+                ),
+                'Expected review-cakephp-security skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'send-email/SKILL.md')
+                ),
+                'Expected send-email skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'apply-strict-types/SKILL.md')
+                ),
+                'Expected apply-strict-types PHP skill in dry-run plan'
             );
             self::assertNotEmpty($agentPaths);
             self::assertTrue(

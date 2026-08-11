@@ -1,0 +1,21 @@
+{
+    "id": "outbound-http-prefers-cake-client",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "Calling a JSON HTTP API from a CakePHP service \u2014 what client should we prefer by default?",
+    "expected": {
+        "concepts": [
+            "Http Client"
+        ],
+        "preferred": [
+            "Cake\\Http\\Client",
+            "Http Client"
+        ]
+    },
+    "must_not": [
+        "hardcode API keys in the call site"
+    ],
+    "related_knowledge": [
+        "config-vs-hardcoded-service"
+    ]
+}

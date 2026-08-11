@@ -1,0 +1,14 @@
+{
+  "name": "fixture/cakephp-debug-kit",
+  "packages": [
+    {
+      "name": "cakephp/cakephp",
+      "version": "5.4.2"
+    },
+    {
+      "name": "cakephp/debug_kit",
+      "version": "5.2.4"
+    }
+  ],
+  "packages-dev": []
+}

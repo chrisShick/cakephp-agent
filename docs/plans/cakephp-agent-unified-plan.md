@@ -513,9 +513,13 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 **Deliver (done):** Wave B (pagination, forms, views scope note, errors, config/DI, performance) + Wave C (`cakephp-migrations`, light `cakephp-bake`, mailer/queue honesty evals) — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
 
-### Phase 13 — Packagist / public 1.0
+### Phase 13 — Full CakePHP coverage + security/PHP base
 
-**Deliver:** Packagist publish path, pre-1.0 triage, version bump — [HANDOFF-phase-13.md](../HANDOFF-phase-13.md).
+**Deliver (done):** remaining Book surfaces (sessions, cache, logging, I18n, HTTP client, request/response, mailer, advanced ORM, views skill), queue + DebugKit packs, then `review-cakephp-security`, deepened security rule, PHP safety rules/skills, engineering testing/dependency rules — [HANDOFF-phase-13.md](../HANDOFF-phase-13.md).
+
+### Phase 14 — Packagist / public 1.0
+
+**Deliver:** Packagist publish path, pre-1.0 triage, version bump — [HANDOFF-phase-14.md](../HANDOFF-phase-14.md).
 
 ---
 

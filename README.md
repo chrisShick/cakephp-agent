@@ -2,7 +2,7 @@
 
 AI engineering knowledge for **CakePHP 5.x** — rules, skills, agents, and a safe installer for **Cursor**, **Claude Code**, and **Codex**.
 
-> **Status: 0.9.0 adopter preview** (not 1.0). Phase 12 Wave B + C coverage is done. **Phase 13 next:** Packagist / 1.0 cut ([HANDOFF](docs/HANDOFF-phase-13.md), [coverage map](docs/coverage-rules-skills.md)). Composer name: **`chrisshick/cakephp-agent`**.
+> **Status: 0.9.0 adopter preview** (not 1.0). Phase 13 full CakePHP coverage + security/PHP base is done. **Phase 14 next:** Packagist / 1.0 ([HANDOFF](docs/HANDOFF-phase-14.md), [coverage map](docs/coverage-rules-skills.md)). License: **Apache-2.0**. Composer: **`chrisshick/cakephp-agent`**.
 
 Repository: [github.com/chrisShick/cakephp-agent](https://github.com/chrisShick/cakephp-agent)
 
@@ -116,7 +116,7 @@ Precedence: CLI flags > `.cakephp-agent.json` > `composer.json` extra > defaults
 | [Architecture](docs/architecture.md) | Platform shape |
 | [Pre-1.0 review](docs/pre-1.0-review.md) | Gap backlog |
 | [Rules & skills coverage](docs/coverage-rules-skills.md) | CakePHP coverage audit |
-| [Phase 13 handoff](docs/HANDOFF-phase-13.md) | Next agent: Packagist / 1.0 cut |
+| [Phase 14 handoff](docs/HANDOFF-phase-14.md) | Next agent: Packagist / 1.0 cut |
 
 ## Package development
 

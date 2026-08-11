@@ -1,0 +1,21 @@
+{
+    "id": "reject-open-redirect-from-query",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "After login, should we redirect to whatever URL is in ?next= without allow-listing?",
+    "expected": {
+        "concepts": [
+            "open-redirect"
+        ],
+        "preferred": [
+            "allow-listed local path",
+            "named route"
+        ]
+    },
+    "must_not": [
+        "endorse unrestricted user-supplied redirect targets"
+    ],
+    "related_knowledge": [
+        "open-redirect"
+    ]
+}

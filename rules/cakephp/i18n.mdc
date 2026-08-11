@@ -1,0 +1,37 @@
+---
+description: CakePHP I18n and localization ownership.
+globs:
+  - "**/resources/locales/**/*"
+  - "**/templates/**/*.php"
+  - "**/*.php"
+alwaysApply: false
+priority: medium
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/internationalization-and-localization.html
+last_verified: 2026-08-10
+---
+
+# I18n
+
+## Framework semantics
+
+CakePHP I18n uses message catalogs (`resources/locales`), `__()` / `__d()` helpers, and locale switching. Prefer framework I18n over inventing translation packages foreign to the app.
+
+## Required behavior
+
+- Wrap user-facing strings with the project’s I18n helpers when the app is localized.
+- Keep message domains/catalogs organized; do not hardcode every language in controllers.
+- Format dates/numbers with I18n-aware formatters when locale matters.
+- Do not invent Laravel `__()` / lang JSON layouts as a parallel system.
+
+## Anti-patterns
+
+- Parallel translation systems beside CakePHP I18n without cause
+- Translating only in templates while API messages stay English-hardcoded inconsistently (follow project)
+
+## Review checklist
+
+- [ ] New user-facing strings follow project I18n conventions
+- [ ] Locale catalogs updated when required

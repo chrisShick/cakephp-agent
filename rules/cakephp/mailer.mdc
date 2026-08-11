@@ -1,0 +1,38 @@
+---
+description: CakePHP Mailer ownership for outbound email.
+globs:
+  - "**/Mailer/**/*.php"
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/email.html
+last_verified: 2026-08-10
+---
+
+# Mailer
+
+## Framework semantics
+
+CakePHP ships `Cake\Mailer\Mailer` for composing and sending email. Prefer Mailer classes + config transport over Laravel Mailable/Notification inventions.
+
+## Required behavior
+
+- Put email composition in Mailer classes; keep controllers/commands as thin callers.
+- Configure transports in config; secrets in env/`app_local`.
+- Prefer after-commit / queued sending when email must not roll back DB work (pair with transactions decision).
+- Do not invent `Mailable` / `Mail::` facades.
+
+## Anti-patterns
+
+- Laravel Mailable / Notification APIs
+- Sending email inside Entity callbacks without project convention
+- Hardcoding SMTP credentials in Mailer classes
+
+## Review checklist
+
+- [ ] Mailer class owns templates/subject
+- [ ] Transport config is environment-safe
+- [ ] Failure handling is explicit

@@ -1,0 +1,22 @@
+{
+    "id": "counter-cache-prefers-behavior",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "Articles need a maintained comments_count. Prefer scattered controller increments or a CakePHP approach?",
+    "expected": {
+        "concepts": [
+            "CounterCache",
+            "behavior"
+        ],
+        "preferred": [
+            "CounterCache",
+            "Behavior"
+        ]
+    },
+    "must_not": [
+        "endorse only controller increments as the default"
+    ],
+    "related_knowledge": [
+        "behavior-vs-service"
+    ]
+}

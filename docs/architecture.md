@@ -40,14 +40,16 @@ Details: [editors.md](editors.md).
 | 11 docs/packaging (0.9.0) | Done |
 | 11 CakePHP coverage (Wave A) | Done |
 | 12 CakePHP coverage (Wave B + C) | Done |
-| **13 Packagist / 1.0** | **Next** — [HANDOFF-phase-13.md](HANDOFF-phase-13.md) |
+| 13 Full coverage + security/PHP base | Done |
+| **14 Packagist / 1.0** | **Next** — [HANDOFF-phase-14.md](HANDOFF-phase-14.md) |
 
 Coverage audit: [coverage-rules-skills.md](coverage-rules-skills.md).
 
 ## Versioning
 
 - Package CLI version: `Application::VERSION` (currently **0.9.0** adopter preview).
-- 1.0 requires Packagist (or equivalent) + Wave A–C coverage (done) + soak — see [pre-1.0-review.md](pre-1.0-review.md).
+- License: **Apache-2.0**.
+- 1.0 requires Packagist (or equivalent) + coverage/security base (done) + soak — see [pre-1.0-review.md](pre-1.0-review.md).
 
 ## Related docs
 

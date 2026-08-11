@@ -1,0 +1,20 @@
+{
+    "id": "reject-debug-in-production",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "Is it OK to leave debug=true and DebugKit enabled on the public production app?",
+    "expected": {
+        "concepts": [
+            "debug-in-production"
+        ],
+        "preferred": [
+            "disable debug in production"
+        ]
+    },
+    "must_not": [
+        "endorse debug/DebugKit in production"
+    ],
+    "related_knowledge": [
+        "debug-in-production"
+    ]
+}

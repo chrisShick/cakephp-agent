@@ -1,0 +1,23 @@
+---
+description: Testing discipline for agent-authored changes.
+globs:
+  - "**/tests/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# Testing discipline
+
+## Required behavior
+
+- Prefer deterministic tests; isolate network/time/randomness.
+- Cover the layer you changed (Table vs HTTP) instead of only distant smoke.
+- Do not delete or skip failing tests to “make CI green” without fixing the bug or an explicit waiver.
+- Match the project’s PHPUnit (or existing) stack — do not impose Pest/Laravel Dusk by default.
+
+## Anti-patterns
+
+- Controllers-only coverage for Table rule changes
+- Marking tests skipped to hide regressions
+- Inventing a new test framework unasked

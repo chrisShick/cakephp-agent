@@ -1,0 +1,38 @@
+---
+description: CakePHP Log ownership — levels, channels, and secret hygiene.
+globs:
+  - "**/config/**/*.php"
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/logging.html
+last_verified: 2026-08-10
+---
+
+# Logging
+
+## Framework semantics
+
+CakePHP `Log` is configured with scopes/engines in config. Application code should log through `Log::` / injected loggers — not `echo`/`var_dump` in production paths.
+
+## Required behavior
+
+- Configure log engines/levels in config for the environment.
+- Log failures with enough context to debug; never log passwords, tokens, or full card data.
+- Prefer structured context arrays over string concatenation of sensitive objects.
+- Do not leave debug logging that dumps entities with hidden fields in production.
+
+## Anti-patterns
+
+- Logging secrets or session identifiers casually
+- `var_dump` / `debug()` left in committed hot paths
+- Inventing Monolog service providers as a CakePHP default when Log suffices
+
+## Review checklist
+
+- [ ] Errors are logged where operators expect
+- [ ] No secrets in log lines
+- [ ] Production log level is appropriate

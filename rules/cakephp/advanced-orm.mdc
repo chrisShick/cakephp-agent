@@ -1,0 +1,38 @@
+---
+description: Advanced CakePHP ORM patterns — subqueries, EXISTS, counter-cache ownership.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: medium
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/query-builder.html
+  - https://book.cakephp.org/5.x/orm/behaviors/counter-cache.html
+last_verified: 2026-08-10
+---
+
+# Advanced ORM
+
+## Framework semantics
+
+Complex filtering often needs subqueries/`exists`, association filtering via `matching`, and denormalized counters via CounterCache behavior. Prefer Query expressions over string SQL.
+
+## Required behavior
+
+- Encapsulate advanced query shapes in finders on the owning Table.
+- Prefer `matching` / `notMatching` / subquery expressions over ad-hoc joins in controllers.
+- Use CounterCache (or equivalent Behavior) for maintained counts — not controller increments.
+- Keep raw SQL exceptional and bound; never concatenate user input.
+
+## Anti-patterns
+
+- Controller-built subquery graphs copied everywhere
+- Manual counter updates scattered across actions when CounterCache fits
+- Unbound string SQL
+
+## Review checklist
+
+- [ ] Advanced queries live in finders
+- [ ] Counters have a single ownership strategy
+- [ ] No SQL injection vectors

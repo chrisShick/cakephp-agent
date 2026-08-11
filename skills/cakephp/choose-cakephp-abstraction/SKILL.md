@@ -84,10 +84,14 @@ Rough defaults (override with project conventions and decisions above):
 | CLI / cron / batch entry | Command (`bin/cake`) |
 | Large HTTP lists | Paginate a Table finder |
 | HTML forms | FormHelper + FormProtection/CSRF |
-| Presentation templates | Follow project templates (no deep core view catalog in v1) |
+| Presentation templates | Follow project templates / `work-with-views` |
+| Outbound email | CakePHP Mailer |
+| Outbound HTTP | Cake\\Http\\Client (+ config/DI) |
+| Sessions / flash | Config + request session / Flash |
 | Unexpected errors | Exception renderer / error middleware |
 | Shared infra / secrets | Config + `Application::services()` |
 | Query reuse on one Table | Custom finder |
+| Advanced filters / counters | Advanced finder / CounterCache behavior |
 | Cross-table persistence feature | Behavior |
 | Multi-write consistency unit | Connection transaction |
 | Field shape/format | Validator |
@@ -113,4 +117,4 @@ Rough defaults (override with project conventions and decisions above):
 ## Completion criteria
 
 - Ownership decision documented and ready for implementation.
-- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `add-route`, `paginate-results`, `create-form`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `configure-error-handling`, `configure-application-services`, `review-query-performance`, `review-abstraction-choice`).
+- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `add-route`, `paginate-results`, `create-form`, `send-email`, `create-http-client-call`, `work-with-views`, `review-cakephp-security`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `configure-error-handling`, `configure-application-services`, `review-query-performance`, `review-abstraction-choice`).

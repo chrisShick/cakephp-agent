@@ -15,8 +15,11 @@ Prefer clear names, small focused units, and explicit error handling.
 - Inspect existing project conventions before inventing new ones.
 - Prefer readable code over clever abstractions.
 - Do not expand scope beyond the requested change.
+- Handle errors explicitly — no empty catch-alls that hide failures.
+- Prefer dependency honesty: use what Composer installed; do not invent packages.
 
 ## Anti-patterns
 
-- Drive-by refactors unrelated to the task.
-- Silent catches that hide failures.
+- Drive-by refactors unrelated to the task
+- Silent catches that hide failures
+- Phantom dependencies / undeclared packages

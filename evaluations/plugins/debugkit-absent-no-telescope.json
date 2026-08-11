@@ -1,0 +1,23 @@
+{
+    "id": "debugkit-absent-no-telescope",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "DebugKit is not installed. How should we inspect SQL for a slow page in development?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "query logging",
+            "consider require-dev DebugKit",
+            "review-query-performance"
+        ]
+    },
+    "must_not": [
+        "Telescope",
+        "assume DebugKit APIs"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

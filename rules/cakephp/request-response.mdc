@@ -1,0 +1,39 @@
+---
+description: CakePHP request/response and Flash messaging ownership.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Middleware/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/controllers/request-response.html
+last_verified: 2026-08-10
+---
+
+# Request and response
+
+## Framework semantics
+
+Controllers receive `ServerRequest` and return `Response` (or use `render`/`redirect`). Flash messages use Flash component/helper. Prefer PSR-7 style request data access over `$_POST`/`$_GET`.
+
+## Required behavior
+
+- Read input via `$this->request` / `$request->getData()` / `getQuery()` / `getParam()`.
+- Set status codes, headers, and cookies on the response deliberately.
+- Use Flash for user feedback the project’s way; do not invent session flash schemas.
+- Avoid open redirects — only redirect to known-safe local paths/routes.
+- Do not invent Laravel Request facades / FormRequest.
+
+## Anti-patterns
+
+- Reading `$_POST`/`$_GET` directly in new CakePHP code
+- Open redirects from unvalidated user-supplied URLs
+- Fat responses that embed persistence logic
+
+## Review checklist
+
+- [ ] Input via request APIs
+- [ ] Redirects are safe
+- [ ] Flash usage matches neighbors

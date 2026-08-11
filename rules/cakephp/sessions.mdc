@@ -1,0 +1,41 @@
+---
+description: CakePHP session and cookie ownership.
+globs:
+  - "**/Application.php"
+  - "**/config/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/development/sessions.html
+  - https://book.cakephp.org/5.x/controllers/request-response.html
+last_verified: 2026-08-10
+---
+
+# Sessions
+
+## Framework semantics
+
+CakePHP configures sessions in `config/app.php` and exposes them via the request (`getSession()`). Cookies are set/read through response/request APIs. Prefer framework session/cookie helpers over inventing parallel PHP `$_SESSION` sprawl in app code.
+
+## Required behavior
+
+- Configure session engine/timeouts in config — not hardcoded in controllers.
+- Prefer `$request->getSession()` over raw `$_SESSION` in application code.
+- Keep flash messages via Flash component/helper patterns the project already uses.
+- Set cookie flags (Secure/HttpOnly/SameSite) appropriately for the deployment.
+- Do not store secrets or large blobs in session without cause.
+
+## Anti-patterns
+
+- Ad-hoc `$_SESSION` / `setcookie` bypassing CakePHP APIs without reason
+- Session fixation-prone custom auth storage when Authentication plugin exists
+- Putting authorization decisions only in session flags without server checks
+
+## Review checklist
+
+- [ ] Session config lives in config
+- [ ] Controllers use request session/Flash conventions
+- [ ] Cookie security flags match environment

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "cakephp-debug-kit",
+  "name": "CakePHP DebugKit",
+  "description": "Dev-toolbar awareness for cakephp/debug_kit ^5 \u2014 never enable as production default.",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp/debug_kit",
+        "constraint": "^5.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

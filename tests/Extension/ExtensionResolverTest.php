@@ -293,5 +293,38 @@ final class ExtensionResolverTest extends TestCase
 
         self::assertNotContains('cakephp-migrations', $result->enabledIds());
         self::assertNotContains('cakephp-bake', $result->enabledIds());
+        self::assertNotContains('cakephp-queue', $result->enabledIds());
+        self::assertNotContains('cakephp-debug-kit', $result->enabledIds());
+    }
+
+    public function testQueueDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-queue',
+        ));
+
+        self::assertContains('cakephp-queue', $result->enabledIds());
+    }
+
+    public function testQueueIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-queue-incompatible',
+        ));
+
+        self::assertNotContains('cakephp-queue', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('cakephp-queue')?->status
+        );
+    }
+
+    public function testDebugKitDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-debug-kit',
+        ));
+
+        self::assertContains('cakephp-debug-kit', $result->enabledIds());
     }
 }

@@ -1,0 +1,21 @@
+{
+    "id": "mass-assignment-must-stay-tight",
+    "category": "security",
+    "type": "selection",
+    "prompt": "UsersTable Entity currently allows role and password_hash via _accessible true. What should a security review recommend?",
+    "expected": {
+        "concepts": [
+            "mass assignment"
+        ],
+        "preferred": [
+            "tighten _accessible",
+            "exclude role/password_hash"
+        ]
+    },
+    "must_not": [
+        "endorse wide accessibility for role and password_hash"
+    ],
+    "related_knowledge": [
+        "mass-assignment-overexposure"
+    ]
+}

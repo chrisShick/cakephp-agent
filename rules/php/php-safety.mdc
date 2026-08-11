@@ -1,0 +1,25 @@
+---
+description: PHP safety checklist — input trust, crypto, files, and dangerous APIs.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# PHP safety
+
+## Required behavior
+
+- Validate/normalize input at boundaries before business logic.
+- Compare secrets with `hash_equals` when needed; use strong random (`random_bytes`).
+- Path operations must reject traversal; never concatenate client filenames into filesystem paths.
+- Output escaping belongs at the presentation boundary (CakePHP helpers/templates).
+- Disable verbose error display in production; log instead.
+
+## Anti-patterns
+
+- Trusting client-side checks alone
+- Building filesystem paths from raw user filenames
+- Weak custom crypto for passwords
+- Leaving `display_errors` on in production

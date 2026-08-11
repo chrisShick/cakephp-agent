@@ -1,0 +1,24 @@
+---
+description: Composer dependency honesty — do not invent undeclared packages.
+globs:
+  - "**/composer.json"
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+---
+
+# Dependency honesty
+
+## Required behavior
+
+- Inspect `composer.json` / lock before recommending a library API.
+- Prefer packages already installed; propose new requires explicitly.
+- Do not invent Laravel packages or APIs in a CakePHP app.
+- Keep require vs require-dev accurate (DebugKit/Bake usually require-dev).
+
+## Anti-patterns
+
+- Phantom packages
+- Assuming optional plugins
+- Moving prod-only tools into require-dev incorrectly without reason (and vice versa)

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/extension-manifest.schema.json",
+  "id": "cakephp-queue",
+  "name": "CakePHP Queue",
+  "description": "Background job guidance for cakephp/queue ^2 on CakePHP 5.",
+  "version": "1.0.0",
+  "type": "composer-package",
+  "detect": {
+    "composer": [
+      {
+        "package": "cakephp/queue",
+        "constraint": "^2.0"
+      }
+    ]
+  },
+  "requires": {
+    "cakephp": "^5.0"
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "rules": [
+    "rules/*.mdc"
+  ],
+  "skills": [
+    "skills/*"
+  ],
+  "agents": [],
+  "defaultEnabledWhenDetected": true
+}

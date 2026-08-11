@@ -1,0 +1,37 @@
+---
+description: CakePHP HTTP client ownership for outbound requests.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/httpclient.html
+last_verified: 2026-08-10
+---
+
+# HTTP client
+
+## Framework semantics
+
+Outbound HTTP uses `Cake\Http\Client` (or project-wrapped clients registered in DI). Keep credentials in config; keep persistence on Tables — do not put remote IO inside Entities.
+
+## Required behavior
+
+- Prefer CakePHP Http Client or the project’s existing wrapper over ad-hoc curl in new code.
+- Timeouts, base URLs, and tokens come from config/`Application::services()`.
+- Handle non-2xx explicitly; do not ignore failures.
+- Do not call remote APIs from Entity methods by default.
+
+## Anti-patterns
+
+- Hardcoded API keys in client call sites
+- Remote IO inside Entities (active-record style)
+- Inventing Guzzle service providers when the app standardizes on Cake\Http\Client
+
+## Review checklist
+
+- [ ] Client is configured/injected consistently
+- [ ] Errors/timeouts handled
+- [ ] Secrets not hardcoded

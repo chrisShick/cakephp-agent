@@ -7,7 +7,7 @@ Goal: track what remains before calling a public **1.0**.
 
 **0.9.0 adopter preview** is ready to dogfood: documented VCS install, uninstall, hardened doctor, quarantined test fakes, schema drift fixed, public docs.
 
-**Not 1.0 yet:** Packagist publish + tagged release soak still pending (Phase 13). Phases 11–12 CakePHP coverage Waves A–C are done.
+**Not 1.0 yet:** Packagist publish + tagged release soak still pending (Phase 14). Phases 11–13 CakePHP coverage + security/PHP base are done.
 
 ## Closed in 0.9.0
 

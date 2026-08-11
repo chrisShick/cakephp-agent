@@ -39,9 +39,10 @@ Never recommend Laravel Gate/Sanctum/Passport as CakePHP defaults.
 ## Workflow
 
 1. Discover auth packages and identity source.
-2. Threat-model the changed endpoints lightly (assets, actors, trust boundaries).
-3. Prioritize exploitable findings (IDOR, mass assignment, injection).
-4. Remediate via Auth pack skills when packages exist, else project conventions + core skills.
+2. Prefer procedural skill **`review-cakephp-security`** for the checklist pass.
+3. Threat-model the changed endpoints lightly (assets, actors, trust boundaries).
+4. Prioritize exploitable findings (IDOR, mass assignment, injection, open redirects, debug-in-prod).
+5. Remediate via Auth pack skills when packages exist, else project conventions + core skills (`create-form`, entity accessibility, upload handling).
 
 ## Output format
 

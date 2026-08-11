@@ -11,6 +11,7 @@ sources:
   - https://book.cakephp.org/5.x/core-libraries/form-protection-component.html
   - https://book.cakephp.org/5.x/orm/entities.html
   - https://book.cakephp.org/5.x/controllers/request-response.html
+  - https://book.cakephp.org/5.x/development/configuration.html
 last_verified: 2026-08-10
 ---
 
@@ -18,7 +19,7 @@ last_verified: 2026-08-10
 
 ## Framework semantics
 
-CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs authorization, safe SQL, uploads, and serialization. Prefer framework middleware/components already configured in the app over inventing parallel token schemes.
+CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs authorization, safe SQL, uploads, serialization, redirects, secrets, and debug exposure. Prefer framework middleware/components already configured in the app over inventing parallel token schemes.
 
 ## Required behavior
 
@@ -28,7 +29,11 @@ CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs a
 - For HTML forms, use CakePHP FormProtection / CSRF middleware as the project already wires them — do not rely on client-only tokens.
 - Validate and store uploads with explicit type/size/path rules; never trust client filenames as filesystem paths.
 - Avoid unsafe raw SQL concatenation; prefer ORM expressions/bindings.
-- Do not leak secrets in logs or serialized outputs (`$_hidden`, API shaping).
+- Do not leak secrets in logs, exceptions, or serialized outputs (`$_hidden`, API shaping).
+- Keep credentials and API keys in config/env — never commit them.
+- Reject open redirects: only redirect to known-safe local routes/paths.
+- Keep `debug` disabled in production; do not expose stack traces or DebugKit in prod.
+- Prefer `password_hash` / Authentication password hashers over reversible encoding for passwords.
 
 ## Anti-patterns
 
@@ -37,10 +42,16 @@ CakePHP security spans mass assignment, FormProtection/CSRF, authentication vs a
 - Serialization overexposure
 - Missing FormProtection/CSRF on state-changing HTML forms
 - CSRF-only-in-javascript
+- unsafe-upload-handling
+- Open redirects from user-supplied URLs
+- Debug-in-production
+- Secrets in source control or logs
 
 ## Review checklist
 
-- [ ] Write endpoints check server-side authz
+- [ ] Write endpoints check server-side authz / IDOR scoping
 - [ ] Forms participate in project FormProtection/CSRF setup
 - [ ] Uploads are validated and stored outside webroot when required
 - [ ] Sensitive fields hidden from default serialization
+- [ ] Redirect targets are allow-listed / local
+- [ ] Production debug/DebugKit off; secrets not logged

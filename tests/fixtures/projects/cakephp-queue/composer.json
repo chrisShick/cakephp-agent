@@ -1,0 +1,8 @@
+{
+  "name": "fixture/cakephp-queue",
+  "require": {
+    "php": "^8.2",
+    "cakephp/cakephp": "^5.4",
+    "cakephp/queue": "^2.0"
+  }
+}
