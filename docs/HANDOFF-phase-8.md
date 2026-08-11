@@ -4,7 +4,7 @@
 
 **Repo:** `/Users/chrishickingbottom/Development/cakephp-agent`  
 **Branch:** `main`  
-**Package:** `cakephp-agent/cakephp-agent` (PHP 8.2+)  
+**Package:** `chrisshick/cakephp-agent` (PHP 8.2+)  
 **Status date:** 2026-08-10
 
 ---

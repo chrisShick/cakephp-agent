@@ -39,7 +39,7 @@ Default editor when `--editor` is omitted: **cursor**.
 Typical upgrade:
 
 ```bash
-composer update cakephp-agent/cakephp-agent
+composer update chrisshick/cakephp-agent
 vendor/bin/cakephp-agent install --editor=cursor
 # optional after package removed files:
 vendor/bin/cakephp-agent install --editor=cursor --prune

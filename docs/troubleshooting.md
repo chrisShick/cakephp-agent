@@ -60,7 +60,7 @@ Empty parent directories (e.g. `.cursor/rules/cakephp-agent/`) may remain after 
 ```bash
 vendor/bin/cakephp-agent uninstall --dry-run
 vendor/bin/cakephp-agent uninstall
-composer remove cakephp-agent/cakephp-agent
+composer remove chrisshick/cakephp-agent
 ```
 
 ## Symlink failures

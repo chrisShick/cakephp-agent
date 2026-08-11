@@ -1,6 +1,6 @@
 {
-    "name": "cakephp-agent/cakephp-agent",
-    "description": "AI engineering knowledge platform for CakePHP 5 — rules, skills, extensions, and installer for Cursor, Claude Code, and Codex.",
+    "name": "chrisshick/cakephp-agent",
+    "description": "AI engineering knowledge platform for CakePHP 5 \u2014 rules, skills, extensions, and installer for Cursor, Claude Code, and Codex.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -15,7 +15,8 @@
     ],
     "authors": [
         {
-            "name": "CakePHP Agent Contributors"
+            "name": "Chris Hickingbottom",
+            "homepage": "https://github.com/chrisShick"
         }
     ],
     "require": {
@@ -54,5 +55,10 @@
         "sort-packages": true
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "homepage": "https://github.com/chrisShick/cakephp-agent",
+    "support": {
+        "issues": "https://github.com/chrisShick/cakephp-agent/issues",
+        "source": "https://github.com/chrisShick/cakephp-agent"
+    }
 }

@@ -5,7 +5,7 @@
 **Repo:** `/Users/chrishickingbottom/Development/cakephp-agent`  
 **Branch:** `main`  
 **HEAD (at handoff):** `c90043c` — *Add canonical CakePHP knowledge, core rules, and evaluation seeds (Phase 3).*  
-**Package:** `cakephp-agent/cakephp-agent` (PHP 8.2+)  
+**Package:** `chrisshick/cakephp-agent` (PHP 8.2+)  
 **Status date:** 2026-08-10
 
 ---

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Adopter preview (not 1.0). Safe installer + extension packs + offline eval platform for CakePHP 5, with packaging/docs gap fixes for dogfooding.
 
+Composer package name: **`chrisshick/cakephp-agent`** (Composer requires a lowercase vendor; GitHub remains `chrisShick/cakephp-agent`).
+
 ### Added
 
 - Phases 0–10 vertical slice: repository bootstrap, installer foundation, extension engine, canonical knowledge + core rules, P0 skills, FriendsOfCake CRUD pack, AuthN/AuthZ packs, Search + integration packs, capability-aware agents, decision/smell intelligence, offline `cakephp-agent eval` with baselines
@@ -27,7 +29,7 @@ Adopter preview (not 1.0). Safe installer + extension packs + offline eval platf
 
 ### Notes
 
-- Not on Packagist yet — install via VCS (`https://github.com/chrisShick/cakephp-agent.git`) or path repository
+- Not on Packagist yet — install via VCS (`https://github.com/chrisShick/cakephp-agent.git`) or path repository as `chrisshick/cakephp-agent`
 - Offline `eval` is a corpus/self-check harness, not live model grading
 - See [docs/pre-1.0-review.md](docs/pre-1.0-review.md) for the path to 1.0
 

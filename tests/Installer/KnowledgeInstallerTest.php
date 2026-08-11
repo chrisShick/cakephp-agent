@@ -31,7 +31,7 @@ final class KnowledgeInstallerTest extends TestCase
         mkdir($this->packageRoot . '/agents', 0775, true);
 
         file_put_contents($this->projectRoot . '/composer.json', '{"name":"fixture/app"}');
-        file_put_contents($this->packageRoot . '/composer.json', '{"name":"cakephp-agent/cakephp-agent","version":"0.1.0"}');
+        file_put_contents($this->packageRoot . '/composer.json', '{"name":"chrisshick/cakephp-agent","version":"0.1.0"}');
         file_put_contents($this->packageRoot . '/rules/engineering/clean-code.mdc', "# clean\n");
         file_put_contents($this->packageRoot . '/rules/php/php.mdc', "# php\n");
         file_put_contents($this->packageRoot . '/rules/cakephp/conventions.mdc', "# cake\n");

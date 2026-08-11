@@ -2,7 +2,7 @@
 
 This guide is for developers who already have a **CakePHP 5.x** app and want AI coding tools (Cursor, Claude Code, Codex) to follow CakePHP-native conventions.
 
-> **Status:** Adopter preview **0.9.0** — not 1.0 yet. The package is not on Packagist yet; use a VCS or path repository until a tagged Packagist release is published.
+> **Status:** Adopter preview **0.9.0** — not 1.0 yet. Composer package name is `chrisshick/cakephp-agent` (lowercase vendor required by Composer); GitHub stays `chrisShick/cakephp-agent`. Not on Packagist yet — use VCS or path until published.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ In your **application** `composer.json`:
     }
   ],
   "require-dev": {
-    "cakephp-agent/cakephp-agent": "dev-main"
+    "chrisshick/cakephp-agent": "dev-main"
   }
 }
 ```
@@ -34,7 +34,7 @@ In your **application** `composer.json`:
 Then:
 
 ```bash
-composer update cakephp-agent/cakephp-agent
+composer update chrisshick/cakephp-agent
 ```
 
 Prefer `require-dev` unless you intentionally want the package available in production deploys (usually you do not).
@@ -51,13 +51,13 @@ Prefer `require-dev` unless you intentionally want the package available in prod
     }
   ],
   "require-dev": {
-    "cakephp-agent/cakephp-agent": "*"
+    "chrisshick/cakephp-agent": "*"
   }
 }
 ```
 
 ```bash
-composer update cakephp-agent/cakephp-agent
+composer update chrisshick/cakephp-agent
 ```
 
 ### Confirm the binary
@@ -191,7 +191,7 @@ vendor/bin/cakephp-agent doctor
 ## 8. Upgrade
 
 ```bash
-composer update cakephp-agent/cakephp-agent
+composer update chrisshick/cakephp-agent
 vendor/bin/cakephp-agent install --editor=cursor
 ```
 
@@ -215,7 +215,7 @@ vendor/bin/cakephp-agent uninstall
 vendor/bin/cakephp-agent uninstall --editor=cursor
 
 # Then remove the Composer package
-composer remove cakephp-agent/cakephp-agent
+composer remove chrisshick/cakephp-agent
 ```
 
 `.ai/` overlays are left untouched. Empty editor directories may remain — delete them manually if desired. See [troubleshooting.md](troubleshooting.md).
