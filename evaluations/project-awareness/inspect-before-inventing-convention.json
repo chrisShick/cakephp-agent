@@ -1,0 +1,18 @@
+{
+    "id": "inspect-before-inventing-convention",
+    "category": "project-awareness",
+    "type": "project-awareness",
+    "prompt": "Where should I put a new event listener in this unfamiliar CakePHP app?",
+    "expected": {
+        "concepts": [
+            "inspect-before-coding"
+        ],
+        "preferred": [
+            "inspect existing listeners and .ai"
+        ]
+    },
+    "must_not": [
+        "invent a new folder convention immediately"
+    ],
+    "related_knowledge": []
+}

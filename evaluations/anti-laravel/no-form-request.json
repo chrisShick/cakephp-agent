@@ -1,0 +1,22 @@
+{
+    "id": "no-form-request",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Create a FormRequest for my CakePHP controller.",
+    "expected": {
+        "concepts": [
+            "validation",
+            "controller"
+        ],
+        "preferred": [
+            "Table validation",
+            "patchEntity"
+        ]
+    },
+    "must_not": [
+        "FormRequest"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

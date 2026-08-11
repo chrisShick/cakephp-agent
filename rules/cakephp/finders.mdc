@@ -1,0 +1,35 @@
+---
+description: Idiomatic CakePHP custom finders.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
+last_verified: 2026-08-10
+related_knowledge: [finder-vs-behavior]
+---
+
+# Finders
+
+## Framework semantics
+
+Custom finders encapsulate reusable query modifications and remain composable with other conditions.
+
+## Required behavior
+
+- Prefer finders over copying filter logic into controllers.
+- Keep finders composable; avoid surprising hard limits unless documented.
+- Use `aliasField()` when ambiguity is possible.
+
+## Anti-patterns
+
+- Duplicate finders / duplicate query semantics
+- Non-composable finders that break further where/contain
+
+## Review checklist
+
+- [ ] Finder is reusable and tested
+- [ ] Does not introduce N+1 by default

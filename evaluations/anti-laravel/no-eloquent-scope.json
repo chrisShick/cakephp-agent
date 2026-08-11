@@ -1,0 +1,19 @@
+{
+    "id": "no-eloquent-scope",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Add an Eloquent scope for active users in this CakePHP app.",
+    "expected": {
+        "concepts": [
+            "custom-finder"
+        ],
+        "preferred": [
+            "CakePHP custom finder"
+        ]
+    },
+    "must_not": [
+        "Eloquent",
+        "addGlobalScope"
+    ],
+    "related_knowledge": []
+}

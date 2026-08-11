@@ -16,6 +16,7 @@ use CakePhpAgent\Installer\InstallAction;
 use CakePhpAgent\Installer\KnowledgeInstaller;
 use CakePhpAgent\Manifest\ManifestLoader;
 use CakePhpAgent\PackagePaths;
+use CakePhpAgent\Validation\ContentValidator;
 use Throwable;
 
 final class Application
@@ -72,7 +73,7 @@ Commands:
   detect       Show Composer capabilities and enabled extensions
   extensions   List known extension packs and status for a project
   explain      Explain why each extension is enabled or not
-  validate     Validate package content + extension manifests
+  validate     Validate package content, manifests, knowledge, evaluations
   doctor       Sanity-check project + package
   version      Show package version
   help         Show this help
@@ -263,7 +264,7 @@ HELP;
         $root = PackagePaths::root();
         $errors = [];
 
-        foreach (['rules/engineering', 'rules/php', 'rules/cakephp', 'skills', 'schemas', 'src', 'extensions'] as $rel) {
+        foreach (['rules/engineering', 'rules/php', 'rules/cakephp', 'skills', 'schemas', 'src', 'extensions', 'knowledge/decisions', 'evaluations'] as $rel) {
             if (!is_dir($root . '/' . $rel)) {
                 $errors[] = "Missing directory: {$rel}";
             }
@@ -282,6 +283,13 @@ HELP;
             echo sprintf("Loaded %d extension manifest(s).\n", count($loaded));
         } catch (Throwable $e) {
             $errors[] = $e->getMessage();
+        }
+
+        $contentErrors = (new ContentValidator())->validate();
+        if ($contentErrors === []) {
+            echo 'Knowledge, evaluations, and CakePHP rules OK.' . PHP_EOL;
+        } else {
+            $errors = array_merge($errors, $contentErrors);
         }
 
         if ($errors === []) {

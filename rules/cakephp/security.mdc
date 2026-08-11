@@ -1,0 +1,29 @@
+---
+description: CakePHP-focused security review guidance.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/security.html
+  - https://book.cakephp.org/5.x/orm/entities.html
+last_verified: 2026-08-10
+---
+
+# Security
+
+## Required behavior
+
+- Keep Entity mass assignment tight.
+- Enforce authorization on the server; never only in the UI.
+- Distinguish authentication (identity) from authorization (permission).
+- Avoid unsafe raw SQL concatenation; prefer ORM expressions/bindings.
+- Do not leak secrets in logs or serialized outputs.
+
+## Anti-patterns
+
+- Mass assignment overexposure
+- Authorization only in UI
+- Serialization overexposure

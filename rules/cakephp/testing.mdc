@@ -1,0 +1,28 @@
+---
+description: CakePHP PHPUnit testing conventions.
+globs:
+  - "**/tests/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/development/testing.html
+last_verified: 2026-08-10
+---
+
+# Testing
+
+## Framework semantics
+
+CakePHP testing is PHPUnit-oriented with Table tests, integration/controller tests, fixtures, and optional factories when present.
+
+## Required behavior
+
+- Prefer deterministic fixtures/data.
+- Choose test type by boundary: pure unit vs Table persistence vs HTTP integration.
+- Do not impose Pest unless the project already uses it.
+
+## Anti-patterns
+
+- Tests that require production network services without isolation

@@ -1,0 +1,20 @@
+{
+    "id": "no-plugin-api-reimplementation",
+    "category": "plugins",
+    "type": "selection",
+    "prompt": "friendsofcake/crud is installed. I need standard index/view/add/edit/delete actions with minor query tweaks.",
+    "expected": {
+        "concepts": [
+            "use-plugin-extension-points"
+        ],
+        "preferred": [
+            "CRUD configuration or listener"
+        ]
+    },
+    "must_not": [
+        "reimplement full CRUD actions unnecessarily"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

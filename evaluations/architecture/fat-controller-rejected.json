@@ -1,0 +1,19 @@
+{
+    "id": "fat-controller-rejected",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "My controller action builds a complex query, validates uniqueness, saves associations, and formats the JSON response. Is that fine?",
+    "expected": {
+        "concepts": [
+            "controller-orchestration",
+            "table-persistence"
+        ],
+        "preferred": [
+            "move persistence to Table"
+        ]
+    },
+    "must_not": [
+        "endorse fat controller as best practice"
+    ],
+    "related_knowledge": []
+}

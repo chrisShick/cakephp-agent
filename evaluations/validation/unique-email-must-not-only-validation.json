@@ -1,0 +1,21 @@
+{
+    "id": "unique-email-must-not-only-validation",
+    "category": "validation",
+    "type": "rejection",
+    "prompt": "Where should I put a uniqueness check for email so it is enforced on save?",
+    "expected": {
+        "concepts": [
+            "application-rule"
+        ],
+        "preferred": [
+            "RulesChecker"
+        ]
+    },
+    "must_not": [
+        "validationDefault only",
+        "FormRequest"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

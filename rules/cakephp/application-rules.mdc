@@ -1,0 +1,35 @@
+---
+description: CakePHP RulesChecker application rules for stateful invariants.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/validation.html
+last_verified: 2026-08-10
+related_knowledge: [validation-vs-application-rule, table-callback-vs-application-rule]
+---
+
+# Application rules
+
+## Framework semantics
+
+Application rules (`RulesChecker` via `buildRules()`) check stateful properties during `save()` / `delete()` (e.g. `isUnique`, `existsIn`).
+
+## Required behavior
+
+- Enforce uniqueness and existence with application rules.
+- Keep rule failures on the entity error collection.
+- Prefer rules over ad-hoc `beforeSave` boolean gates for invariants.
+
+## Anti-patterns
+
+- Encoding uniqueness only in callbacks
+- Confusing rules with HTTP validation-only flows
+
+## Review checklist
+
+- [ ] Stateful invariants in `buildRules()`
+- [ ] Create/update/delete modes considered when needed

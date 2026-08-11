@@ -5,8 +5,11 @@ globs:
 alwaysApply: false
 priority: critical
 truth_level: FRAMEWORK_DEFAULT
-framework_versions:
-  - ">=5.0 <6.0"
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/intro.html
+  - https://book.cakephp.org/5.x/orm.html
+last_verified: 2026-08-10
 ---
 
 # CakePHP conventions
@@ -23,10 +26,16 @@ Prefer CakePHP conventions and extension points before inventing framework repla
 
 - Inspect `composer.json` / installed plugins before recommending plugin APIs.
 - Follow existing project folder and naming conventions.
-- Do not invent Laravel concepts (FormRequest, Eloquent, ServiceProvider, Artisan, Gate, Blade).
+- Do not invent Laravel concepts (not Laravel: FormRequest, Eloquent, ServiceProvider, artisan, Blade, Gate).
 
 ## Anti-patterns
 
 - Active Record Entities that query the database by default.
 - Wrapping every Table in a repository without architectural value.
 - Adding a service solely to shorten a controller.
+
+## Review checklist
+
+- [ ] Conventions inspected
+- [ ] Plugin APIs only when present
+- [ ] Table/Entity/validation/rules boundaries correct

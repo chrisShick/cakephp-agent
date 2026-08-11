@@ -1,0 +1,21 @@
+{
+    "id": "contain-vs-matching-filter",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "I need articles that have the tag \"news\". I do not necessarily need the tag entities hydrated.",
+    "expected": {
+        "concepts": [
+            "matching"
+        ],
+        "preferred": [
+            "matching",
+            "innerJoinWith"
+        ]
+    },
+    "must_not": [
+        "contain only because association exists"
+    ],
+    "related_knowledge": [
+        "contain-vs-matching"
+    ]
+}

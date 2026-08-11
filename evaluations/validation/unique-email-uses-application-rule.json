@@ -1,0 +1,23 @@
+{
+    "id": "unique-email-uses-application-rule",
+    "category": "validation",
+    "type": "selection",
+    "prompt": "I need to ensure a user's email address is unique when saving.",
+    "expected": {
+        "concepts": [
+            "application-rule"
+        ],
+        "preferred": [
+            "RulesChecker",
+            "buildRules",
+            "isUnique"
+        ]
+    },
+    "must_not": [
+        "rely solely on validationDefault",
+        "Eloquent"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

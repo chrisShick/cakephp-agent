@@ -1,0 +1,30 @@
+---
+description: CakePHP plugin loading and boundary rules.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/plugins.html
+last_verified: 2026-08-10
+related_knowledge: [plugin-vs-application-code]
+---
+
+# Plugins
+
+## Framework semantics
+
+Plugins are Composer-distributed CakePHP packages loaded by the application with their own namespaces, bootstrap, routes, and services.
+
+## Required behavior
+
+- Confirm a plugin is installed/loaded before using its APIs.
+- Prefer plugin extension points over reimplementation.
+- Keep application-specific domain logic in the app unless extracting a real shared plugin.
+
+## Anti-patterns
+
+- Plugin API reimplementation
+- Recommending unloaded plugin APIs

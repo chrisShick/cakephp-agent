@@ -1,0 +1,20 @@
+{
+    "id": "auth-middleware-not-component-default",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "I need to load the authenticated identity for most HTTP requests in CakePHP 5 with the Authentication plugin available.",
+    "expected": {
+        "concepts": [
+            "middleware"
+        ],
+        "preferred": [
+            "Authentication middleware"
+        ]
+    },
+    "must_not": [
+        "put identity loading only in a random component by default"
+    ],
+    "related_knowledge": [
+        "component-vs-middleware"
+    ]
+}

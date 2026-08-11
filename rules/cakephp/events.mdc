@@ -1,0 +1,30 @@
+---
+description: CakePHP event system ownership.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/core-libraries/events.html
+  - https://book.cakephp.org/5.x/orm/table-objects.html
+last_verified: 2026-08-10
+---
+
+# Events
+
+## Framework semantics
+
+CakePHP has application events, controller callbacks, ORM/table callbacks, listeners, and plugin-emitted events. Similarly named events are not interchangeable ownership boundaries.
+
+## Required behavior
+
+- Choose listeners based on the lifecycle that owns the concern.
+- Prefer explicit listener classes for substantial behavior over anonymous closures.
+- Do not move persistence invariants solely into HTTP-layer events.
+
+## Anti-patterns
+
+- Event-chain obscurity
+- Callback side-effect explosion

@@ -1,0 +1,20 @@
+{
+    "id": "avoid-over-eager-contain",
+    "category": "orm",
+    "type": "rejection",
+    "prompt": "For an index listing article titles only, should I contain every association defined on ArticlesTable?",
+    "expected": {
+        "concepts": [
+            "selective-loading"
+        ],
+        "preferred": [
+            "contain only needed associations"
+        ]
+    },
+    "must_not": [
+        "contain everything by default"
+    ],
+    "related_knowledge": [
+        "contain-vs-matching"
+    ]
+}

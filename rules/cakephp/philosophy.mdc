@@ -1,0 +1,37 @@
+---
+description: Concise CakePHP philosophy and negative rules for agents.
+globs:
+alwaysApply: true
+priority: critical
+truth_level: PACKAGE_RECOMMENDATION
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5/en/intro.html
+last_verified: 2026-08-10
+---
+
+# CakePHP philosophy
+
+## Required behavior
+
+- Prefer convention before configuration.
+- Prefer CakePHP extension points before inventing framework replacements.
+- Inspect existing project conventions (and `.ai/`) before creating new ones.
+- Use plugin capabilities only when the project has intentionally adopted them.
+- For important decisions, state rejected alternatives (“why not”).
+
+## Anti-patterns (do not)
+
+- Do not wrap every Table in a repository by default.
+- Do not treat Entities as Active Record models.
+- Do not introduce services solely to shorten controllers.
+- Do not put authorization only in the UI.
+- Do not enforce persisted uniqueness solely through input validation.
+- Do not use `contain()` merely because an association exists.
+- Do not invent Laravel concepts (not Laravel: FormRequest, Eloquent, ServiceProvider, artisan, Blade, Gate).
+
+## Review checklist
+
+- [ ] Convention inspected before invention
+- [ ] Ownership boundary named
+- [ ] Rejected alternative stated when choosing an abstraction

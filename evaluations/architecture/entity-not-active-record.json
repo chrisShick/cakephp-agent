@@ -1,0 +1,23 @@
+{
+    "id": "entity-not-active-record",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Should my User entity call TableRegistry to load related posts inside an accessor?",
+    "expected": {
+        "concepts": [
+            "entity-state",
+            "table-queries"
+        ],
+        "preferred": [
+            "query on Table",
+            "contain"
+        ]
+    },
+    "must_not": [
+        "Active Record entity queries by default",
+        "Eloquent"
+    ],
+    "related_knowledge": [
+        "entity-accessor-vs-query-calculation"
+    ]
+}

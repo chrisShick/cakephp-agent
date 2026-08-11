@@ -1,0 +1,35 @@
+---
+description: CakePHP Validator usage for shape and format checks.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/validation.html
+last_verified: 2026-08-10
+related_knowledge: [validation-vs-application-rule]
+---
+
+# Validation
+
+## Framework semantics
+
+Validation is the first ORM layer: stateless shape/type/format checks during `newEntity()` / `patchEntity()`.
+
+## Required behavior
+
+- Put format/presence/type constraints in validators.
+- Do not treat validation as the only layer for uniqueness/stateful invariants.
+- Prefer clear field-level messages for user-facing input.
+
+## Anti-patterns
+
+- Duplicate validation
+- Enforcing persisted uniqueness solely through validation
+
+## Review checklist
+
+- [ ] Shape/format checks are validators
+- [ ] Stateful checks also covered by application rules where needed

@@ -1,0 +1,36 @@
+---
+description: CakePHP 5 controller and HTTP orchestration guidance.
+globs:
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/controllers.html
+last_verified: 2026-08-10
+---
+
+# Controllers
+
+## Framework semantics
+
+Controllers coordinate request/response flow, interact with components, and delegate persistence to Tables.
+
+## Required behavior
+
+- Keep actions focused on HTTP/application flow.
+- Use request/response objects correctly.
+- Avoid substantial persistence/domain logic in controllers.
+- Prefer components for reusable controller-level concerns when appropriate.
+
+## Anti-patterns
+
+- Persistence concern in controller
+- Fat controller
+- Inventing FormRequest-style classes (not Laravel)
+
+## Review checklist
+
+- [ ] Action is orchestration, not a Table replacement
+- [ ] Validation/rules live on the model layer where appropriate

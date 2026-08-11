@@ -1,0 +1,20 @@
+{
+    "id": "bulk-update-skips-entity-callbacks",
+    "category": "orm",
+    "type": "lifecycle",
+    "prompt": "If I run a Query update() to expire 10k tokens, will beforeSave on the Token entity run for each row?",
+    "expected": {
+        "concepts": [
+            "bulk-update-tradeoffs"
+        ],
+        "preferred": [
+            "callbacks may not run"
+        ]
+    },
+    "must_not": [
+        "assume entity save callbacks always run"
+    ],
+    "related_knowledge": [
+        "bulk-update-vs-entity-save"
+    ]
+}

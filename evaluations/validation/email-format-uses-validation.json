@@ -1,0 +1,22 @@
+{
+    "id": "email-format-uses-validation",
+    "category": "validation",
+    "type": "selection",
+    "prompt": "I need to reject malformed email addresses from a registration form before save.",
+    "expected": {
+        "concepts": [
+            "validation"
+        ],
+        "preferred": [
+            "Validator",
+            "validationDefault",
+            "email"
+        ]
+    },
+    "must_not": [
+        "only RulesChecker for format"
+    ],
+    "related_knowledge": [
+        "validation-vs-application-rule"
+    ]
+}

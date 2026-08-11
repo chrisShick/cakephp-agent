@@ -1,0 +1,39 @@
+---
+description: CakePHP 5 ORM overview and query efficiency expectations.
+globs:
+  - "**/Model/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm.html
+  - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
+last_verified: 2026-08-10
+related_knowledge: [contain-vs-matching, bulk-update-vs-entity-save]
+---
+
+# ORM
+
+## Framework semantics
+
+The CakePHP ORM centers on Tables, Entities, associations, `SelectQuery`, finders, and marshaling via `newEntity`/`patchEntity`.
+
+## Required behavior
+
+- Compose queries; prefer custom finders for reusable semantics.
+- Prevent N+1 with deliberate `contain` / join strategies.
+- Distinguish filtering associations (`matching` / joinWith) from eager loading (`contain`).
+- Do not assume bulk updates run entity callbacks/rules.
+
+## Anti-patterns
+
+- Hidden N+1
+- Over-eager contain
+- Eloquent-style mental models (not Laravel)
+
+## Review checklist
+
+- [ ] Query composable and intentional
+- [ ] Association loading justified
+- [ ] Lifecycle implications understood for writes

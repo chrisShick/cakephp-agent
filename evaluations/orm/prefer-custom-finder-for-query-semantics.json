@@ -1,0 +1,21 @@
+{
+    "id": "prefer-custom-finder-for-query-semantics",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "Several controllers filter articles where status=published. Where should that live?",
+    "expected": {
+        "concepts": [
+            "custom-finder"
+        ],
+        "preferred": [
+            "findPublished",
+            "custom finder"
+        ]
+    },
+    "must_not": [
+        "duplicate where clauses in every controller"
+    ],
+    "related_knowledge": [
+        "finder-vs-behavior"
+    ]
+}

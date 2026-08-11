@@ -1,0 +1,35 @@
+---
+description: CakePHP association configuration and loading implications.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/associations.html
+last_verified: 2026-08-10
+related_knowledge: [contain-vs-matching]
+---
+
+# Associations
+
+## Framework semantics
+
+Support `belongsTo`, `hasOne`, `hasMany`, `belongsToMany` with foreign/binding keys, strategies, and save options.
+
+## Required behavior
+
+- Configure associations on Tables with correct keys.
+- Choose loading strategy consciously (`join` vs `select`).
+- Understand cascading/dependent delete implications before enabling them.
+
+## Anti-patterns
+
+- Over-eager contain
+- Incorrect foreign key assumptions
+
+## Review checklist
+
+- [ ] Keys and class names correct
+- [ ] Loading strategy matches use case

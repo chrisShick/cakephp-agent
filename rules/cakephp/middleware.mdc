@@ -1,0 +1,30 @@
+---
+description: CakePHP middleware pipeline guidance.
+globs:
+  - "**/*Middleware*.php"
+  - "**/Application.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/controllers/middleware.html
+last_verified: 2026-08-10
+related_knowledge: [component-vs-middleware]
+---
+
+# Middleware
+
+## Framework semantics
+
+Middleware forms the PSR-style request/response queue configured on the Application.
+
+## Required behavior
+
+- Place cross-cutting HTTP pipeline concerns in middleware.
+- Do not push domain/persistence logic into middleware by default.
+- Respect existing middleware order in the project.
+
+## Anti-patterns
+
+- Middleware as a replacement for every cross-cutting concern

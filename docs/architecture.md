@@ -8,13 +8,12 @@ See the unified plan for the full blueprint:
 
 ## Current phase
 
-**Phase 0–1 complete.** Phase 2 extension engine is in progress / landed:
+**Phase 0–2 complete.** Phase 3 canonical knowledge landed:
 
-- Extension manifests + loader/validator
-- Composer detection with semver constraints
-- Enable/disable, dependsOn, conflicts, cycles
-- `detect` / `extensions` / `explain` CLI
-- Fake reference extensions: `test-fake-plugin`, `test-fake-addon`
-- Installer installs enabled extension rules/skills under `extensions/<id>/`
+- `knowledge/decisions/` v1 decision catalog (8 units)
+- `knowledge/anti-patterns/` (12 smells)
+- CakePHP core rules with `truth_level`, `priority`, and source provenance
+- `evaluations/` seed (17 scenarios) + schemas
+- `cakephp-agent validate` content lint + CI `content-validation` job
 
-**Next:** Phase 3 — canonical knowledge + CakePHP core rules (source-verified).
+**Next:** Phase 4 — P0 skills (`inspect-before-coding`, `choose-cakephp-abstraction`, …).

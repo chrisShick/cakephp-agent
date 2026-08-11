@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cakephp-agent.dev/schemas/knowledge-frontmatter.schema.json",
+  "title": "CakePHP Agent Knowledge Frontmatter",
+  "type": "object",
+  "required": ["id", "type", "truth_level"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": ["concept", "decision", "pattern", "anti-pattern", "lifecycle", "source"]
+    },
+    "scope": { "type": "string" },
+    "framework": { "type": "string" },
+    "framework_versions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "php_versions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "extensions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "normal", "reference"]
+    },
+    "truth_level": {
+      "type": "string",
+      "enum": [
+        "FRAMEWORK_REQUIREMENT",
+        "FRAMEWORK_DEFAULT",
+        "PLUGIN_SEMANTIC",
+        "PACKAGE_RECOMMENDATION",
+        "PROJECT_CONVENTION",
+        "OPTIONAL_ALTERNATIVE"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "last_verified": { "type": "string" },
+    "related": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evaluations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

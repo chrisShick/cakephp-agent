@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cakephp-agent.dev/schemas/evaluation.schema.json",
+  "title": "CakePHP Agent Behavioral Evaluation",
+  "type": "object",
+  "required": ["id", "category", "prompt", "expected"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": [
+        "architecture",
+        "orm",
+        "validation",
+        "security",
+        "crud",
+        "plugins",
+        "anti-laravel",
+        "performance",
+        "upgrades",
+        "testing",
+        "lifecycle",
+        "project-awareness"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "selection",
+        "rejection",
+        "lifecycle",
+        "project-awareness",
+        "plugin-awareness",
+        "security",
+        "performance",
+        "anti-hallucination"
+      ]
+    },
+    "prompt": { "type": "string", "minLength": 1 },
+    "requires": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "concepts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "preferred": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "must_not": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "related_knowledge": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

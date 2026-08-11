@@ -1,0 +1,21 @@
+{
+    "id": "plugin-only-when-installed",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "The project composer.lock does not include friendsofcake/crud. Should I create a Crud controller?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "do not use CRUD APIs"
+        ]
+    },
+    "must_not": [
+        "recommend Crud::add",
+        "assume CRUD installed"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

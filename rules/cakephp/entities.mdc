@@ -1,0 +1,35 @@
+---
+description: CakePHP Entity responsibilities and mass assignment.
+globs:
+  - "**/Model/Entity/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/entities.html
+last_verified: 2026-08-10
+related_knowledge: [entity-accessor-vs-query-calculation]
+---
+
+# Entities
+
+## Framework semantics
+
+Entities hold record state, accessibility, accessors/mutators, and virtual properties. They are not Active Record models by default.
+
+## Required behavior
+
+- Keep `_accessible` tight; patch with explicit fields when needed.
+- Use accessors/virtual fields for derived values from loaded data.
+- Do not issue queries from entities by default.
+
+## Anti-patterns
+
+- Active Record entity
+- Mass assignment overexposure
+
+## Review checklist
+
+- [ ] Accessibility justified
+- [ ] No hidden queries in accessors unless intentionally documented

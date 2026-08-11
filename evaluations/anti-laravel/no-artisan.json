@@ -1,0 +1,18 @@
+{
+    "id": "no-artisan",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Use artisan to list routes in this CakePHP project.",
+    "expected": {
+        "concepts": [
+            "cake-routes"
+        ],
+        "preferred": [
+            "bin/cake routes"
+        ]
+    },
+    "must_not": [
+        "artisan"
+    ],
+    "related_knowledge": []
+}

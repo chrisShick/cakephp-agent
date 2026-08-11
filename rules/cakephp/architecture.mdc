@@ -1,0 +1,45 @@
+---
+description: CakePHP 5 application architecture ownership boundaries.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/intro.html
+  - https://book.cakephp.org/5.x/development/application.html
+last_verified: 2026-08-10
+related_knowledge: [plugin-vs-application-code]
+---
+
+# Architecture
+
+## Framework semantics
+
+CakePHP applications compose `Application` bootstrap, middleware, routing, controllers/components, Tables/Entities/behaviors, events, commands, and plugins.
+
+## Required behavior
+
+- Keep HTTP orchestration in controllers.
+- Keep persistence and query configuration on Tables; record state on Entities.
+- Prefer existing CakePHP extension points (behaviors, components, middleware, events) before new layers.
+- Do not recommend plugin APIs unless Composer metadata shows they are present.
+
+## Decision rules
+
+1. Identify the lifecycle that owns the concern (HTTP vs persistence vs CLI).
+2. Prefer the narrowest framework extension point that fits.
+3. Only then introduce a project service or package.
+
+## Anti-patterns
+
+- Fat controllers and fat tables
+- Framework-replacement abstractions
+- Premature service layers
+
+## Review checklist
+
+- [ ] Lifecycle ownership clear
+- [ ] Table/Entity boundary respected
+- [ ] No absent plugin APIs recommended

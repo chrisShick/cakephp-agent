@@ -1,0 +1,18 @@
+{
+    "id": "table-not-repository-wrapper",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Should I wrap every CakePHP Table in a repository class by default?",
+    "expected": {
+        "concepts": [
+            "table-as-repository"
+        ],
+        "preferred": [
+            "use Table directly"
+        ]
+    },
+    "must_not": [
+        "mandate repository wrappers"
+    ],
+    "related_knowledge": []
+}

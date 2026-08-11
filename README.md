@@ -2,7 +2,7 @@
 
 AI engineering knowledge platform for **CakePHP 5.x** — rules, skills, extensions, and a safe installer for Cursor, Claude Code, and Codex.
 
-> Status: early development (Phase 0–1). Extension auto-detection and full CakePHP knowledge packs land in later phases.
+> Status: early development (Phases 0–3). Extension auto-detection works; CakePHP core knowledge/rules and evaluation seeds are in place. P0 skills and FriendsOfCake CRUD come next.
 
 ## What this is
 

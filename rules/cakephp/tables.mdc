@@ -1,0 +1,37 @@
+---
+description: CakePHP Table responsibilities and lifecycle.
+globs:
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/table-objects.html
+last_verified: 2026-08-10
+related_knowledge: [table-callback-vs-application-rule]
+---
+
+# Tables
+
+## Framework semantics
+
+Tables are the primary persistence/query interface. Configure associations, validation, application rules, finders, and behaviors in `initialize()` / `buildRules()` / `validation*` methods.
+
+## Required behavior
+
+- Put repository/query access on Tables, not Entities.
+- Use `buildRules()` for stateful invariants.
+- Prefer behaviors for reusable cross-table persistence features.
+- Obtain tables via locator/`fetchTable` conventions used by the project.
+
+## Anti-patterns
+
+- Fat table
+- HTTP concerns in model
+- Repository-over-table by default
+
+## Review checklist
+
+- [ ] Associations and rules configured on Table
+- [ ] Callbacks used for side effects, not as a substitute for RulesChecker when rules fit
