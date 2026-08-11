@@ -6,7 +6,7 @@ Goal: track what remains before calling a public **stable 1.0**.
 ## Verdict
 
 **Packagist is live:** [chrisshick/cakephp-agent](https://packagist.org/packages/chrisshick/cakephp-agent).  
-**`1.0.0-beta.1`** is the public beta. Phase **14b** adds ORM-first + thin security/knowledge polish for an amazing stable 1.0. Remaining gate: **soak** → **`1.0.0`**.
+**`1.0.0-beta.2`** is the current public beta (ORM-first polish). Remaining gate: **soak** → **`1.0.0`**.
 
 ## Closed before / in beta + 14b
 

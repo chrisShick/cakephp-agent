@@ -3,7 +3,7 @@
 > **For agents:** ORM-first + thin security/knowledge polish before stable 1.0. Packagist/beta path remains [HANDOFF-phase-14.md](HANDOFF-phase-14.md).
 
 **Repo:** https://github.com/chrisShick/cakephp-agent  
-**Package:** [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent) · CLI **1.0.0-beta.1** · **Apache-2.0**  
+**Package:** [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent) · CLI **1.0.0-beta.2** · **Apache-2.0**  
 **Status date:** 2026-08-11
 
 ---
@@ -31,6 +31,6 @@ Live LLM evals, MCP/remote registry, 200+ evals, DB packs, plugin-author mode, k
 ## Kickoff (remaining)
 
 ```text
-Soak install of 1.0.0-beta.1 in a real CakePHP 5 app.
+Soak install of 1.0.0-beta.2 in a real CakePHP 5 app.
 Fix friction, then cut v1.0.0.
 ```

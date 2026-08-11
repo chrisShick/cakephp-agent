@@ -1,9 +1,9 @@
 # Agent Handoff — Phase 14 (Packagist / 1.0)
 
-> **Status:** Packagist live; **`1.0.0-beta.1`** prepared. Remaining: tag beta, soak, then stable **1.0.0**.
+> **Status:** Packagist live; **`1.0.0-beta.2`** (ORM-first polish). Remaining: soak, then stable **1.0.0**.
 
 **Repo:** https://github.com/chrisShick/cakephp-agent  
-**Package:** [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent) · CLI **1.0.0-beta.1** · **Apache-2.0**  
+**Package:** [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent) · CLI **1.0.0-beta.2** · **Apache-2.0**  
 **Status date:** 2026-08-11
 
 ---

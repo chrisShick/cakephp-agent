@@ -47,7 +47,7 @@ Coverage audit: [coverage-rules-skills.md](coverage-rules-skills.md).
 
 ## Versioning
 
-- Package CLI version: `Application::VERSION` (currently **1.0.0-beta.1**).
+- Package CLI version: `Application::VERSION` (currently **1.0.0-beta.2**).
 - Packagist: https://packagist.org/packages/chrisshick/cakephp-agent
 - License: **Apache-2.0**.
 - Stable 1.0 after soak — see [pre-1.0-review.md](pre-1.0-review.md).

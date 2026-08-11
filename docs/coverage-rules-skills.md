@@ -1,6 +1,6 @@
 # Rules & skills coverage map (CakePHP 5)
 
-Audit date: 2026-08-11 · Package **1.0.0-beta.1** · **Apache-2.0**  
+Audit date: 2026-08-11 · Package **1.0.0-beta.2** · **Apache-2.0**  
 **Phase ownership:** Phase 14 Packagist/beta done path — [HANDOFF-phase-14.md](HANDOFF-phase-14.md). Phase **14b** ORM-first + 1.0 polish — [HANDOFF-phase-14b.md](HANDOFF-phase-14b.md) (soak → stable 1.0).
 
 Goal: everyday CakePHP work has a rule/skill path (or capability-gated pack) so agents don’t invent foreign frameworks. **Book-complete enough for 1.0 trust** after Phase 13; not an encyclopedia of every plugin.
