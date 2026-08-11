@@ -35,8 +35,9 @@ Review a diff or area for CakePHP-native quality: correct abstraction ownership,
 4. Check validation vs application rules boundary.
 5. Check plugin/API honesty — no reimplementation or phantom packages.
 6. Check security-sensitive surfaces lightly (exposure, IDOR patterns as evidenced) without assuming Auth plugins.
-7. Produce findings: severity, file references, preferred CakePHP fix, rejected alternatives.
-8. Suggest follow-up skills for fixes (`add-application-rule`, `create-finder`, etc.).
+7. For structural issues, use `detect-architectural-smells`; for ownership disputes, use `review-abstraction-choice`.
+8. Produce findings: severity, file references, preferred CakePHP fix, rejected alternatives.
+9. Suggest follow-up skills for fixes (`add-application-rule`, `create-finder`, etc.).
 
 ## Framework decisions
 

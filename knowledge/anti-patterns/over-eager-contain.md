@@ -23,6 +23,10 @@ Over-fetching and row explosion
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+contain() lists that load associations unused by the view/API serializer.
+
 ## Preferred refactoring
 
 Contain only what the use case needs; prefer matching/joins for filters

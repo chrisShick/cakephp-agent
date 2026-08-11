@@ -23,6 +23,10 @@ Onboarding cost; fights conventions
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Custom layers whose only job is to hide CakePHP Tables/controllers behind generic ports.
+
 ## Preferred refactoring
 
 Prefer CakePHP extension points; invent abstractions for real domain needs

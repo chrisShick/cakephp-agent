@@ -11,7 +11,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/validation.html
 last_verified: 2026-08-10
 related: [validation-vs-application-rule]
-evaluations: [unique-email-uses-application-rule]
+evaluations: [unique-email-uses-application-rule, reject-uniqueness-only-in-beforeSave]
 ---
 
 # Table callback vs application rule
@@ -49,3 +49,4 @@ Reject duplicate slug → `buildRules`. Touch a search index after save → `aft
 ## Evaluations
 
 - `unique-email-uses-application-rule`
+- `reject-uniqueness-only-in-beforeSave`

@@ -1,0 +1,20 @@
+{
+    "id": "reject-listener-for-http-auth-gate",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Should I enforce /admin authentication by listening to Controller.startup and skip middleware?",
+    "expected": {
+        "concepts": [
+            "middleware"
+        ],
+        "preferred": [
+            "middleware"
+        ]
+    },
+    "must_not": [
+        "endorse listeners as the preferred HTTP auth gate"
+    ],
+    "related_knowledge": [
+        "middleware-vs-event-listener"
+    ]
+}

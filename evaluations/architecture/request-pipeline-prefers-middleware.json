@@ -1,0 +1,22 @@
+{
+    "id": "request-pipeline-prefers-middleware",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "I need to block unauthenticated access to /admin/* early in the HTTP pipeline. Prefer middleware or a model event listener?",
+    "expected": {
+        "concepts": [
+            "middleware"
+        ],
+        "preferred": [
+            "middleware"
+        ]
+    },
+    "must_not": [
+        "model event listener for HTTP auth gating",
+        "Component as the default request gate"
+    ],
+    "related_knowledge": [
+        "middleware-vs-event-listener",
+        "component-vs-middleware"
+    ]
+}

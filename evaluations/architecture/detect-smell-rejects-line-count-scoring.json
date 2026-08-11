@@ -1,0 +1,22 @@
+{
+    "id": "detect-smell-rejects-line-count-scoring",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "A Table is 400 lines long. Is that alone enough to call it a fat-table architectural smell?",
+    "expected": {
+        "concepts": [
+            "detect-architectural-smells",
+            "false-positives"
+        ],
+        "preferred": [
+            "evaluate ownership",
+            "duplication"
+        ]
+    },
+    "must_not": [
+        "treat line count alone as proof of an architectural smell"
+    ],
+    "related_knowledge": [
+        "fat-table"
+    ]
+}

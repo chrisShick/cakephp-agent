@@ -23,6 +23,10 @@ Security and integrity risk
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+_accessible set to true for sensitive or unintended fields to make patching convenient.
+
 ## Preferred refactoring
 
 Keep accessibility tight; patch with field lists

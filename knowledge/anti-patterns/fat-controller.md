@@ -23,6 +23,10 @@ Hard to test; duplicates model rules; blurs HTTP vs domain ownership
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Look for persistence, complex queries, and domain invariants inside controller actions instead of HTTP orchestration.
+
 ## Preferred refactoring
 
 Move persistence to Tables/rules/finders; keep controllers as HTTP orchestration

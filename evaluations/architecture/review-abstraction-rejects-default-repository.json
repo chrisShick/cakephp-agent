@@ -1,0 +1,22 @@
+{
+    "id": "review-abstraction-rejects-default-repository",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "A PR wraps every Table in a repository for clean architecture with no multi-source need. Approve as CakePHP best practice?",
+    "expected": {
+        "concepts": [
+            "review-abstraction-choice",
+            "table"
+        ],
+        "preferred": [
+            "Table"
+        ]
+    },
+    "must_not": [
+        "endorse repository-over-table as default best practice"
+    ],
+    "related_knowledge": [
+        "repository-over-table",
+        "finder-vs-service"
+    ]
+}

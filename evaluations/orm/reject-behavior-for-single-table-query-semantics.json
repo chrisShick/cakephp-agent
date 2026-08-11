@@ -1,0 +1,20 @@
+{
+    "id": "reject-behavior-for-single-table-query-semantics",
+    "category": "orm",
+    "type": "rejection",
+    "prompt": "ArticlesTable needs findPublished() used only by articles. Should I put that in a new general Behavior?",
+    "expected": {
+        "concepts": [
+            "custom-finder"
+        ],
+        "preferred": [
+            "finder"
+        ]
+    },
+    "must_not": [
+        "endorse a god behavior for one table's query semantics"
+    ],
+    "related_knowledge": [
+        "finder-vs-behavior"
+    ]
+}

@@ -216,6 +216,20 @@ final class KnowledgeInstallerTest extends TestCase
                 ),
                 'Expected choose-cakephp-abstraction skill in dry-run plan'
             );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'detect-architectural-smells/SKILL.md')
+                ),
+                'Expected detect-architectural-smells skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'review-abstraction-choice/SKILL.md')
+                ),
+                'Expected review-abstraction-choice skill in dry-run plan'
+            );
             self::assertNotEmpty($agentPaths);
             self::assertTrue(
                 (bool) array_filter(

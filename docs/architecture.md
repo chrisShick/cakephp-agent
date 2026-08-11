@@ -8,11 +8,11 @@ See the unified plan for the full blueprint:
 
 ## Agent handoff
 
-**Starting Phase 9?** Read **[HANDOFF-phase-9.md](HANDOFF-phase-9.md)** first.
+**Starting Phase 10?** Read **[HANDOFF-phase-10.md](HANDOFF-phase-10.md)** first.
 
 ## Current phase
 
-**Phases 0–8 complete** on `main`.
+**Phases 0–9 complete** on `main`.
 
 | Phase | Status |
 |---|---|
@@ -24,10 +24,12 @@ See the unified plan for the full blueprint:
 | 6 AuthN / AuthZ | Done |
 | 7 Search + CRUD↔Search integration | Done |
 | 8 Agents + deeper reviews | Done |
-| **9 Decision intelligence hardening** | **Next** |
+| 9 Decision intelligence hardening | Done |
+| **10 Evaluation platform** | **Next** |
 
-Phase 8 delivered:
+Phase 9 delivered:
 
-- Core agents: `cakephp-code-reviewer`, `cakephp-orm-reviewer`, `cakephp-security-reviewer`, `cakephp-architecture-reviewer`
-- Capability gates (no phantom CRUD/Search/Auth APIs)
-- Content validation + installer coverage for agents/
+- Expanded core decisions (service/event/transaction/join/middleware boundaries)
+- Smell catalog expanded beyond the v1 minimum (god-* / duplication / exposure / lifecycle opacity)
+- Skills: `detect-architectural-smells`, `review-abstraction-choice`
+- Positive + negative eval coverage for critical/high decisions

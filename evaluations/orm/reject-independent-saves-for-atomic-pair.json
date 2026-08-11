@@ -1,0 +1,20 @@
+{
+    "id": "reject-independent-saves-for-atomic-pair",
+    "category": "orm",
+    "type": "rejection",
+    "prompt": "I'll save the invoice, then save line items in a second unrelated call with no transaction. Is that fine when both must exist together?",
+    "expected": {
+        "concepts": [
+            "transaction"
+        ],
+        "preferred": [
+            "transactional"
+        ]
+    },
+    "must_not": [
+        "endorse independent saves for an atomic pair"
+    ],
+    "related_knowledge": [
+        "transaction-vs-independent-save"
+    ]
+}

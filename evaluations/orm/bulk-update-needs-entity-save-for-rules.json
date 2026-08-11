@@ -1,0 +1,23 @@
+{
+    "id": "bulk-update-needs-entity-save-for-rules",
+    "category": "orm",
+    "type": "rejection",
+    "prompt": "I need to update an article's status and ensure application rules and afterSave callbacks still run. Is Table::updateAll the right default?",
+    "expected": {
+        "concepts": [
+            "entity-save",
+            "application-rules"
+        ],
+        "preferred": [
+            "save",
+            "saveMany"
+        ]
+    },
+    "must_not": [
+        "endorse updateAll when rules and callbacks are required",
+        "assume bulk update runs entity callbacks"
+    ],
+    "related_knowledge": [
+        "bulk-update-vs-entity-save"
+    ]
+}

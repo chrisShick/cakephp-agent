@@ -23,6 +23,10 @@ Duplicates and skips model invariants
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Controllers calling patch/validate/save graphs or encoding uniqueness checks inline.
+
 ## Preferred refactoring
 
 Use Table validation, rules, and finders

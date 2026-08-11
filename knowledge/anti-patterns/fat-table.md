@@ -23,6 +23,10 @@ Becomes an untestable god object
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Inventory Table methods for UI/HTTP/integration concerns unrelated to persistence and query ownership.
+
 ## Preferred refactoring
 
 Extract finders/behaviors/listeners; keep Table focused on persistence boundary

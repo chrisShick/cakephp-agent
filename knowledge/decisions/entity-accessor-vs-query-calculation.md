@@ -10,7 +10,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/entities.html
 last_verified: 2026-08-10
 related: [contain-vs-matching]
-evaluations: [entity-not-active-record]
+evaluations: [entity-not-active-record, aggregate-sort-prefers-query-not-accessor]
 ---
 
 # Entity accessor vs query-time calculation
@@ -48,3 +48,4 @@ Full name from first/last → accessor. Count of related comments for index sort
 ## Evaluations
 
 - `entity-not-active-record`
+- `aggregate-sort-prefers-query-not-accessor`

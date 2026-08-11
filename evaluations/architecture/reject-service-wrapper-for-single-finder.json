@@ -1,0 +1,21 @@
+{
+    "id": "reject-service-wrapper-for-single-finder",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Is an ArticleService whose only method calls $articles->find('published') a good CakePHP default?",
+    "expected": {
+        "concepts": [
+            "custom-finder",
+            "premature-service-layer"
+        ],
+        "preferred": [
+            "finder"
+        ]
+    },
+    "must_not": [
+        "endorse premature service wrapper for a single finder"
+    ],
+    "related_knowledge": [
+        "finder-vs-service"
+    ]
+}

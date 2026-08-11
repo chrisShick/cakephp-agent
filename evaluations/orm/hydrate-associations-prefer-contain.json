@@ -1,0 +1,20 @@
+{
+    "id": "hydrate-associations-prefer-contain",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "Article index entities need their Authors loaded for the view. Prefer contain() or a hand-written join that reinvents the association?",
+    "expected": {
+        "concepts": [
+            "contain"
+        ],
+        "preferred": [
+            "contain"
+        ]
+    },
+    "must_not": [
+        "hand-written join reimplementing association keys for simple eager load"
+    ],
+    "related_knowledge": [
+        "contain-vs-join"
+    ]
+}

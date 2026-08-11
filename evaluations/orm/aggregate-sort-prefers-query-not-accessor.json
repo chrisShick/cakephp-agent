@@ -1,0 +1,24 @@
+{
+    "id": "aggregate-sort-prefers-query-not-accessor",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "I need to sort articles by comment count on an index page. Should I load all articles and compute counts in an entity accessor?",
+    "expected": {
+        "concepts": [
+            "query-aggregate",
+            "finder"
+        ],
+        "preferred": [
+            "query",
+            "finder",
+            "counter cache"
+        ]
+    },
+    "must_not": [
+        "hydrate all rows to count in PHP",
+        "entity accessor issuing queries by default"
+    ],
+    "related_knowledge": [
+        "entity-accessor-vs-query-calculation"
+    ]
+}

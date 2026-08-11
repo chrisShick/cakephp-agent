@@ -11,7 +11,7 @@ sources:
   - https://book.cakephp.org/5.x/controllers/middleware.html
 last_verified: 2026-08-10
 related: []
-evaluations: [auth-middleware-not-component-default]
+evaluations: [auth-middleware-not-component-default, reusable-controller-helper-prefers-component, reject-middleware-for-controller-only-flash-helper]
 ---
 
 # Component vs middleware
@@ -49,3 +49,5 @@ Authentication identity loading typically belongs in middleware; a pagination he
 ## Evaluations
 
 - `auth-middleware-not-component-default`
+- `reusable-controller-helper-prefers-component`
+- `reject-middleware-for-controller-only-flash-helper`

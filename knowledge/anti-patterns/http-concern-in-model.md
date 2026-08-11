@@ -23,6 +23,10 @@ Couples persistence to HTTP
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Tables/entities building redirects, flash messages, or response JSON.
+
 ## Preferred refactoring
 
 Keep HTTP shaping in controllers/components/listeners

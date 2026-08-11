@@ -23,6 +23,10 @@ Drift and duplicated bugs
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+App code reinventing behaviors already provided by an installed plugin API.
+
 ## Preferred refactoring
 
 Use plugin extension points when the pack is enabled

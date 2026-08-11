@@ -23,6 +23,10 @@ Hides CakePHP without benefit
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Flag repositories that exist solely to proxy Table methods without an anti-corruption or multi-source reason.
+
 ## Preferred refactoring
 
 Use Tables directly unless a clear architectural boundary exists

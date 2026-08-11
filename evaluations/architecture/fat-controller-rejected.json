@@ -15,5 +15,7 @@
     "must_not": [
         "endorse fat controller as best practice"
     ],
-    "related_knowledge": []
+    "related_knowledge": [
+        "fat-controller"
+    ]
 }

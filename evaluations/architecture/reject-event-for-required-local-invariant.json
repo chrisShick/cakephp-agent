@@ -1,0 +1,22 @@
+{
+    "id": "reject-event-for-required-local-invariant",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Decrementing inventory must succeed as part of placing an order. Is firing an event and hoping a listener runs the preferred approach?",
+    "expected": {
+        "concepts": [
+            "direct-call",
+            "transaction"
+        ],
+        "preferred": [
+            "direct call",
+            "transaction"
+        ]
+    },
+    "must_not": [
+        "endorse events as the only path for required local invariants"
+    ],
+    "related_knowledge": [
+        "event-vs-direct-call"
+    ]
+}

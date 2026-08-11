@@ -23,6 +23,10 @@ Extra indirection without architectural value
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Flag new *Service classes that only wrap a single Table find/save with no multi-step orchestration.
+
 ## Preferred refactoring
 
 Prefer Table/Entity/Behavior/component/listener first; add services for real orchestration

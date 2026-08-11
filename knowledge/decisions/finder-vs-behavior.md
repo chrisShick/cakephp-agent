@@ -11,7 +11,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/behaviors.html
 last_verified: 2026-08-10
 related: [contain-vs-matching]
-evaluations: [prefer-custom-finder-for-query-semantics]
+evaluations: [prefer-custom-finder-for-query-semantics, reject-behavior-for-single-table-query-semantics]
 ---
 
 # Finder vs behavior
@@ -49,3 +49,4 @@ Prefer `$articles->find('published')` over copying status conditions into every 
 ## Evaluations
 
 - `prefer-custom-finder-for-query-semantics`
+- `reject-behavior-for-single-table-query-semantics`

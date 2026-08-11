@@ -23,6 +23,10 @@ Silent performance collapse
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Association property access inside loops without contain/select; compare query counts on list pages.
+
 ## Preferred refactoring
 
 Eager-load deliberately; inspect query count

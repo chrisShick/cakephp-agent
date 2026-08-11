@@ -1,0 +1,20 @@
+{
+    "id": "cross-table-capability-prefers-behavior",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "Many Tables need the same soft-delete callbacks and finders. Prefer a Behavior or a shared service class?",
+    "expected": {
+        "concepts": [
+            "behavior"
+        ],
+        "preferred": [
+            "Behavior"
+        ]
+    },
+    "must_not": [
+        "endorse a service instead of a Behavior for Table lifecycle reuse"
+    ],
+    "related_knowledge": [
+        "behavior-vs-service"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "reject-service-for-timestamp-style-concern",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Should I implement created/modified timestamp updates via an application service called from every controller rather than a Behavior?",
+    "expected": {
+        "concepts": [
+            "behavior"
+        ],
+        "preferred": [
+            "Timestamp",
+            "Behavior"
+        ]
+    },
+    "must_not": [
+        "endorse controller-called services for timestamp-style Table concerns"
+    ],
+    "related_knowledge": [
+        "behavior-vs-service"
+    ]
+}

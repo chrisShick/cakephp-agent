@@ -10,7 +10,7 @@ sources:
   - https://book.cakephp.org/5.x/plugins.html
 last_verified: 2026-08-10
 related: []
-evaluations: [plugin-only-when-installed, no-plugin-api-reimplementation]
+evaluations: [plugin-only-when-installed, no-plugin-api-reimplementation, reject-plugin-for-one-app-controller-glue]
 ---
 
 # Plugin vs application code
@@ -51,3 +51,4 @@ If `friendsofcake/crud` is installed, prefer CRUD configuration/listeners over r
 
 - `plugin-only-when-installed`
 - `no-plugin-api-reimplementation`
+- `reject-plugin-for-one-app-controller-glue`

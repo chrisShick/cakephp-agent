@@ -1,0 +1,24 @@
+{
+    "id": "reject-uniqueness-only-in-beforeSave",
+    "category": "lifecycle",
+    "type": "rejection",
+    "prompt": "To enforce unique emails, I will check uniqueness only inside beforeSave and skip RulesChecker. Is that the preferred CakePHP approach?",
+    "expected": {
+        "concepts": [
+            "application-rule"
+        ],
+        "preferred": [
+            "buildRules",
+            "RulesChecker",
+            "isUnique"
+        ]
+    },
+    "must_not": [
+        "endorse uniqueness only in beforeSave",
+        "skip RulesChecker as best practice"
+    ],
+    "related_knowledge": [
+        "table-callback-vs-application-rule",
+        "validation-vs-application-rule"
+    ]
+}

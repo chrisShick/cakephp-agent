@@ -1,0 +1,22 @@
+{
+    "id": "decoupled-side-effect-prefers-event",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "After an order is saved, optional analytics and email subscribers should react without the OrdersTable knowing each one. Prefer events or hard-coding every call?",
+    "expected": {
+        "concepts": [
+            "event",
+            "listener"
+        ],
+        "preferred": [
+            "event",
+            "listener"
+        ]
+    },
+    "must_not": [
+        "hard-code every optional subscriber in the Table"
+    ],
+    "related_knowledge": [
+        "event-vs-direct-call"
+    ]
+}

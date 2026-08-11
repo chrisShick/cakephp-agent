@@ -1,0 +1,22 @@
+{
+    "id": "query-semantics-prefer-finder-not-service",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "I need reusable published-article query filters for ArticlesTable. Should I create ArticleQueryService or a custom finder?",
+    "expected": {
+        "concepts": [
+            "custom-finder"
+        ],
+        "preferred": [
+            "finder",
+            "findPublished"
+        ]
+    },
+    "must_not": [
+        "endorse a service that only wraps a finder",
+        "Eloquent scope"
+    ],
+    "related_knowledge": [
+        "finder-vs-service"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id": "multi-write-consistency-prefers-transaction",
+    "category": "orm",
+    "type": "selection",
+    "prompt": "Creating an invoice and its line items must not leave an invoice without lines on failure. How should persistence be structured?",
+    "expected": {
+        "concepts": [
+            "transaction"
+        ],
+        "preferred": [
+            "transactional",
+            "transaction"
+        ]
+    },
+    "must_not": [
+        "independent saves without a consistency boundary"
+    ],
+    "related_knowledge": [
+        "transaction-vs-independent-save"
+    ]
+}

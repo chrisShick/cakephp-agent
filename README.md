@@ -2,7 +2,7 @@
 
 AI engineering knowledge platform for **CakePHP 5.x** — rules, skills, extensions, and a safe installer for Cursor, Claude Code, and Codex.
 
-> Status: early development (Phases 0–8). Capability-aware reviewer agents are in place. Decision intelligence hardening is next.
+> Status: early development (Phases 0–9). Decision intelligence hardening is in place. Evaluation platform (eval runner) is next.
 
 ## What this is
 
@@ -90,7 +90,7 @@ Cursor / Claude / Codex + .ai project overlays
 
 See [docs/plans/cakephp-agent-unified-plan.md](docs/plans/cakephp-agent-unified-plan.md).
 
-**New agent / Phase 9 pickup:** [docs/HANDOFF-phase-9.md](docs/HANDOFF-phase-9.md)
+**New agent / Phase 10 pickup:** [docs/HANDOFF-phase-10.md](docs/HANDOFF-phase-10.md)
 
 ## Development
 

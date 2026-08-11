@@ -23,6 +23,10 @@ Breaks CakePHP Table/Entity separation
 
 Large files alone are not proof. Evaluate ownership and duplication, not line count.
 
+## Detection guidance
+
+Search entity methods for TableLocator usage, direct connection queries, or save() on self as the default style.
+
 ## Preferred refactoring
 
 Keep queries/saves on Tables; entities hold state

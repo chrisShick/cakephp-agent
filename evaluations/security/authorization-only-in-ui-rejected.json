@@ -1,0 +1,22 @@
+{
+    "id": "authorization-only-in-ui-rejected",
+    "category": "security",
+    "type": "rejection",
+    "prompt": "We hide the Delete button in the UI for non-admins and skip server-side authorization. Is that sufficient?",
+    "expected": {
+        "concepts": [
+            "authorization",
+            "authorization-only-in-ui"
+        ],
+        "preferred": [
+            "server-side authorization",
+            "policy"
+        ]
+    },
+    "must_not": [
+        "endorse UI-only authorization as sufficient"
+    ],
+    "related_knowledge": [
+        "authorization-only-in-ui"
+    ]
+}

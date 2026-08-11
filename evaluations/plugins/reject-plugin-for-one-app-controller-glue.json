@@ -1,0 +1,21 @@
+{
+    "id": "reject-plugin-for-one-app-controller-glue",
+    "category": "plugins",
+    "type": "rejection",
+    "prompt": "I have a small redirect helper used by two controllers in one app. Should I create a Composer plugin package for it by default?",
+    "expected": {
+        "concepts": [
+            "application-code"
+        ],
+        "preferred": [
+            "application",
+            "Component"
+        ]
+    },
+    "must_not": [
+        "endorse creating a plugin for one-app-only glue by default"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

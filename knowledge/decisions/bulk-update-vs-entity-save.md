@@ -10,7 +10,7 @@ sources:
   - https://book.cakephp.org/5.x/orm/saving-data.html
 last_verified: 2026-08-10
 related: [table-callback-vs-application-rule]
-evaluations: [bulk-update-skips-entity-callbacks]
+evaluations: [bulk-update-skips-entity-callbacks, bulk-update-needs-entity-save-for-rules]
 ---
 
 # Bulk update vs entity save
@@ -48,3 +48,4 @@ Toggle one article’s published flag with rules → entity save. Mark 50k expir
 ## Evaluations
 
 - `bulk-update-skips-entity-callbacks`
+- `bulk-update-needs-entity-save-for-rules`

@@ -1,0 +1,22 @@
+{
+    "id": "reject-middleware-for-controller-only-flash-helper",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "I want middleware to format success flash messages for one controller action's form POST flow. Good idea?",
+    "expected": {
+        "concepts": [
+            "component",
+            "controller-orchestration"
+        ],
+        "preferred": [
+            "Component",
+            "controller"
+        ]
+    },
+    "must_not": [
+        "endorse middleware for controller-only flash helpers"
+    ],
+    "related_knowledge": [
+        "component-vs-middleware"
+    ]
+}

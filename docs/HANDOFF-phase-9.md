@@ -28,11 +28,13 @@ Installer, extensions (CRUD/Auth/Search + integrations), P0 skills, evaluations 
 
 ### Accept
 
-- New decisions/smells follow existing contracts + content validation
-- Skills reference `inspect-before-coding` / `choose-cakephp-abstraction`
-- Critical decisions have pos+neg evals
-- `phpunit` + `phpstan` + `validate` green
-- Handoff for Phase 10 (eval runner) or docs/1.0 track as appropriate
+- [x] New decisions/smells follow existing contracts + content validation
+- [x] Skills reference `inspect-before-coding` / `choose-cakephp-abstraction`
+- [x] Critical decisions have pos+neg evals
+- [x] `phpunit` + `phpstan` + `validate` green
+- [x] Handoff for Phase 10 (eval runner)
+
+> **Phase 9 complete.** Continue at [HANDOFF-phase-10.md](HANDOFF-phase-10.md).
 
 ### Out of scope
 

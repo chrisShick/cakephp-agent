@@ -54,11 +54,17 @@ Link and apply as relevant:
 
 - `knowledge/decisions/validation-vs-application-rule`
 - `knowledge/decisions/finder-vs-behavior`
+- `knowledge/decisions/finder-vs-service`
+- `knowledge/decisions/behavior-vs-service`
 - `knowledge/decisions/component-vs-middleware`
+- `knowledge/decisions/middleware-vs-event-listener`
 - `knowledge/decisions/entity-accessor-vs-query-calculation`
 - `knowledge/decisions/table-callback-vs-application-rule`
 - `knowledge/decisions/contain-vs-matching`
+- `knowledge/decisions/contain-vs-join`
 - `knowledge/decisions/bulk-update-vs-entity-save`
+- `knowledge/decisions/transaction-vs-independent-save`
+- `knowledge/decisions/event-vs-direct-call`
 - `knowledge/decisions/plugin-vs-application-code`
 
 Rough defaults (override with project conventions and decisions above):
@@ -93,4 +99,4 @@ Rough defaults (override with project conventions and decisions above):
 ## Completion criteria
 
 - Ownership decision documented and ready for implementation.
-- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`).
+- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `review-abstraction-choice`).
