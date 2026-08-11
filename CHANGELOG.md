@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-beta.2] - 2026-08-11
+
+ORM-first quality polish on Packagist. Still a public beta — soak before stable `1.0.0`.
+
+Composer: **`composer require --dev chrisshick/cakephp-agent:^1.0@beta`**  
+Package: https://packagist.org/packages/chrisshick/cakephp-agent
+
 ### Added
 
 - Phase 14b: ORM-first decision (`orm-vs-connection-sql`), anti-patterns (`bypassing-orm-for-convenience`, `unsafe-sql-concatenation`), and related evals
@@ -18,6 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Philosophy / ORM / Tables / advanced-orm / security rules prefer ORM and bound Query expressions
 - Ownership and smell skills link ORM-first + SQL concat guidance
 - Source freshness (`last_verified`) refreshed on critical ORM/security rules
+- Package version **1.0.0-beta.2**
+
+### Notes
+
+- Prefer Table/Query APIs for domain data; `Connection::execute` / raw SQL is exceptional and must be bound
+- Offline `eval` is a corpus/self-check harness, not live model grading
+- Stable **1.0.0** after soak — see [docs/pre-1.0-review.md](docs/pre-1.0-review.md)
 
 ## [1.0.0-beta.1] - 2026-08-11
 
@@ -77,5 +91,6 @@ Composer package name: **`chrisshick/cakephp-agent`** (Composer requires a lower
 - Offline `eval` is a corpus/self-check harness, not live model grading
 - See [docs/pre-1.0-review.md](docs/pre-1.0-review.md) for the path to stable 1.0
 
+[1.0.0-beta.2]: https://github.com/chrisShick/cakephp-agent/releases/tag/v1.0.0-beta.2
 [1.0.0-beta.1]: https://github.com/chrisShick/cakephp-agent/releases/tag/v1.0.0-beta.1
 [0.9.0]: https://github.com/chrisShick/cakephp-agent/releases/tag/v0.9.0

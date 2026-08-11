@@ -2,7 +2,7 @@
 
 AI engineering knowledge for **CakePHP 5.x** — rules, skills, agents, and a safe installer for **Cursor**, **Claude Code**, and **Codex**.
 
-> **Status: 1.0.0-beta.1** (public beta — not stable 1.0 yet). On Packagist: [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent). License: **Apache-2.0**. Soak then stable `1.0.0` — [HANDOFF](docs/HANDOFF-phase-14.md), [pre-1.0](docs/pre-1.0-review.md).
+> **Status: 1.0.0-beta.2** (public beta — not stable 1.0 yet). On Packagist: [`chrisshick/cakephp-agent`](https://packagist.org/packages/chrisshick/cakephp-agent). License: **Apache-2.0**. Soak then stable `1.0.0` — [HANDOFF](docs/HANDOFF-phase-14b.md), [pre-1.0](docs/pre-1.0-review.md).
 
 Repository: [github.com/chrisShick/cakephp-agent](https://github.com/chrisShick/cakephp-agent)
 
