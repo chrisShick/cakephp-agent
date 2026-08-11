@@ -251,4 +251,47 @@ final class ExtensionResolverTest extends TestCase
             $result->decisionFor('friendsofcake-search')?->status
         );
     }
+
+    public function testMigrationsDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-migrations',
+        ));
+
+        self::assertContains('cakephp-migrations', $result->enabledIds());
+        self::assertNotContains('cakephp-bake', $result->enabledIds());
+    }
+
+    public function testMigrationsIncompatibleMajorReported(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-migrations-incompatible',
+        ));
+
+        self::assertNotContains('cakephp-migrations', $result->enabledIds());
+        self::assertSame(
+            ExtensionDecision::INCOMPATIBLE,
+            $result->decisionFor('cakephp-migrations')?->status
+        );
+    }
+
+    public function testBakeDetectedWhenPresent(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-bake',
+        ));
+
+        self::assertContains('cakephp-bake', $result->enabledIds());
+        self::assertNotContains('cakephp-migrations', $result->enabledIds());
+    }
+
+    public function testCakephpOnlyDoesNotEnableMigrationsOrBake(): void
+    {
+        $result = $this->resolver->resolve(new ProjectConfig(
+            projectRoot: $this->fixtures . '/cakephp-only',
+        ));
+
+        self::assertNotContains('cakephp-migrations', $result->enabledIds());
+        self::assertNotContains('cakephp-bake', $result->enabledIds());
+    }
 }

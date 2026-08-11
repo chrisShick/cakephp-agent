@@ -2,7 +2,7 @@
     "name": "chrisshick/cakephp-agent",
     "description": "AI engineering knowledge platform for CakePHP 5 \u2014 rules, skills, extensions, and installer for Cursor, Claude Code, and Codex.",
     "type": "library",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "keywords": [
         "cakephp",
         "ai",

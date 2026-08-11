@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-migrations-incompatible",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "cakephp/migrations",
+            "version": "3.9.0"
+        }
+    ],
+    "packages-dev": []
+}

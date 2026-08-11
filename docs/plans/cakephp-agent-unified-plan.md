@@ -511,7 +511,7 @@ Skills must reference `inspect-before-coding` instead of duplicating discovery w
 
 ### Phase 12 — CakePHP coverage Wave B + Wave C
 
-**Deliver:** Wave B (pagination, forms, views-or-out-of-scope, errors, config/DI, performance) then Wave C (migrations pack; Bake/mailer/queues as time allows) — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
+**Deliver (done):** Wave B (pagination, forms, views scope note, errors, config/DI, performance) + Wave C (`cakephp-migrations`, light `cakephp-bake`, mailer/queue honesty evals) — [HANDOFF-phase-12.md](../HANDOFF-phase-12.md).
 
 ### Phase 13 — Packagist / public 1.0
 

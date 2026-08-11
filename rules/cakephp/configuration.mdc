@@ -1,0 +1,40 @@
+---
+description: CakePHP configuration and Application service container (DI) ownership.
+globs:
+  - "**/config/**/*.php"
+  - "**/Application.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/development/configuration.html
+  - https://book.cakephp.org/5.x/development/dependency-injection.html
+last_verified: 2026-08-10
+related_knowledge: [config-vs-hardcoded-service]
+---
+
+# Configuration
+
+## Framework semantics
+
+App config lives under `config/` (`app.php`, `app_local.php`, etc.). CakePHP 5 supports a PSR container via `Application::services()` for wiring dependencies. Prefer config + container over scattered `new` of infrastructure in controllers.
+
+## Required behavior
+
+- Keep secrets and environment-specific values in config/`app_local` / env — not hardcoded in domain classes.
+- Register shared infrastructure in `Application::services()` when the project already uses DI.
+- Do not invent Laravel ServiceProvider / facades as CakePHP defaults.
+- Prefer CakePHP Configure / config files for feature flags and connection settings.
+
+## Anti-patterns
+
+- Hardcoding credentials or hostnames in controllers/Tables
+- Inventing ServiceProvider / facade layers
+- New container abstractions that bypass Application services without cause
+
+## Review checklist
+
+- [ ] Env-specific values come from config/env
+- [ ] Shared services follow project DI patterns
+- [ ] No Laravel provider mental model

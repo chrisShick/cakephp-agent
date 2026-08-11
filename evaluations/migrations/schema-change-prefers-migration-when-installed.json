@@ -1,0 +1,22 @@
+{
+    "id": "schema-change-prefers-migration-when-installed",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "This app has cakephp/migrations installed. We need to add articles.slug. How should the schema change be delivered?",
+    "expected": {
+        "concepts": [
+            "migrations"
+        ],
+        "preferred": [
+            "migration",
+            "bin/cake migrations"
+        ]
+    },
+    "must_not": [
+        "artisan migrate",
+        "Eloquent migration"
+    ],
+    "related_knowledge": [
+        "migration-vs-raw-sql"
+    ]
+}

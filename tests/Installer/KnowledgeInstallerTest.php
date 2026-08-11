@@ -251,6 +251,20 @@ final class KnowledgeInstallerTest extends TestCase
                 ),
                 'Expected write-table-test skill in dry-run plan'
             );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'paginate-results/SKILL.md')
+                ),
+                'Expected paginate-results skill in dry-run plan'
+            );
+            self::assertTrue(
+                (bool) array_filter(
+                    $skillPaths,
+                    static fn (string $p): bool => str_contains($p, 'create-form/SKILL.md')
+                ),
+                'Expected create-form skill in dry-run plan'
+            );
             self::assertNotEmpty($agentPaths);
             self::assertTrue(
                 (bool) array_filter(

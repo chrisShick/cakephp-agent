@@ -11,12 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Phase 11 Wave A CakePHP coverage: rules for routing, behaviors, components, commands, transactions; skills `add-route`, `review-routing`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`
 - Decisions `route-config-vs-controller-url-logic`, `command-vs-controller-action`; security anti-patterns for FormProtection/CSRF and unsafe uploads
-- Pos+neg evaluations for routing, CLI vs HTTP, FormProtection, uploads, and Table-test boundaries
-- [HANDOFF-phase-12.md](docs/HANDOFF-phase-12.md) for Wave B + Wave C coverage; Packagist/1.0 stubbed as Phase 13
+- Phase 12 Wave B: rules/skills for pagination, forms, views scope, errors, configuration/DI, performance
+- Phase 12 Wave C: `cakephp-migrations` and light `cakephp-bake` extension packs; mailer/queue absent honesty evals
+- Pos+neg evaluations across Waves A–C; [HANDOFF-phase-13.md](docs/HANDOFF-phase-13.md) for Packagist / 1.0
 
 ### Changed
 
-- Deepened `security` and `testing` core rules; updated coverage map and `choose-cakephp-abstraction` defaults
+- Deepened `security` and `testing` core rules; updated coverage map and `choose-cakephp-abstraction` defaults through Wave B
+- Relicensed from MIT to **Apache-2.0** (`LICENSE`, `NOTICE`, `composer.json`, README)
 
 ## [0.9.0] - 2026-08-10
 

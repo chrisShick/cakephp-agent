@@ -1,0 +1,20 @@
+{
+    "id": "reject-unbounded-all-for-ui-list",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "For the main Articles admin table UI, should we call `$this->Articles->find()->all()` without pagination?",
+    "expected": {
+        "concepts": [
+            "pagination"
+        ],
+        "preferred": [
+            "paginate"
+        ]
+    },
+    "must_not": [
+        "endorse unbounded all() for the UI list"
+    ],
+    "related_knowledge": [
+        "paginate-controller-vs-custom-finder"
+    ]
+}

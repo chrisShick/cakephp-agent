@@ -68,6 +68,10 @@ Link and apply as relevant:
 - `knowledge/decisions/plugin-vs-application-code`
 - `knowledge/decisions/route-config-vs-controller-url-logic`
 - `knowledge/decisions/command-vs-controller-action`
+- `knowledge/decisions/paginate-controller-vs-custom-finder`
+- `knowledge/decisions/exception-renderer-vs-controller-catch`
+- `knowledge/decisions/config-vs-hardcoded-service`
+- `knowledge/decisions/views-out-of-scope-for-core-skills`
 
 Rough defaults (override with project conventions and decisions above):
 
@@ -78,6 +82,11 @@ Rough defaults (override with project conventions and decisions above):
 | Reusable controller collaboration | Component |
 | HTTP orchestration only | Controller action |
 | CLI / cron / batch entry | Command (`bin/cake`) |
+| Large HTTP lists | Paginate a Table finder |
+| HTML forms | FormHelper + FormProtection/CSRF |
+| Presentation templates | Follow project templates (no deep core view catalog in v1) |
+| Unexpected errors | Exception renderer / error middleware |
+| Shared infra / secrets | Config + `Application::services()` |
 | Query reuse on one Table | Custom finder |
 | Cross-table persistence feature | Behavior |
 | Multi-write consistency unit | Connection transaction |
@@ -104,4 +113,4 @@ Rough defaults (override with project conventions and decisions above):
 ## Completion criteria
 
 - Ownership decision documented and ready for implementation.
-- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `add-route`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `review-abstraction-choice`).
+- Clear next skill (e.g. `add-application-rule`, `create-finder`, `create-controller-action`, `add-route`, `paginate-results`, `create-form`, `create-behavior`, `create-component`, `create-command`, `add-transaction`, `write-table-test`, `configure-error-handling`, `configure-application-services`, `review-query-performance`, `review-abstraction-choice`).

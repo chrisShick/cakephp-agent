@@ -1,0 +1,40 @@
+---
+description: CakePHP performance guidance — query budgets, contain discipline, and caching honesty.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/orm/retrieving-data-and-resultsets.html
+  - https://book.cakephp.org/5.x/core-libraries/caching.html
+last_verified: 2026-08-10
+related_knowledge: [hidden-n-plus-one, over-eager-contain]
+---
+
+# Performance
+
+## Framework semantics
+
+Most CakePHP performance issues are ORM-shaped: N+1 contains, over-eager association graphs, unbounded lists, and missing pagination. Caching exists (`Cache` engine) but is not a substitute for correct query ownership.
+
+## Required behavior
+
+- Prefer pagination for large lists; avoid unbounded `all()` in HTTP paths.
+- Use `contain` deliberately; prefer matching/select narrowing when filtering.
+- Detect and fix hidden N+1 (loops that re-query associations).
+- Cache derived/expensive reads only with explicit invalidation strategy when the project already uses Cache.
+- Do not add Redis/custom caches by default for a single finder.
+
+## Anti-patterns
+
+- hidden-n-plus-one
+- over-eager-contain
+- Caching as a band-aid for fat controllers / bad queries
+
+## Review checklist
+
+- [ ] List endpoints paginated or explicitly bounded
+- [ ] Association graphs justified per use case
+- [ ] No unexplained per-row queries in loops

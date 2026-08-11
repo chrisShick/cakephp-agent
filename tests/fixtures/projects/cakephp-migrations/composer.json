@@ -1,0 +1,8 @@
+{
+    "name": "fixture/cakephp-migrations",
+    "require": {
+        "php": "^8.2",
+        "cakephp/cakephp": "^5.4",
+        "cakephp/migrations": "^4.0 || ^5.0"
+    }
+}

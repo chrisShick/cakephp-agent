@@ -1,0 +1,25 @@
+{
+    "id": "queue-absent-no-laravel-jobs",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "We need background work. No queue plugin is installed. What should an agent do?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "inspect composer",
+            "Command for cron",
+            "do not invent queue APIs"
+        ]
+    },
+    "must_not": [
+        "ShouldQueue",
+        "dispatch(new Job",
+        "artisan queue"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code",
+        "command-vs-controller-action"
+    ]
+}

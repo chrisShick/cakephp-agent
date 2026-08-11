@@ -1,0 +1,14 @@
+{
+    "name": "fixture/cakephp-bake",
+    "packages": [
+        {
+            "name": "cakephp/cakephp",
+            "version": "5.4.2"
+        },
+        {
+            "name": "cakephp/bake",
+            "version": "3.5.0"
+        }
+    ],
+    "packages-dev": []
+}

@@ -1,0 +1,40 @@
+---
+description: CakePHP FormHelper and FormProtection/CSRF ownership for HTML forms.
+globs:
+  - "**/templates/**/*.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/views/helpers/form.html
+  - https://book.cakephp.org/5.x/core-libraries/form-protection-component.html
+last_verified: 2026-08-10
+related_knowledge: [csrf-formprotection-required]
+---
+
+# Forms
+
+## Framework semantics
+
+HTML forms in CakePHP typically use FormHelper with entities, and participate in FormProtection / CSRF middleware already configured on the Application. Forms marshal into entities via `newEntity`/`patchEntity` — not Laravel FormRequest classes.
+
+## Required behavior
+
+- Prefer FormHelper + entity context matching project templates.
+- Keep FormProtection/CSRF enabled for cookie-session HTML state changes.
+- Put field shape checks in Table validators; put persistence invariants in application rules.
+- Do not invent FormRequest / Livewire form objects as CakePHP defaults.
+
+## Anti-patterns
+
+- csrf-formprotection-required
+- Inventing FormRequest
+- Duplicating validation only in the template
+
+## Review checklist
+
+- [ ] Form posts hit protected endpoints with project CSRF/FormProtection
+- [ ] Entity marshaling uses Table APIs
+- [ ] Locked/unlocked fields match FormProtection expectations when used

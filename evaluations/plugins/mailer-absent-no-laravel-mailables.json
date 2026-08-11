@@ -1,0 +1,24 @@
+{
+    "id": "mailer-absent-no-laravel-mailables",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "We need to send a welcome email. The app has not standardized on a mail stack yet. What should we avoid inventing?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness",
+            "inspect-before-coding"
+        ],
+        "preferred": [
+            "inspect existing mailer",
+            "CakePHP Mailer if present"
+        ]
+    },
+    "must_not": [
+        "Mailable",
+        "Mail::send facade",
+        "assume Laravel notifications"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

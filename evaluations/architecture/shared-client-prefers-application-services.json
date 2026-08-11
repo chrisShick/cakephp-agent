@@ -1,0 +1,23 @@
+{
+    "id": "shared-client-prefers-application-services",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "Several controllers and a Command need the same HTTP API client with an API key. Where should wiring live by default in CakePHP 5?",
+    "expected": {
+        "concepts": [
+            "configuration",
+            "DI"
+        ],
+        "preferred": [
+            "Application::services",
+            "config"
+        ]
+    },
+    "must_not": [
+        "ServiceProvider",
+        "hardcode the API key in each controller"
+    ],
+    "related_knowledge": [
+        "config-vs-hardcoded-service"
+    ]
+}

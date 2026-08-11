@@ -1,0 +1,33 @@
+---
+description: CakePHP Migrations plugin ownership for schema changes.
+globs:
+  - "**/config/Migrations/**/*.php"
+  - "**/config/Seeds/**/*.php"
+alwaysApply: false
+priority: critical
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/migrations
+package_versions: [">=4.0 <6.0"]
+sources:
+  - https://book.cakephp.org/migrations/5/
+last_verified: 2026-08-10
+---
+
+# CakePHP Migrations
+
+## Plugin semantics
+
+`cakephp/migrations` owns versioned schema migrations and seeds via `bin/cake migrations` (builtin backend on modern versions). Prefer migrations over ad-hoc production SQL when the plugin is installed.
+
+## Required behavior
+
+- Apply only when `cakephp/migrations` ^4/^5 is installed.
+- Put schema changes in migration classes under the project’s Migrations path.
+- Keep migrations focused on schema (and intentional data migrations); do not bury app business rules here.
+- Do not invent Laravel `artisan migrate` / Eloquent migration APIs.
+
+## Anti-patterns
+
+- Hand-editing production schema with no migration when Migrations is the project standard
+- Inventing Artisan migration commands
+- Mixing large unrelated schema changes in one opaque migration without cause

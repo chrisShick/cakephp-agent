@@ -1,0 +1,24 @@
+{
+    "id": "migrations-absent-no-phinx-apis",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "composer.json has no cakephp/migrations. How should I change the users table schema?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "inspect composer",
+            "project schema strategy",
+            "consider installing cakephp/migrations"
+        ]
+    },
+    "must_not": [
+        "assume Migrations plugin APIs",
+        "artisan make:migration"
+    ],
+    "related_knowledge": [
+        "migration-vs-raw-sql",
+        "plugin-vs-application-code"
+    ]
+}

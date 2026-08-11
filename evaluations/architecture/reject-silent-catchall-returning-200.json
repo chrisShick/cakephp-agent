@@ -1,0 +1,20 @@
+{
+    "id": "reject-silent-catchall-returning-200",
+    "category": "architecture",
+    "type": "rejection",
+    "prompt": "Is it acceptable to wrap every controller action in try/catch (\\Throwable) and return HTTP 200 with `{error: message}`?",
+    "expected": {
+        "concepts": [
+            "exception renderer"
+        ],
+        "preferred": [
+            "framework error handling"
+        ]
+    },
+    "must_not": [
+        "endorse silent catch-all returning 200"
+    ],
+    "related_knowledge": [
+        "exception-renderer-vs-controller-catch"
+    ]
+}

@@ -1,0 +1,27 @@
+---
+description: Safe schema-change habits when using cakephp/migrations.
+globs:
+  - "**/config/Migrations/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PACKAGE_RECOMMENDATION
+package: cakephp/migrations
+package_versions: [">=4.0 <6.0"]
+sources:
+  - https://book.cakephp.org/migrations/5/
+last_verified: 2026-08-10
+---
+
+# Schema changes
+
+## Required behavior
+
+- Prefer additive, reversible changes when the project expects `down()` / rollback.
+- Name migrations clearly; one logical change set per migration when practical.
+- Coordinate Table schema caches / bake regeneration only as the project already does.
+- Never put secrets into seed/migration files committed to git.
+
+## Anti-patterns
+
+- Destructive column drops without a rollout plan
+- Committing environment credentials in seeds

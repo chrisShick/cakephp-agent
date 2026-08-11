@@ -1,0 +1,24 @@
+{
+    "id": "bake-absent-no-bake-apis",
+    "category": "plugins",
+    "type": "plugin-awareness",
+    "prompt": "This CakePHP app does not include cakephp/bake. How should I add an ArticlesController?",
+    "expected": {
+        "concepts": [
+            "plugin-awareness"
+        ],
+        "preferred": [
+            "create-controller-action",
+            "hand-write",
+            "inspect composer"
+        ]
+    },
+    "must_not": [
+        "bin/cake bake",
+        "assume Bake",
+        "artisan make:controller"
+    ],
+    "related_knowledge": [
+        "plugin-vs-application-code"
+    ]
+}

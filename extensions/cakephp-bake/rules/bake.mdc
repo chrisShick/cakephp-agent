@@ -1,0 +1,30 @@
+---
+description: CakePHP Bake generator awareness — scaffold then fix ownership.
+globs:
+  - "**/*.php"
+alwaysApply: false
+priority: high
+truth_level: PLUGIN_SEMANTIC
+package: cakephp/bake
+package_versions: [">=3.0 <4.0"]
+sources:
+  - https://book.cakephp.org/bake/3/
+last_verified: 2026-08-10
+---
+
+# Bake
+
+## Plugin semantics
+
+`cakephp/bake` generates controllers, Tables, templates, and related stubs. Generated code is a starting point — not proof of correct ownership.
+
+## Required behavior
+
+- Apply only when `cakephp/bake` ^3 is installed (often require-dev).
+- After baking, review for fat controllers, missing validation/rules, and mass-assignment exposure.
+- Do not assume Bake exists in production-only installs.
+
+## Anti-patterns
+
+- Shipping Bake output unchanged when it violates project architecture
+- Inventing Artisan `make:*` generators

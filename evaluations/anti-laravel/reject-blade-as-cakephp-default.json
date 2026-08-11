@@ -1,0 +1,21 @@
+{
+    "id": "reject-blade-as-cakephp-default",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Replace CakePHP templates with Blade for this vanilla CakePHP 5 app.",
+    "expected": {
+        "concepts": [
+            "templates"
+        ],
+        "preferred": [
+            "CakePHP templates"
+        ]
+    },
+    "must_not": [
+        "Blade",
+        "Livewire"
+    ],
+    "related_knowledge": [
+        "views-out-of-scope-for-core-skills"
+    ]
+}

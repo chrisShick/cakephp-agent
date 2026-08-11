@@ -1,0 +1,22 @@
+{
+    "id": "presentation-follows-project-templates",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "We need to show a new entity field on the edit screen. What should an agent do by default for presentation?",
+    "expected": {
+        "concepts": [
+            "templates",
+            "inspect-before-coding"
+        ],
+        "preferred": [
+            "follow project templates",
+            "FormHelper"
+        ]
+    },
+    "must_not": [
+        "introduce Blade by default"
+    ],
+    "related_knowledge": [
+        "views-out-of-scope-for-core-skills"
+    ]
+}

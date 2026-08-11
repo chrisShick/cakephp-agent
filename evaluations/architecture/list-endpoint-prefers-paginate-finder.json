@@ -1,0 +1,23 @@
+{
+    "id": "list-endpoint-prefers-paginate-finder",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "Articles index can grow to tens of thousands of rows. How should the CakePHP list action load data by default?",
+    "expected": {
+        "concepts": [
+            "pagination",
+            "finder"
+        ],
+        "preferred": [
+            "paginate",
+            "finder"
+        ]
+    },
+    "must_not": [
+        "unbounded all() for the UI list",
+        "LengthAwarePaginator"
+    ],
+    "related_knowledge": [
+        "paginate-controller-vs-custom-finder"
+    ]
+}

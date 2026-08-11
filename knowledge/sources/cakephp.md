@@ -21,5 +21,12 @@ Primary authoritative sources for framework-sensitive knowledge in this package.
 | Testing | https://book.cakephp.org/5.x/development/testing.html | 2026-08-10 |
 | Security | https://book.cakephp.org/5.x/security.html | 2026-08-10 |
 | FormProtection | https://book.cakephp.org/5.x/core-libraries/form-protection-component.html | 2026-08-10 |
+| FormHelper | https://book.cakephp.org/5.x/views/helpers/form.html | 2026-08-10 |
+| Pagination | https://book.cakephp.org/5.x/controllers/pagination.html | 2026-08-10 |
+| Views | https://book.cakephp.org/5.x/views.html | 2026-08-10 |
+| Errors | https://book.cakephp.org/5.x/development/errors.html | 2026-08-10 |
+| Configuration | https://book.cakephp.org/5.x/development/configuration.html | 2026-08-10 |
+| Dependency injection | https://book.cakephp.org/5.x/development/dependency-injection.html | 2026-08-10 |
+| Caching | https://book.cakephp.org/5.x/core-libraries/caching.html | 2026-08-10 |
 
 When updating rules or decisions, verify against these pages (or CakePHP source) and bump `last_verified`.

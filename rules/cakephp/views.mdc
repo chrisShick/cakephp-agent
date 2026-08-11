@@ -1,0 +1,39 @@
+---
+description: CakePHP views/templates scope note — presentation is project-owned; core agent skills stay ownership-focused.
+globs:
+  - "**/templates/**/*.php"
+  - "**/View/**/*.php"
+alwaysApply: false
+priority: medium
+truth_level: PACKAGE_RECOMMENDATION
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/views.html
+last_verified: 2026-08-10
+related_knowledge: [views-out-of-scope-for-core-skills]
+---
+
+# Views
+
+## Framework semantics
+
+CakePHP uses `.php` templates, cells, and helpers under `templates/` / `View/`. Presentation is real framework surface — but **core cakephp-agent skills intentionally do not deep-author view/cell/helper catalogs in v1**.
+
+## Required behavior
+
+- Follow existing project template/layout/helper conventions discovered via `inspect-before-coding`.
+- Do not invent Laravel Blade, Livewire, or Twig stacks unless the project already uses them.
+- Keep substantial domain/persistence logic out of templates; templates display and submit.
+- Cells/helpers are fine when the project already uses them for reusable presentation fragments.
+
+## Anti-patterns
+
+- Inventing Blade / Livewire (not Laravel defaults)
+- Fat templates with query/persistence logic
+- Rewriting the app’s template system without an explicit request
+
+## Review checklist
+
+- [ ] Template changes match neighboring layouts/elements
+- [ ] No new template engine introduced casually
+- [ ] Domain rules remain on Tables/validators

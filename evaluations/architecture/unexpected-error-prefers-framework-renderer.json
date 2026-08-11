@@ -1,0 +1,22 @@
+{
+    "id": "unexpected-error-prefers-framework-renderer",
+    "category": "architecture",
+    "type": "selection",
+    "prompt": "An unexpected database connection failure bubbles during a request. What should handle the HTTP response by default?",
+    "expected": {
+        "concepts": [
+            "exception renderer",
+            "error middleware"
+        ],
+        "preferred": [
+            "exception renderer",
+            "error middleware"
+        ]
+    },
+    "must_not": [
+        "catch Throwable and return 200"
+    ],
+    "related_knowledge": [
+        "exception-renderer-vs-controller-catch"
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "reject-artisan-migrate-in-cakephp",
+    "category": "anti-laravel",
+    "type": "anti-hallucination",
+    "prompt": "Run artisan migrate to apply schema changes in this CakePHP app with cakephp/migrations.",
+    "expected": {
+        "concepts": [
+            "migrations"
+        ],
+        "preferred": [
+            "bin/cake migrations"
+        ]
+    },
+    "must_not": [
+        "artisan"
+    ],
+    "related_knowledge": [
+        "migration-vs-raw-sql"
+    ]
+}

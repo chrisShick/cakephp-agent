@@ -58,6 +58,10 @@ Distinguish **FRAMEWORK REQUIREMENT** vs **PACKAGE RECOMMENDATION** vs **PROJECT
 
 Do not mechanically map Laravel concepts (FormRequest, Eloquent, Artisan, Gate, ServiceProvider, Blade, etc.) into CakePHP. Prefer CakePHP-native extension points (Tables, Entities, Behaviors, Components, middleware, events, Application rules).
 
+## License
+
+Contributions are accepted under the [Apache License 2.0](LICENSE). By submitting a pull request, you agree your contribution is licensed under the same terms.
+
 ## Related
 
 - [Security policy](SECURITY.md)

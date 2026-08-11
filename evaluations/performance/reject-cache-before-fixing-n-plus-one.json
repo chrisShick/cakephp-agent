@@ -1,0 +1,23 @@
+{
+    "id": "reject-cache-before-fixing-n-plus-one",
+    "category": "performance",
+    "type": "rejection",
+    "prompt": "A list action runs one query per row for associated authors. Should we add Redis caching first as the default fix?",
+    "expected": {
+        "concepts": [
+            "N+1",
+            "contain"
+        ],
+        "preferred": [
+            "fix N+1",
+            "contain",
+            "finder"
+        ]
+    },
+    "must_not": [
+        "endorse Redis/caching as the first fix before addressing N+1"
+    ],
+    "related_knowledge": [
+        "hidden-n-plus-one"
+    ]
+}

@@ -79,14 +79,16 @@ Follow existing extension patterns (`extensions/friendsofcake-crud/`, AuthN/Auth
 
 ### Accept
 
-- [ ] Wave B rules/skills (or explicit out-of-scope notes) present; `php bin/cakephp-agent validate` green
-- [ ] Wave C: at least Migrations pack started **or** Wave B complete with Wave C deferred + Phase 13 handoff explaining why
-- [ ] New skills reference `inspect-before-coding`
-- [ ] Critical new boundaries have pos+neg evals; `php bin/cakephp-agent eval` self-check green
-- [ ] `vendor/bin/phpunit` + `vendor/bin/phpstan analyse --memory-limit=512M` green
-- [ ] [coverage-rules-skills.md](coverage-rules-skills.md) updated (Wave B/C status)
-- [ ] README / architecture note Phase 12 status
-- [ ] Handoff for **Phase 13** (Packagist / 1.0 cut) written
+- [x] Wave B rules/skills (or explicit out-of-scope notes) present; `php bin/cakephp-agent validate` green
+- [x] Wave C: Migrations pack + Bake light pack; mailer/queue honesty evals (full packs deferred)
+- [x] New skills reference `inspect-before-coding`
+- [x] Critical new boundaries have pos+neg evals; `php bin/cakephp-agent eval` self-check green
+- [x] `vendor/bin/phpunit` + `vendor/bin/phpstan analyse --memory-limit=512M` green
+- [x] [coverage-rules-skills.md](coverage-rules-skills.md) updated (Wave B/C status)
+- [x] README / architecture note Phase 12 status
+- [x] Handoff for **Phase 13** (Packagist / 1.0 cut) written
+
+> **Phase 12 complete.** Continue at [HANDOFF-phase-13.md](HANDOFF-phase-13.md).
 
 ### Out of scope
 

@@ -1,0 +1,39 @@
+---
+description: CakePHP pagination ownership between controllers and ORM queries.
+globs:
+  - "**/Controller/**/*.php"
+  - "**/Model/Table/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/controllers/pagination.html
+last_verified: 2026-08-10
+related_knowledge: [paginate-controller-vs-custom-finder]
+---
+
+# Pagination
+
+## Framework semantics
+
+CakePHP paginates result sets via controller `$this->paginate()` (or PaginatorComponent patterns) over Table queries/finders. Pagination is HTTP list orchestration — not a place to dump complex domain query graphs without finders.
+
+## Required behavior
+
+- Build reusable query semantics in Table finders; paginate the finder from the controller.
+- Preserve filter/sort query params consistently with project conventions (and Search when installed).
+- Do not load unbounded result sets into memory when pagination is the product requirement.
+- Keep page size limits sensible; reject client-controlled absurd limits unless explicitly allowed.
+
+## Anti-patterns
+
+- Copying huge `where`/`contain` stacks into every paginate call instead of a finder
+- Unbounded `all()` for UI lists that should be paginated
+- Do not invent Laravel LengthAwarePaginator APIs
+
+## Review checklist
+
+- [ ] List endpoints use CakePHP pagination (or documented alternative)
+- [ ] Query reuse lives in finders/filters, not duplicated in controllers
+- [ ] Contain/eager-load budgets stay reasonable per page

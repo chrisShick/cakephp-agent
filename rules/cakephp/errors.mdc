@@ -1,0 +1,40 @@
+---
+description: CakePHP error and exception rendering ownership.
+globs:
+  - "**/Error/**/*.php"
+  - "**/Application.php"
+  - "**/Controller/**/*.php"
+alwaysApply: false
+priority: high
+truth_level: FRAMEWORK_DEFAULT
+framework_versions: [">=5.0 <6.0"]
+sources:
+  - https://book.cakephp.org/5.x/development/errors.html
+last_verified: 2026-08-10
+related_knowledge: [exception-renderer-vs-controller-catch]
+---
+
+# Errors
+
+## Framework semantics
+
+CakePHP maps exceptions to HTTP responses via error middleware and exception renderers (HTML/JSON). Controllers may translate expected domain outcomes to status codes; they should not swallow unexpected failures with empty catches.
+
+## Required behavior
+
+- Prefer framework exception rendering for unexpected errors.
+- Map expected failures (not found, validation) to clear HTTP outcomes without hiding stack traces in production.
+- Keep API error shapes consistent with project conventions (`viewClasses` / exception renderer).
+- Do not catch `\Throwable` broadly just to return 200 with an error string.
+
+## Anti-patterns
+
+- Silent catch-all that hides failures
+- Duplicating ad-hoc JSON error envelopes in every action when a renderer exists
+- Leaking secrets/stack traces to clients in production
+
+## Review checklist
+
+- [ ] Unexpected errors flow through error middleware/renderer
+- [ ] Expected domain failures use explicit status/body patterns
+- [ ] Logs capture server-side detail without client leakage
